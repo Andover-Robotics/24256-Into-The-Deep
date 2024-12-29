@@ -117,40 +117,13 @@ public class IntakeTest extends LinearOpMode {
                 }
 
                 if (gamepad2.a) {
-                    bucketServoL.setPosition(0.38);
-                    bucketServoR.setPosition(0.38);
-                    topWrist.setPosition(0.155);
-                    wristServo.setPosition(0);
-                    sleep(800);
-                    armServoR.setPosition(0.245);
-                    armServoL.setPosition(0.245);
-                    sleep(500);
-                    topClaw.setPosition(0.55);
-                    sleep(500);
-                    claw.setPosition(0.05);
-                    sleep(1000);
-                    toggleTop = true;
-                    toggleTopMethod();
+                    transfer1();
                 } else {
-                    bucketServoL.setPosition(0.37);
-                    bucketServoR.setPosition(0.37);
-                    armServoR.setPosition(0.2);
-                    armServoL.setPosition(0.2);
-                    wristServo.setPosition(0.75);
-                    topWrist.setPosition(0.155);
+                    afterTransfer1();
                 }
 
                 if (gamepad2.b) {
-                    topClaw.setPosition(0.55);
-                    sleep(500);
-                    topWrist.setPosition(0.73);
-                    bucketServoL.setPosition(.8);
-                    bucketServoR.setPosition(.8);
-                    sleep(1500);
-                    topClaw.setPosition(.1);
-                    //toggleTop = false;
-                    //toggleTopMethod();
-                    sleep(1000);
+                    transfer2();
                 }
 
 
@@ -214,5 +187,41 @@ public class IntakeTest extends LinearOpMode {
         slideMotorL.setPower(0);
         slideMotorR.setPower(0);
 
+    }
+    public void transfer1(){
+        bucketServoL.setPosition(0.38);
+        bucketServoR.setPosition(0.38);
+        topWrist.setPosition(0.155);
+        wristServo.setPosition(0);
+        sleep(800);
+        armServoR.setPosition(0.245);
+        armServoL.setPosition(0.245);
+        sleep(500);
+        topClaw.setPosition(0.55);
+        sleep(500);
+        claw.setPosition(0.05);
+        sleep(1000);
+        toggleTop = true;
+        toggleTopMethod();
+    }
+    public void afterTransfer1(){
+        bucketServoL.setPosition(0.37);
+        bucketServoR.setPosition(0.37);
+        armServoR.setPosition(0.2);
+        armServoL.setPosition(0.2);
+        wristServo.setPosition(0.75);
+        topWrist.setPosition(0.155);
+    }
+    public void transfer2(){
+        topClaw.setPosition(0.55);
+        sleep(500);
+        topWrist.setPosition(0.73);
+        bucketServoL.setPosition(.8);
+        bucketServoR.setPosition(.8);
+        sleep(1500);
+        topClaw.setPosition(.1);
+        //toggleTop = false;
+        //toggleTopMethod();
+        sleep(1000);
     }
 }
