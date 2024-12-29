@@ -25,7 +25,6 @@ public class IntakeTest extends LinearOpMode {
     private Servo topWrist;
     boolean toggleWrist = false;
     boolean toggleTopWrist = false;
-    boolean toggleArm = false;
 
     boolean toggleTop = false;
 
@@ -58,7 +57,10 @@ public class IntakeTest extends LinearOpMode {
         bucketServoR.setDirection(Servo.Direction.REVERSE);
         topWrist.setDirection(Servo.Direction.REVERSE);
 
-
+        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideMotorR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         slideMotorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -75,6 +77,21 @@ public class IntakeTest extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+                // Remember, Y stick value is reversed
+                forwardSpeed = gamepad1.left_stick_y;
+                // Factor to counteract imperfect strafing
+                strafeSpeed = -gamepad1.left_stick_x;
+                turnSpeed = gamepad1.right_stick_x;
+
+                // Make sure your ID's match your configuration
+                fl.setPower(-forwardSpeed - strafeSpeed - turnSpeed);
+                bl.setPower(-forwardSpeed - strafeSpeed + turnSpeed);
+                fr.setPower(forwardSpeed - strafeSpeed - turnSpeed);
+                br.setPower(forwardSpeed - strafeSpeed + turnSpeed);
+
+                telemetry.addData("game controller ", gamepad1.left_stick_x);
+
+                telemetry.addData("game controller ", gamepad1.left_stick_x);
 
                 //Sets the claw positions on top and bottom
 
@@ -100,13 +117,13 @@ public class IntakeTest extends LinearOpMode {
                 }
 
                 if (gamepad2.a) {
-                    bucketServoL.setPosition(0.37);
-                    bucketServoR.setPosition(0.37);
-                    topWrist.setPosition(0.165);
+                    bucketServoL.setPosition(0.38);
+                    bucketServoR.setPosition(0.38);
+                    topWrist.setPosition(0.155);
                     wristServo.setPosition(0);
                     sleep(800);
-                    armServoR.setPosition(0.27);
-                    armServoL.setPosition(0.27);
+                    armServoR.setPosition(0.245);
+                    armServoL.setPosition(0.245);
                     sleep(500);
                     topClaw.setPosition(0.55);
                     sleep(500);
@@ -136,14 +153,14 @@ public class IntakeTest extends LinearOpMode {
                     sleep(1000);
                 }
 
+
                 if (gamepad2.dpad_up) {
                     raiseSlides();
-                    stopAllMotors();
                 } else if (gamepad2.dpad_down){
                     lowerSlides();
-                    stopAllMotors();
                 } else {
-                    stopAllMotors();
+                    slideMotorR.setPower(0);
+                    slideMotorL.setPower(0);
                 }
 
 
@@ -173,31 +190,29 @@ public class IntakeTest extends LinearOpMode {
 
     }
 
-    public void stopAllMotors(){
-        slideMotorR.setPower(0);
-        slideMotorL.setPower(0);
-        slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
     public void raiseSlides() {
-        slideMotorL.setTargetPosition(-2000);
-        slideMotorR.setTargetPosition(-2000);
         slideMotorL.setPower(.4);
         slideMotorR.setPower(-.4);
-        slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        if(gamepad1.a){
+            slideMotorL.setPower(0);
+            slideMotorR.setPower(0);
+        }
+        sleep(3700);
+        slideMotorL.setPower(0);
+        slideMotorR.setPower(0);
+
     }
     public void lowerSlides() {
-        slideMotorL.setTargetPosition(1000);
-        slideMotorR.setTargetPosition(1000);
-        slideMotorL.setPower(.4);
-        slideMotorR.setPower(-.4);
-        slideMotorR.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slideMotorL.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        stopAllMotors();
+        slideMotorL.setPower(-.4);
+        slideMotorR.setPower(.4);
+        if(gamepad1.b){
+            slideMotorL.setPower(0);
+            slideMotorR.setPower(0);
+        }
+        sleep(3500);
+        slideMotorL.setPower(0);
+        slideMotorR.setPower(0);
 
     }
 }
