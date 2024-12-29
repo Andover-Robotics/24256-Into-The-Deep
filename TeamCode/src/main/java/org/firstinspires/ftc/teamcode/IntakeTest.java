@@ -33,9 +33,9 @@ public class IntakeTest extends LinearOpMode {
      */
     @Override
     public void runOpMode() {
-        float forwardSpeed;
-        float strafeSpeed;
-        float turnSpeed;
+        double forwardSpeed;
+        double strafeSpeed;
+        double turnSpeed;
 
         fr = hardwareMap.get(DcMotor.class, "fr");
         bl = hardwareMap.get(DcMotor.class, "bl");
@@ -75,19 +75,22 @@ public class IntakeTest extends LinearOpMode {
 
         waitForStart();
 
+
+
+
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 // Remember, Y stick value is reversed
-                forwardSpeed = gamepad1.left_stick_y;
+                forwardSpeed = gamepad1.left_stick_y * .7;
                 // Factor to counteract imperfect strafing
-                strafeSpeed = -gamepad1.left_stick_x;
-                turnSpeed = gamepad1.right_stick_x;
+                strafeSpeed = -gamepad1.left_stick_x *-.7;
+                turnSpeed = gamepad1.right_stick_x *.7;
 
                 // Make sure your ID's match your configuration
-                fl.setPower(-forwardSpeed - strafeSpeed - turnSpeed);
-                bl.setPower(-forwardSpeed - strafeSpeed + turnSpeed);
-                fr.setPower(forwardSpeed - strafeSpeed - turnSpeed);
-                br.setPower(forwardSpeed - strafeSpeed + turnSpeed);
+                fl.setPower(-forwardSpeed - strafeSpeed + turnSpeed);
+                bl.setPower(-forwardSpeed - strafeSpeed - turnSpeed);
+                fr.setPower(forwardSpeed - strafeSpeed + turnSpeed);
+                br.setPower(forwardSpeed - strafeSpeed - turnSpeed);
 
                 telemetry.addData("game controller ", gamepad1.left_stick_x);
 
@@ -97,27 +100,22 @@ public class IntakeTest extends LinearOpMode {
 
 
                 if (gamepad2.left_bumper) {
-                    topClaw.setPosition(0.55);
-                } else {
-                    if(toggleTop){
-                        topClaw.setPosition(0.55);
-                    }
-                    else{
-                        topClaw.setPosition(.1);
-                    }
+                    toggleTop = !toggleTop;
+                    toggleTopMethod();
                 }
 
                 if (gamepad2.right_bumper) {
                     claw.setPosition(0.05);
                 } else {
-                    claw.setPosition(0.55);
+                    claw.setPosition(0.513);
                 }
-                if(gamepad2.y){
-                    toggleTop = !toggleTop;
-                }
+
 
                 if (gamepad2.a) {
                     transfer1();
+                } else if (gamepad2.right_trigger>0) {
+                    armServoL.setPosition(.3);
+                    armServoR.setPosition(.3);
                 } else {
                     afterTransfer1();
                 }
@@ -132,9 +130,10 @@ public class IntakeTest extends LinearOpMode {
                 } else if (gamepad2.dpad_down){
                     lowerSlides();
                 } else {
-                    slideMotorR.setPower(0);
-                    slideMotorL.setPower(0);
+                    slideMotorR.setPower(-0.05);
+                    slideMotorL.setPower(0.05);
                 }
+
 
 
 
@@ -155,7 +154,7 @@ public class IntakeTest extends LinearOpMode {
 
     public void toggleTopMethod(){
         if(toggleTop){
-            topClaw.setPosition(.55);
+            topClaw.setPosition(.7);
         }
         else{
             topClaw.setPosition(.1);
@@ -171,7 +170,7 @@ public class IntakeTest extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3700);
+        sleep(3600);
         slideMotorL.setPower(0);
         slideMotorR.setPower(0);
 
@@ -183,21 +182,23 @@ public class IntakeTest extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3500);
-        slideMotorL.setPower(0);
-        slideMotorR.setPower(0);
+        sleep(3600);
+        slideMotorL.setPower(0.5);
+        slideMotorR.setPower(-0.5);
 
     }
     public void transfer1(){
-        bucketServoL.setPosition(0.38);
-        bucketServoR.setPosition(0.38);
+        bucketServoL.setPosition(0.43);
+        bucketServoR.setPosition(0.43);
         topWrist.setPosition(0.155);
-        wristServo.setPosition(0);
-        sleep(800);
-        armServoR.setPosition(0.245);
-        armServoL.setPosition(0.245);
+        // wrist less is more up
+
+        wristServo.setPosition(0.01);
+        sleep(1000);
+        armServoR.setPosition(0.26);
+        armServoL.setPosition(0.26);
         sleep(500);
-        topClaw.setPosition(0.55);
+        topClaw.setPosition(0.7);
         sleep(500);
         claw.setPosition(0.05);
         sleep(1000);
@@ -205,15 +206,15 @@ public class IntakeTest extends LinearOpMode {
         toggleTopMethod();
     }
     public void afterTransfer1(){
-        bucketServoL.setPosition(0.37);
-        bucketServoR.setPosition(0.37);
+        bucketServoL.setPosition(0.41);
+        bucketServoR.setPosition(0.41);
         armServoR.setPosition(0.2);
         armServoL.setPosition(0.2);
-        wristServo.setPosition(0.75);
+        wristServo.setPosition(0.55);
         topWrist.setPosition(0.155);
     }
     public void transfer2(){
-        topClaw.setPosition(0.55);
+        topClaw.setPosition(0.7);
         sleep(500);
         topWrist.setPosition(0.73);
         bucketServoL.setPosition(.8);
