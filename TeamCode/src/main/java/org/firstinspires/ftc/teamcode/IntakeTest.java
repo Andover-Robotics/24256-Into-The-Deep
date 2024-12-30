@@ -171,6 +171,9 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3600);
+        slideMotorL.setPower(.09);
+        slideMotorR.setPower(-0.09);
+
 
     }
     public void lowerSlides() {
@@ -180,19 +183,21 @@ public class IntakeTest extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3600);
+        sleep(3500);
+
 
     }
     public void transfer1(){
-        bucketServoL.setPosition(0.43);
-        bucketServoR.setPosition(0.43);
+        bucketServoL.setPosition(0.4);
+        bucketServoR.setPosition(0.4);
         topWrist.setPosition(0.155);
         // wrist less is more up
 
         wristServo.setPosition(0.01);
         sleep(1000);
-        armServoR.setPosition(0.26);
-        armServoL.setPosition(0.26);
+        armServoR.setPosition(0.27);
+        armServoL.setPosition(0.27);
+        sleep(500);
         sleep(500);
         topClaw.setPosition(0.7);
         sleep(500);
@@ -202,19 +207,19 @@ public class IntakeTest extends LinearOpMode {
         toggleTopMethod();
     }
     public void afterTransfer1(){
-        bucketServoL.setPosition(0.41);
-        bucketServoR.setPosition(0.41);
+        bucketServoL.setPosition(0.35);
+        bucketServoR.setPosition(0.35);
         armServoR.setPosition(0.2);
         armServoL.setPosition(0.2);
         wristServo.setPosition(0.55);
-        topWrist.setPosition(0.155);
+        topWrist.setPosition(0.1);
     }
     public void transfer2(){
         topClaw.setPosition(0.7);
         sleep(500);
-        topWrist.setPosition(0.73);
-        bucketServoL.setPosition(.8);
-        bucketServoR.setPosition(.8);
+        topWrist.setPosition(0.53);
+        bucketServoL.setPosition(.9);
+        bucketServoR.setPosition(.9);
         sleep(1500);
         topClaw.setPosition(.1);
         //toggleTop = false;
