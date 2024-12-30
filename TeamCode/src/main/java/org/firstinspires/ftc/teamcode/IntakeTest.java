@@ -130,8 +130,8 @@ public class IntakeTest extends LinearOpMode {
                 } else if (gamepad2.dpad_down){
                     lowerSlides();
                 } else {
-                    slideMotorR.setPower(-0.02);
-                    slideMotorL.setPower(0.02);
+                    slideMotorR.setPower(0);
+                    slideMotorL.setPower(0);
                 }
 
 
@@ -171,6 +171,9 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3600);
+        slideMotorL.setPower(.01);
+        slideMotorR.setPower(-0.01);
+        sleep(500);
         slideMotorL.setPower(0);
         slideMotorR.setPower(0);
 
