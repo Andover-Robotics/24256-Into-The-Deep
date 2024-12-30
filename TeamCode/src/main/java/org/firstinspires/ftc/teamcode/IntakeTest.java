@@ -26,7 +26,7 @@ public class IntakeTest extends LinearOpMode {
     boolean toggleWrist = false;
     boolean toggleTopWrist = false;
 
-    boolean toggleTop = false;
+    private boolean toggleTop = false;
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
