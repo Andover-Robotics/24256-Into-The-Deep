@@ -171,11 +171,6 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3600);
-        slideMotorL.setPower(.01);
-        slideMotorR.setPower(-0.01);
-        sleep(500);
-        slideMotorL.setPower(0);
-        slideMotorR.setPower(0);
 
     }
     public void lowerSlides() {
