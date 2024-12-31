@@ -107,15 +107,15 @@ public class IntakeTest extends LinearOpMode {
                 if (gamepad2.right_bumper) {
                     claw.setPosition(0.05);
                 } else {
-                    claw.setPosition(0.513);
+                    claw.setPosition(0.54);
                 }
 
 
                 if (gamepad2.a) {
                     transfer1();
                 } else if (gamepad2.right_trigger>0) {
-                    armServoL.setPosition(.3);
-                    armServoR.setPosition(.3);
+                    armServoL.setPosition(.4);
+                    armServoR.setPosition(.4);
                 } else {
                     afterTransfer1();
                 }
@@ -154,7 +154,7 @@ public class IntakeTest extends LinearOpMode {
 
     public void toggleTopMethod(){
         if(toggleTop){
-            topClaw.setPosition(.7);
+            topClaw.setPosition(.65);
         }
         else{
             topClaw.setPosition(.1);
@@ -190,16 +190,16 @@ public class IntakeTest extends LinearOpMode {
     public void transfer1(){
         bucketServoL.setPosition(0.4);
         bucketServoR.setPosition(0.4);
-        topWrist.setPosition(0.155);
+        topWrist.setPosition(0.15);
         // wrist less is more up
 
-        wristServo.setPosition(0.01);
-        sleep(1000);
-        armServoR.setPosition(0.27);
-        armServoL.setPosition(0.27);
+        wristServo.setPosition(0.14);
+        sleep(2000);
+        armServoR.setPosition(0.43);
+        armServoL.setPosition(0.43);
         sleep(500);
         sleep(500);
-        topClaw.setPosition(0.7);
+        topClaw.setPosition(0.67);
         sleep(500);
         claw.setPosition(0.05);
         sleep(1000);
@@ -207,12 +207,12 @@ public class IntakeTest extends LinearOpMode {
         toggleTopMethod();
     }
     public void afterTransfer1(){
-        bucketServoL.setPosition(0.35);
-        bucketServoR.setPosition(0.35);
-        armServoR.setPosition(0.2);
-        armServoL.setPosition(0.2);
-        wristServo.setPosition(0.55);
-        topWrist.setPosition(0.1);
+        bucketServoL.setPosition(0.38);
+        bucketServoR.setPosition(0.38);
+        armServoR.setPosition(0.34);
+        armServoL.setPosition(0.34);
+        wristServo.setPosition(0.8);
+        topWrist.setPosition(0.12);
     }
     public void transfer2(){
         topClaw.setPosition(0.7);
