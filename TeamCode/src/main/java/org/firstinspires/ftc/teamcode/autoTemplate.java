@@ -95,7 +95,7 @@ public class autoTemplate extends LinearOpMode {
             turnRight(2130, 0.6);
             drive(-500, -500, 0.6);
             raiseSlides();
-            sleep(1700);
+            sleep(1600);
 
             telemetry.addData("armServoR Position: ", armServoR.getPosition());
             telemetry.addData("armServoL Position: ", armServoR.getPosition());
