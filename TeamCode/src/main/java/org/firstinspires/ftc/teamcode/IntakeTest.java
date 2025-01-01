@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import  com.qualcomm.robotcore.hardware.Servo;
-@TeleOp(name = "Servo Test")
+@TeleOp(name = "Sigma Skibibi Rizz no Diddy")
 public class IntakeTest extends LinearOpMode {
 
     private DcMotor fr;
@@ -54,7 +54,7 @@ public class IntakeTest extends LinearOpMode {
         //fr.setDirection(DcMotor.Direction.REVERSE);
         //bl.setDirection(DcMotor.Direction.REVERSE);
         armServoL.setDirection(Servo.Direction.REVERSE);
-        bucketServoR.setDirection(Servo.Direction.REVERSE);
+        bucketServoL.setDirection(Servo.Direction.REVERSE);
         topWrist.setDirection(Servo.Direction.REVERSE);
 
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -126,9 +126,9 @@ public class IntakeTest extends LinearOpMode {
 
 
                 if (gamepad2.dpad_up) {
-                    raiseSlides();
-                } else if (gamepad2.dpad_down){
                     lowerSlides();
+                } else if (gamepad2.dpad_down){
+                    raiseSlides();
                 } else {
                     slideMotorR.setPower(0);
                     slideMotorL.setPower(0);
@@ -170,9 +170,8 @@ public class IntakeTest extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3600);
-        slideMotorL.setPower(.09);
-        slideMotorR.setPower(-0.09);
+        sleep(3500);
+
 
 
     }
@@ -183,23 +182,25 @@ public class IntakeTest extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3500);
+        sleep(3600);
+        slideMotorL.setPower(.09);
+        slideMotorR.setPower(-0.09);
 
 
     }
     public void transfer1(){
-        bucketServoL.setPosition(0.4);
-        bucketServoR.setPosition(0.4);
+        bucketServoL.setPosition(0.38);
+        bucketServoR.setPosition(0.38);
         topWrist.setPosition(0.15);
         // wrist less is more up
 
-        wristServo.setPosition(0.14);
-        sleep(2000);
-        armServoR.setPosition(0.43);
-        armServoL.setPosition(0.43);
+        wristServo.setPosition(0.18);
+        sleep(1500);
+        armServoR.setPosition(0.57);
+        armServoL.setPosition(0.57);
         sleep(500);
         sleep(500);
-        topClaw.setPosition(0.67);
+        topClaw.setPosition(0.6);
         sleep(500);
         claw.setPosition(0.05);
         sleep(1000);
@@ -209,8 +210,8 @@ public class IntakeTest extends LinearOpMode {
     public void afterTransfer1(){
         bucketServoL.setPosition(0.38);
         bucketServoR.setPosition(0.38);
-        armServoR.setPosition(0.34);
-        armServoL.setPosition(0.34);
+        armServoR.setPosition(0.48);
+        armServoL.setPosition(0.48);
         wristServo.setPosition(0.8);
         topWrist.setPosition(0.12);
     }
