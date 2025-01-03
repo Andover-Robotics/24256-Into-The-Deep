@@ -1,5 +1,4 @@
-package org.firstinspires.ftc.teamcode;
-
+package org.firstinspires.ftc.teamcode.Test;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -114,8 +113,8 @@ public class IntakeTest extends LinearOpMode {
                 if (gamepad2.a) {
                     transfer1();
                 } else if (gamepad2.right_trigger>0) {
-                    armServoL.setPosition(.4);
-                    armServoR.setPosition(.4);
+                    armServoL.setPosition(.55);
+                    armServoR.setPosition(.55);
                 } else {
                     afterTransfer1();
                 }
@@ -183,8 +182,8 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3600);
-        slideMotorL.setPower(.09);
-        slideMotorR.setPower(-0.09);
+        slideMotorL.setPower(-.09);
+        slideMotorR.setPower(0.09);
 
 
     }
@@ -196,8 +195,8 @@ public class IntakeTest extends LinearOpMode {
 
         wristServo.setPosition(0.18);
         sleep(1500);
-        armServoR.setPosition(0.57);
-        armServoL.setPosition(0.57);
+        armServoR.setPosition(0.6);
+        armServoL.setPosition(0.6);
         sleep(500);
         sleep(500);
         topClaw.setPosition(0.6);
@@ -210,8 +209,8 @@ public class IntakeTest extends LinearOpMode {
     public void afterTransfer1(){
         bucketServoL.setPosition(0.38);
         bucketServoR.setPosition(0.38);
-        armServoR.setPosition(0.48);
-        armServoL.setPosition(0.48);
+        armServoR.setPosition(0.33);
+        armServoL.setPosition(0.33);
         wristServo.setPosition(0.8);
         topWrist.setPosition(0.12);
     }

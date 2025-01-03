@@ -1,13 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Test;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import  com.qualcomm.robotcore.hardware.Servo;
-@Autonomous(name = "autoTemplate")
-public class autoTemplate extends LinearOpMode {
+@Autonomous(name = "Jaybe or Jaybe not")
+public class PushAuto extends LinearOpMode {
 
     private DcMotor fr;
     private DcMotor bl;
@@ -29,9 +27,6 @@ public class autoTemplate extends LinearOpMode {
 
     boolean toggleTop = false;
 
-    /**
-     * This function is executed when this Op Mode is selected from the Driver Station.
-     */
     @Override
     public void runOpMode() {
         float forwardSpeed;
@@ -81,42 +76,26 @@ public class autoTemplate extends LinearOpMode {
         waitForStart();
 
         if (opModeIsActive()) {
-            afterTransfer1();
-            drive(300, 300, 0.6);
-            strafe(1000, 0.6);
-            raiseSlides();
-            sleep(600);
-            turnRight(500, 0.6);
-            drive(-270, -270, .6);
-            transfer2();
+            drive(1000,1000,.5);
             sleep(500);
-            drive(300, 300, .6);
-            afterTransfer1();
-            lowerSlides();
-            turnRight(550, 0.6);
-            strafe(750, 0.6);
-            drive(900, 800, 0.6);
-            strafe(1390, 0.6);
-            turnRight(2130, 0.6);
-            drive(-500, -500, 0.6);
-            raiseSlides();
-            sleep(1700);
-
-
-            telemetry.addData("armServoR Position: ", armServoR.getPosition());
-            telemetry.addData("armServoL Position: ", armServoR.getPosition());
-            telemetry.addData("bucketServoR Position: ", bucketServoR.getPosition());
-            telemetry.addData("bucketServoR Position: ", bucketServoR.getPosition());
-            telemetry.addData("claw Position: ", claw.getPosition());
-            telemetry.addData("Wrist Position", wristServo.getPosition());
-            telemetry.addData("top claw", topClaw.getPosition());
-            telemetry.update();
-
+            strafe(200,.5);
+            sleep(500);
+            drive(-1000,-1000,.5);
+            sleep(500);
+            drive(1000,1000,.5);
+            sleep(500);
+            strafe(200,.5);
+            sleep(500);
+            drive(-1000,-1000,.5);
+            sleep(500);
+            drive(1000,1000,.5);
+            sleep(500);
+            strafe(200,.5);
+            sleep(500);
+            drive(-1000,-1000,.5);
+            sleep(500);
         }
-
     }
-
-
     public void toggleTopMethod() {
         if (toggleTop) {
             topClaw.setPosition(.55);
@@ -230,91 +209,68 @@ public class autoTemplate extends LinearOpMode {
         br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
-
     public void raiseSlides() {
         slideMotorL.setPower(.4);
         slideMotorR.setPower(-.4);
-        if (gamepad1.a) {
-            slideMotorL.setPower(0);
-            slideMotorR.setPower(0);
-        }
-        sleep(3700);
-        slideMotorL.setPower(0);
-        slideMotorR.setPower(0);
-
-    }
-
-    public void lowerSlides() {
-        slideMotorL.setPower(-.4);
-        slideMotorR.setPower(.4);
-        if (gamepad1.b) {
+        if(gamepad1.a){
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
         sleep(3500);
-        slideMotorL.setPower(0);
-        slideMotorR.setPower(0);
+
+
 
     }
+    public void lowerSlides() {
+        slideMotorL.setPower(-.4);
+        slideMotorR.setPower(.4);
+        if(gamepad1.b){
+            slideMotorL.setPower(0);
+            slideMotorR.setPower(0);
+        }
+        sleep(3600);
+        slideMotorL.setPower(.09);
+        slideMotorR.setPower(-0.09);
 
-    public void transfer1() {
+
+    }
+    public void transfer1(){
         bucketServoL.setPosition(0.38);
         bucketServoR.setPosition(0.38);
-        topWrist.setPosition(0.155);
-        wristServo.setPosition(0);
-        sleep(800);
-        armServoR.setPosition(0.245);
-        armServoL.setPosition(0.245);
+        topWrist.setPosition(0.15);
+        // wrist less is more up
+
+        wristServo.setPosition(0.18);
+        sleep(1500);
+        armServoR.setPosition(0.62);
+        armServoL.setPosition(0.62);
         sleep(500);
-        topClaw.setPosition(0.55);
+        sleep(500);
+        topClaw.setPosition(0.6);
         sleep(500);
         claw.setPosition(0.05);
         sleep(1000);
         toggleTop = true;
         toggleTopMethod();
     }
-
-    public void afterTransfer1() {
-        bucketServoL.setPosition(0.37);
-        bucketServoR.setPosition(0.37);
-        armServoR.setPosition(0.2);
-        armServoL.setPosition(0.2);
-        wristServo.setPosition(0.75);
-        topWrist.setPosition(0.155);
+    public void afterTransfer1(){
+        bucketServoL.setPosition(0.38);
+        bucketServoR.setPosition(0.38);
+        armServoR.setPosition(0.53);
+        armServoL.setPosition(0.53);
+        wristServo.setPosition(0.8);
+        topWrist.setPosition(0.12);
     }
-
-    public void transfer2() {
-        topClaw.setPosition(0.55);
+    public void transfer2(){
+        topClaw.setPosition(0.7);
         sleep(500);
-        topWrist.setPosition(0.73);
-        bucketServoL.setPosition(.8);
-        bucketServoR.setPosition(.8);
+        topWrist.setPosition(0.53);
+        bucketServoL.setPosition(.9);
+        bucketServoR.setPosition(.9);
         sleep(1500);
         topClaw.setPosition(.1);
         //toggleTop = false;
         //toggleTopMethod();
         sleep(1000);
     }
-
-    public void turnLeft(int target, double speed) {
-        // Set target positions for left and right motors to rotate in opposite directions
-        fl.setTargetPosition(-target);
-        bl.setTargetPosition(-target);
-        fr.setTargetPosition(target);
-        br.setTargetPosition(target);
-
-        // Set motors to RUN_TO_POSITION mode
-        fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        bl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        // Set motor power
-        fl.setPower(speed);
-        bl.setPower(speed);
-        fr.setPower(speed);
-        br.setPower(speed);
-    }
 }
-
-
