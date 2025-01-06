@@ -208,7 +208,7 @@ public class PushAuto extends LinearOpMode {
         bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
-
+    //slides functions are reversed i.e raiseSlides lowers them and lowerSlides raises them.
     public void raiseSlides() {
         slideMotorL.setPower(.4);
         slideMotorR.setPower(-.4);
@@ -272,5 +272,26 @@ public class PushAuto extends LinearOpMode {
         //toggleTop = false;
         //toggleTopMethod();
         sleep(1000);
+
     }
+    public void turnLeft(int target, double speed) {
+            // Set target positions for left and right motors to rotate in opposite directions
+            fl.setTargetPosition(-target);
+            bl.setTargetPosition(-target);
+            fr.setTargetPosition(target);
+            br.setTargetPosition(target);
+
+            // Set motors to RUN_TO_POSITION mode
+            fl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            bl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            fr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            br.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // Set motor power
+            fl.setPower(speed);
+            bl.setPower(speed);
+            fr.setPower(speed);
+            br.setPower(speed);
+            stopAllMotors();
+        }
 }

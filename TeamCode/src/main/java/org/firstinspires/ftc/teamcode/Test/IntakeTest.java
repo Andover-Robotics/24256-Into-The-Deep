@@ -153,7 +153,7 @@ public class IntakeTest extends LinearOpMode {
 
     public void toggleTopMethod(){
         if(toggleTop){
-            topClaw.setPosition(.65);
+            topClaw.setPosition(.6);
         }
         else{
             topClaw.setPosition(.1);
@@ -182,8 +182,8 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3600);
-        slideMotorL.setPower(-.09);
-        slideMotorR.setPower(0.09);
+        slideMotorL.setPower(.09);
+        slideMotorR.setPower(-0.09);
 
 
     }
@@ -195,8 +195,8 @@ public class IntakeTest extends LinearOpMode {
 
         wristServo.setPosition(0.18);
         sleep(1500);
-        armServoR.setPosition(0.6);
-        armServoL.setPosition(0.6);
+        armServoR.setPosition(0.42);
+        armServoL.setPosition(0.42);
         sleep(500);
         sleep(500);
         topClaw.setPosition(0.6);
@@ -209,8 +209,8 @@ public class IntakeTest extends LinearOpMode {
     public void afterTransfer1(){
         bucketServoL.setPosition(0.38);
         bucketServoR.setPosition(0.38);
-        armServoR.setPosition(0.33);
-        armServoL.setPosition(0.33);
+        armServoR.setPosition(0.325);
+        armServoL.setPosition(0.325);
         wristServo.setPosition(0.8);
         topWrist.setPosition(0.12);
     }

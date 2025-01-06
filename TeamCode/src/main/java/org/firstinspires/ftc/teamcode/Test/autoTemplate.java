@@ -81,34 +81,25 @@ public class autoTemplate extends LinearOpMode {
         if (opModeIsActive()) {
             afterTransfer1();
             drive(-300, -300, 0.6);
-            strafe(-1000, 0.6);
+            strafe(-850, 0.6);
             sleep(600);
             drive(-100,-100,.6);
             sleep(500);
             turnRight(-3800, 0.6);
             sleep(500);
-            drive(300,300,.6);
+            drive(310,310,.6);
             sleep(500);
             lowerSlides();
             sleep(500);
-            drive(270, 270, .6);
             transfer2();
             sleep(500);
             afterTransfer1();
             sleep(500);
             raiseSlides();
-            sleep(500);
-            /* drive(300, 300, .6);
-            afterTransfer1();
-            raiseSlides();
+            drive(-1000,-1000,.6);
             turnRight(550, 0.6);
-            strafe(750, 0.6);
-            drive(900, 800, 0.6);
-            strafe(1390, 0.6);
-            turnRight(2130, 0.6);
-            drive(-500, -500, 0.6);
-            raiseSlides();
-            sleep(1700);*/
+            strafe(-1390, 0.6);
+            sleep(1500);
 
 
             telemetry.addData("armServoR Position: ", armServoR.getPosition());
@@ -138,14 +129,9 @@ public class autoTemplate extends LinearOpMode {
     public void raiseSlides() {
         slideMotorL.setPower(.4);
         slideMotorR.setPower(-.4);
-        if(gamepad1.a){
-            slideMotorL.setPower(0);
-            slideMotorR.setPower(0);
-        }
-        sleep(3500);
-
-
-
+        sleep(3600);
+        slideMotorL.setPower(0);
+        slideMotorR.setPower(0);
     }
     public void lowerSlides() {
         slideMotorL.setPower(-.4);
@@ -154,7 +140,7 @@ public class autoTemplate extends LinearOpMode {
             slideMotorL.setPower(0);
             slideMotorR.setPower(0);
         }
-        sleep(3600);
+        sleep(3500);
         slideMotorL.setPower(-.09);
         slideMotorR.setPower(0.09);
 
@@ -322,6 +308,7 @@ public class autoTemplate extends LinearOpMode {
         bl.setPower(speed);
         fr.setPower(speed);
         br.setPower(speed);
+        stopAllMotors();
     }
 
 }
