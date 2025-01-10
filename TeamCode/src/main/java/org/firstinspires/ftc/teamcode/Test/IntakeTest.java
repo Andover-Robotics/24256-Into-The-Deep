@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import  com.qualcomm.robotcore.hardware.Servo;
+import com.arcrobotics.ftclib.gamepad.GamepadEx;
+
+
+
+
 @TeleOp(name = "Sigma Skibibi Rizz no Diddy")
 public class IntakeTest extends LinearOpMode {
 
@@ -134,9 +139,6 @@ public class IntakeTest extends LinearOpMode {
                 }
 
 
-
-
-
                 telemetry.addData("armServoR Position: ", armServoR.getPosition());
                 telemetry.addData("armServoL Position: ", armServoR.getPosition());
                 telemetry.addData("bucketServoR Position: ", bucketServoR.getPosition());
@@ -161,7 +163,6 @@ public class IntakeTest extends LinearOpMode {
 
     }
 
-
     public void raiseSlides() {
         slideMotorL.setPower(.4);
         slideMotorR.setPower(-.4);
@@ -170,7 +171,6 @@ public class IntakeTest extends LinearOpMode {
             slideMotorR.setPower(0);
         }
         sleep(3500);
-
 
 
     }

@@ -80,7 +80,7 @@ public class autoTemplate extends LinearOpMode {
 
         if (opModeIsActive()) {
             afterTransfer1();
-            drive(-300, -300, 0.6);
+            drive(-50, -50, 0.6);
             strafe(-850, 0.6);
             sleep(600);
             drive(-100,-100,.6);
@@ -196,6 +196,7 @@ public class autoTemplate extends LinearOpMode {
 
     public void turnRight(int target, double speed) {
         // Set target positions for left and right motors to rotate in opposite directions
+        resetDriveEncoders();
         fl.setTargetPosition(target);
         bl.setTargetPosition(target);
         fr.setTargetPosition(-target);
@@ -225,7 +226,7 @@ public class autoTemplate extends LinearOpMode {
 
 
     public void drive(int leftTarget, int rightTarget, double speed) {
-
+        resetDriveEncoders();
         fl.setTargetPosition(leftTarget);
         bl.setTargetPosition(leftTarget);
         fr.setTargetPosition(rightTarget);
@@ -248,8 +249,14 @@ public class autoTemplate extends LinearOpMode {
 
         stopAllMotors();
     }
-
+    public void resetDriveEncoders(){
+        fl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        fr.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bl.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        br.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
     public void strafe(int target, double speed) {
+        resetDriveEncoders();
         fl.setTargetPosition(-target);
         bl.setTargetPosition(target);
         fr.setTargetPosition(target);
