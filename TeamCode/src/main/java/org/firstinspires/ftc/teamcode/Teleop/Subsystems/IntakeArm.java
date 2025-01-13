@@ -6,6 +6,8 @@ public class IntakeArm {
     public Servo armServoR, armServoL;
     public static final double transferPos = 0.42;
     public static final double intakePos = 0.325;
+    public static final double ArmUpPos = 0.55;
+
 
     public IntakeArm(OpMode opMode) {
         armServoR = opMode.hardwareMap.get(Servo.class, "armServoR");
@@ -18,5 +20,9 @@ public class IntakeArm {
     public void armToIntakePos () {
         armServoL.setPosition(intakePos);
         armServoR.setPosition(intakePos);
+    }
+    public void armToUpPos(){
+        armServoL.setPosition(ArmUpPos);
+        armServoR.setPosition(ArmUpPos);
     }
 }

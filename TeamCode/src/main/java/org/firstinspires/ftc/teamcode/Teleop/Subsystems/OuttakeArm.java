@@ -8,8 +8,8 @@ public class OuttakeArm {
     public static final double afterTransfer1Pos = 0.38;
     public static final double transfer2Pos = 0.9;
     public OuttakeArm(OpMode opMode){
-        bucketServoR = hardwareMap.get(Servo.class, "bucketServoR");
-        bucketServoL = hardwareMap.get(Servo.class, "bucketServoL");
+        bucketServoR = opMode.hardwareMap.get(Servo.class, "bucketServoR");
+        bucketServoL = opMode.hardwareMap.get(Servo.class, "bucketServoL");
     }
     public void armToAfterTransfer1Pos(){
         bucketServoR.setPosition(afterTransfer1Pos);
