@@ -6,10 +6,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class IntakeClaw {
     public Servo  claw, wristServo;
 
-    public static final double clawOpen = 0.05;
-    public static final double clawClose = 0.54;
+    public static final double clawOpen = 0.15;
+    public static final double clawClose = 0.53;
     public static final double wristUp = 0.18;
-    public static final double wristDown = 0.53;
+    public static final double wristDown = 0.67;
 
     public IntakeClaw(OpMode opMode) {
         claw = opMode.hardwareMap.get(Servo.class,"claw");

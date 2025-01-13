@@ -30,7 +30,7 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
             gp2.readButtons();
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)) {
+            if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 toggleBottClaw = !toggleBottClaw;
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)) {
@@ -39,13 +39,15 @@ public class MainTeleOp extends LinearOpMode {
             // opens both bottom and top claws with toggles.
             if (toggleBottClaw) {
                 bot.intakeClaw.openClaw();
-            } else if (toggleTopClaw) {
-                bot.outtakeClaw.outtakeClawOpen();
             } else {
                 bot.intakeClaw.closeClaw();
+            }
+            if (toggleTopClaw) {
+                bot.outtakeClaw.outtakeClawOpen();
+            } else {
                 bot.outtakeClaw.outtakeClawClose();
             }
-            if(gp2.wasJustPressed(GamepadKeys.Button.A)){
+            if (gp2.wasJustPressed(GamepadKeys.Button.A)){
                 bot.goToTransferPos(time);
             } else {
                 bot.resetIntake();
@@ -71,9 +73,9 @@ public class MainTeleOp extends LinearOpMode {
         gp1.readButtons();
         bot.prepMotors();
         Vector2d driveVector;
-        driveVector = new Vector2d(gp1.getLeftX(),-gp1.getLeftY());
+        driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY());
         Vector2d turnVector;
-        turnVector = new Vector2d(gp1.getRightX(), 0);
+        turnVector = new Vector2d(-gp1.getRightX(), 0);
         bot.driveRobotCentric(driveVector.getX()*0.7, driveVector.getY()*0.7, turnVector.getX()/1.7);
 
     }

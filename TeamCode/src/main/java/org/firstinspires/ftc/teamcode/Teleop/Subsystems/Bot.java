@@ -16,7 +16,7 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 
 
 @TeleOp
-public class Bot {
+public class Bot  {
 
     public OpMode opMode;
     public static Bot instance;
@@ -45,12 +45,13 @@ public class Bot {
         bl = opMode.hardwareMap.get(DcMotorEx.class,"bl");
         br = opMode.hardwareMap.get(DcMotorEx.class,"br");
 
-        prepMotors();
-
         this.intakeArm = new IntakeArm(opMode);
         this.intakeClaw = new IntakeClaw(opMode);
         this.outtakeArm = new OuttakeArm(opMode);
         this.outtakeClaw = new OuttakeClaw(opMode);
+        this.slides = new Slides(opMode);
+        prepMotors();
+
 
     }
 
@@ -87,17 +88,17 @@ public class Bot {
         intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
         outtakeArm.bucketServoL.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
-        fr.setDirection(DcMotorSimple.Direction.REVERSE);
+        fl.setDirection(DcMotorSimple.Direction.REVERSE);
         bl.setDirection(DcMotorSimple.Direction.REVERSE);
-        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fl.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        fr.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        br.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
 
-        fl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        fr.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        bl.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        br.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
     public void resetEverything(){
         intakeArm.armToIntakePos();
@@ -120,7 +121,6 @@ public class Bot {
     }
     public void resetOuttake(){
         outtakeArm.armToAfterTransfer1Pos();
-        outtakeClaw.outtakeClawOpen();
         outtakeClaw.topWristTransferPos();
     }
     public void goToTransferPos(ElapsedTime time){
@@ -128,19 +128,22 @@ public class Bot {
         intakeArm.armToTransferPos();
         while(time.seconds() <0.5);
         intakeClaw.wristToTransferPos();
-        while(time.seconds() <0.5);
+        while(time.seconds() <1);
         outtakeClaw.outtakeClawClose();
-        while(time.seconds() <0.5);
+        while(time.seconds() <1.5);
         intakeClaw.openClaw();
-        while(time.seconds() <0.5);
+        while(time.seconds() < 2);
     }
     public void goToOuttakePos(ElapsedTime time) {
         time.reset();
         outtakeArm.armToTransfer2Pos();
         while(time.seconds() <0.5);
         outtakeClaw.topWristToOuttakePos();
-        while(time.seconds() <0.5);
+        while(time.seconds() <2);
         outtakeClaw.outtakeClawOpen();
+        while(time.seconds() <2.5);
+
+
     }
 
 }
