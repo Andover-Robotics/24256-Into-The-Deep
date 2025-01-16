@@ -15,7 +15,6 @@ import com.arcrobotics.ftclib.drivebase.MecanumDrive;
 
 
 
-@TeleOp
 public class Bot  {
 
     public OpMode opMode;
@@ -86,6 +85,8 @@ public class Bot  {
     }
     public void prepMotors() {
         intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
+        slides.slideMotorR.setInverted(false);
+        slides.slideMotorL.setInverted(true);
         outtakeArm.bucketServoL.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
         fl.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -125,14 +126,15 @@ public class Bot  {
     }
     public void goToTransferPos(ElapsedTime time){
         time.reset();
+        outtakeClaw.outtakeClawOpen();
         intakeArm.armToTransferPos();
         while(time.seconds() <0.5);
         intakeClaw.wristToTransferPos();
-        while(time.seconds() <1);
-        outtakeClaw.outtakeClawClose();
         while(time.seconds() <1.5);
+        outtakeClaw.outtakeClawClose();
+        while(time.seconds() <2);
         intakeClaw.openClaw();
-        while(time.seconds() < 2);
+        while(time.seconds() < 2.5);
     }
     public void goToOuttakePos(ElapsedTime time) {
         time.reset();

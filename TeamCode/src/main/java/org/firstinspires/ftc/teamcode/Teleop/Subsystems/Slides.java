@@ -9,25 +9,120 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 
 @Config
-@TeleOp
+
 public class Slides {
-    private MotorEx slideMotorR, slideMotorL;
+    public  final MotorEx slideMotorR, slideMotorL;
     private PIDFController controller;
-    public static double p = 0, i = 0, d = 0, f =0;
-    //need to add motion profiler but I don't know how.
-public Slides (OpMode opMode) {
-    slideMotorL = new MotorEx(opMode.hardwareMap, "slideMotorL", Motor.GoBILDA.RPM_312);
-    slideMotorR = new MotorEx(opMode.hardwareMap, "slideMotorR", Motor.GoBILDA.RPM_312);
+    public static double p = 0.015, i = 0, d = 0, f =0, staticF = 0.25;
+    //tune if you have time, supposedly it will work well enough without tuning but likely will help.
+    private final double tolerance = 10, powerUp = 0.1, powerDown = 0.05, powerMin =0.1, manualDivide = 1 ;
+    public  double target = 0;
+    private double power;
+    private final OpMode opMode;
+    private double manualPower = 0;
+    public boolean goingDown = false;
 
-    controller = new PIDFController(p, i, d, f);
+    public static int storage = 0, topBucket = -3000;
+    //tune top bucket value very carefully
+    private double profiler_init_time = 0;
 
-    slideMotorR.setInverted(true);
-    slideMotorL.setInverted(false);
 
-    slideMotorL.setRunMode(Motor.RunMode.RawPower );
-    slideMotorL.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
-    slideMotorR.setRunMode(Motor.RunMode.RawPower);
-    slideMotorR.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+    MotionProfiler profiler = new MotionProfiler(20000,30000);
+    public Slides (OpMode opmode) {
+        slideMotorL = new MotorEx(opmode.hardwareMap, "slideMotorL", Motor.GoBILDA.RPM_312);
+        slideMotorR = new MotorEx(opmode.hardwareMap, "slideMotorR", Motor.GoBILDA.RPM_312);
+
+        controller = new PIDFController(p, i, d, f);
+        controller.setTolerance(tolerance);
+        controller.setSetPoint(0);
+
+        slideMotorR.setInverted(false);
+        slideMotorL.setInverted(true);
+
+        slideMotorL.setRunMode(Motor.RunMode.RawPower );
+        slideMotorL.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+        slideMotorR.setRunMode(Motor.RunMode.RawPower);
+        slideMotorR.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
+        this.opMode = opmode;
+    }
+    public void runTo(double pos) {
+        slideMotorR.setRunMode(Motor.RunMode.RawPower);
+        slideMotorR.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
+        slideMotorL.setRunMode(Motor.RunMode.RawPower);
+        slideMotorL.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
+
+        controller = new PIDFController(p, i, d, f);
+        controller.setTolerance(tolerance);
+
+        if (manualPower == 0) {
+            resetProfiler();
+            profiler.init(slideMotorL.getCurrentPosition(),pos);
+            profiler_init_time = opMode.time;
+
+            goingDown = pos> target;
+            target = pos;
+        }
+    }
+    public void runToTopBucket(){
+        runTo(topBucket);
+        }
+    public void runToStorage() {
+        runTo(storage);
+    }
+    public void runToManual(double manual){
+        if (manualPower > powerMin || manualPower < -powerMin) {
+            manualPower = -manual;
+        } else {
+            manualPower = 0;
+        }
+        }
+    public void periodic() {
+        slideMotorL.setInverted(false);
+        slideMotorR.setInverted(true);
+        controller.setPIDF(p, i, d, f);
+        double dt = opMode.time - profiler_init_time;
+        if (!profiler.isOver()) {
+
+            controller.setSetPoint(profiler.profile_pos(dt));
+            power = powerUp * controller.calculate(slideMotorL.getCurrentPosition());
+            if (goingDown) {
+                power = powerDown * controller.calculate(slideMotorL.getCurrentPosition());
+            }
+            slideMotorR.set(power);
+            slideMotorL.set(power);
+
+
+        } else {
+            if (profiler.isDone()) {
+                profiler = new MotionProfiler(30000, 20000);
+            }
+
+            if (manualPower != 0) {
+
+                controller.setSetPoint(slideMotorL.getCurrentPosition());
+                slideMotorR.set(manualPower / manualDivide);
+                slideMotorL.set(manualPower / manualDivide);
+
+            } else {
+                power = staticF * controller.calculate(slideMotorL.getCurrentPosition());
+                slideMotorR.set(power);
+                slideMotorL.set(power);
+            }
+
+
+        }
+    }
+
+
+    public void resetProfiler() {
+        profiler = new MotionProfiler(20000,30000);
+    }
+
+
+    public int getPosition() {
+        return slideMotorL.getCurrentPosition();
+    }
 }
 
-}

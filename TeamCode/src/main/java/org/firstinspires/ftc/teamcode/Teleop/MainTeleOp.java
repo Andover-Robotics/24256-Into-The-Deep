@@ -1,5 +1,10 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
+import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.storage;
+import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.topBucket;
+
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.geometry.Vector2d;
@@ -18,13 +23,17 @@ public class MainTeleOp extends LinearOpMode {
     private GamepadEx gp1,gp2;
     private  boolean toggleTopClaw = false;
     private  boolean toggleBottClaw = false;
+    private boolean liftArm = false;
+
+    int slidesTarget = 0;
     ElapsedTime time = new ElapsedTime();
     Bot bot;
     public void runOpMode() throws InterruptedException{
+        telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
-
+        bot.prepMotors();
         bot.resetEverything();
         waitForStart();
         while (opModeIsActive()) {
@@ -36,6 +45,10 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)) {
                 toggleTopClaw = !toggleTopClaw;
             }
+            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+                liftArm = !liftArm;
+            }
+
             // opens both bottom and top claws with toggles.
             if (toggleBottClaw) {
                 bot.intakeClaw.openClaw();
@@ -57,13 +70,36 @@ public class MainTeleOp extends LinearOpMode {
             } else {
                 bot.resetOuttake();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+            if (liftArm){
                 bot.intakeArm.armToUpPos();
-            } else {
-                bot.intakeArm.armToIntakePos();
             }
-            drive();
+//            if (gp2.wasJustPressed((GamepadKeys.Button.DPAD_UP))) {
+//                bot.slides.runTo(topBucket);
+//            }
+//            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
+//                bot.slides.runTo(storage);
+//            }
 
+            if (gp2.wasJustPressed((GamepadKeys.Button.DPAD_UP))) {
+                slidesTarget-= 50;
+            }
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
+                slidesTarget+= 50;
+            }
+
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
+                bot.slides.runTo(slidesTarget);
+            }
+            if (Math.abs(gp2.getLeftY()) > 0.05){
+                bot.slides.runToManual(gp2.getLeftY());
+            }
+
+            drive();
+            telemetry.addData("slides target", bot.slides.target);
+           telemetry.addData("slides target", slidesTarget);
+           telemetry.addData("slides postion", bot.slides.getPosition());
+           telemetry.update();
+           bot.slides.periodic();
         }
 
 
