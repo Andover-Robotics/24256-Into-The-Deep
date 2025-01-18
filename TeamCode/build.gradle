@@ -1,4 +1,4 @@
-//
+ //
 // build.gradle in TeamCode
 //
 // Most of the definitions for building your module reside in a common, shared
@@ -26,7 +26,17 @@ android {
     }
 }
 
+ repositories {
+     maven {
+         url = 'https://maven.brott.dev/'
+     }
+ }
+
 dependencies {
     implementation project(':FtcRobotController')
     implementation 'org.ftclib.ftclib:core:2.1.1'
+    implementation "com.acmerobotics.roadrunner:ftc:0.1.15"
+    implementation "com.acmerobotics.roadrunner:core:1.0.1"
+    implementation "com.acmerobotics.roadrunner:actions:1.0.1"
+    implementation "com.acmerobotics.dashboard:dashboard:0.4.16"
 }
