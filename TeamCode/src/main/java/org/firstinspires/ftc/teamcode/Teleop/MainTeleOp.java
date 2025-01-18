@@ -60,9 +60,12 @@ public class MainTeleOp extends LinearOpMode {
             } else {
                 bot.outtakeClaw.outtakeClawClose();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.A)){
+            if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 bot.goToTransferPos(time);
-            } else {
+            }else if(liftArm) {
+                bot.intakeArm.armToUpPos();
+                }
+            else {
                 bot.resetIntake();
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.B)){
@@ -70,29 +73,17 @@ public class MainTeleOp extends LinearOpMode {
             } else {
                 bot.resetOuttake();
             }
-            if (liftArm){
-                bot.intakeArm.armToUpPos();
-            }
-//            if (gp2.wasJustPressed((GamepadKeys.Button.DPAD_UP))) {
-//                bot.slides.runTo(topBucket);
-//            }
-//            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
-//                bot.slides.runTo(storage);
-//            }
 
             if (gp2.wasJustPressed((GamepadKeys.Button.DPAD_UP))) {
-                slidesTarget-= 50;
+               bot.slides.runTo(topBucket);
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
-                slidesTarget+= 50;
+               bot.slides.runTo(storage);
             }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
-                bot.slides.runTo(slidesTarget);
-            }
-            if (Math.abs(gp2.getLeftY()) > 0.05){
+            /*if (Math.abs(gp2.getLeftY()) > 0.05){
                 bot.slides.runToManual(gp2.getLeftY());
-            }
+            }*/
 
             drive();
             telemetry.addData("slides target", bot.slides.target);
