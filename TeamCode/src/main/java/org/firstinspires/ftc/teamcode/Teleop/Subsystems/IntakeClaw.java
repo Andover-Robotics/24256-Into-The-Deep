@@ -9,11 +9,21 @@ public class IntakeClaw {
     public static final double clawOpen = 0.15;
     public static final double clawClose = 0.47;
     public static final double wristUp = 0.18;
-    public static final double wristDown = 0.7;
+    public static final double wristDown = 0.72;
+
+    public boolean open = true;
 
     public IntakeClaw(OpMode opMode) {
         claw = opMode.hardwareMap.get(Servo.class,"claw");
         wristServo = opMode.hardwareMap.get(Servo.class,"wristServo");
+    }
+
+    public void toggleClaw() {
+        if (open) {
+            closeClaw();
+        } else {
+            openClaw();
+        }
     }
 
     public void openClaw(){
