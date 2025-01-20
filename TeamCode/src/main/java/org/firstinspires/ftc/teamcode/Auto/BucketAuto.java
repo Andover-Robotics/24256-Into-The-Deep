@@ -25,7 +25,7 @@ public class BucketAuto extends LinearOpMode {
 
                 //.afterTime(0.01, bot.actionHighBucket())
                 //.strafeToConstantHeading(new Vector2d(38, 55))
-                .lineToY(10)
+                .strafeToConstantHeading(new Vector2d(0, 5))
 
 
 //                .waitSeconds(1.5)

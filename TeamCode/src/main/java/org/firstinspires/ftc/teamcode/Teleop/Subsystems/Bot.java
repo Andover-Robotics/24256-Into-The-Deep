@@ -87,7 +87,7 @@ public class Bot  {
         intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
         slides.slideMotorR.setInverted(false);
         slides.slideMotorL.setInverted(true);
-        outtakeArm.bucketServoL.setDirection(Servo.Direction.REVERSE);
+        outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         br.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -102,10 +102,10 @@ public class Bot  {
         br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
     public void resetEverything(){
-        intakeArm.armToStorage();
-        outtakeArm.transfer();
+        intakeArm.armToUpPos();
+        outtakeArm.outtake();
         intakeClaw.openClaw();
-        outtakeClaw.outtakeClawOpen();
+        outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
     }
@@ -179,9 +179,9 @@ public class Bot  {
 
     public Action actionHighBucket() {
         return new SequentialAction(
-                new InstantAction(()-> slides.runToTopBucket()),
+                //new InstantAction(()-> slides.runToTopBucket()),
                 new SleepAction(1.3),
-                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(()-> outtakeArm.transfer()),
                 new SleepAction(0.5),
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
         );
@@ -198,8 +198,18 @@ public class Bot  {
     public Action toIntake() {
         return new SequentialAction(
                 new InstantAction(() -> intakeArm.intake()),
+                new InstantAction(()-> intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> intakeClaw.openClaw())
         );
+    }
+    public Action actionStorage(){
+        return new SequentialAction(
+           new InstantAction(()-> outtakeArm.transfer()),
+           new InstantAction(()-> intakeArm.armToUpPos()),
+           new InstantAction(()-> intakeClaw.wristToIntakePos()),
+           new InstantAction(()->outtakeClaw.topWristTransferPos()),
+           new InstantAction(()-> intakeClaw.openClaw())
+                   );
     }
 
     public class actionPeriodic implements Action {

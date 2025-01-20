@@ -5,18 +5,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class IntakeArm {
     public Servo armServoR, armServoL;
     public static final double transferPos = 0.39;
-    public static final double intakePos = 0.385;
+    public static final double intakePos = 0.3;
     public static final double ArmUpPos = 0.44;
     public final double armStorage = 0.5;
-    public boolean liftArm = false;
 
-    public void toggleArm() {
-        if (liftArm) {
-            armToUpPos();
-        } else {
-            intake();
-        }
-    }
 
     public IntakeArm(OpMode opMode) {
         armServoR = opMode.hardwareMap.get(Servo.class, "armServoR");

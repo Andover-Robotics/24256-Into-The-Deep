@@ -21,8 +21,10 @@ public class IntakeClaw {
     public void toggleClaw() {
         if (open) {
             closeClaw();
+            open = false;
         } else {
             openClaw();
+            open = true;
         }
     }
 
