@@ -19,27 +19,13 @@ public class BucketAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException{
         Bot.instance = null;
         bot = Bot.getInstance(this);
+
         Pose2d initialPose = new Pose2d(0,0, Math.toRadians(-90));
-        MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
-        Action runAuto = drive.actionBuilder(drive.localizer.getPose())
+        MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0,0, Math.toRadians(-90)));
 
-                //.afterTime(0.01, bot.actionHighBucket())
-                //.strafeToConstantHeading(new Vector2d(38, 55))
+        Action runAuto = drive.actionBuilder(new Pose2d(0,0, Math.toRadians(-90)))
                 .strafeToConstantHeading(new Vector2d(0, 5))
-
-
-//                .waitSeconds(1.5)
-//                .stopAndAdd(bot.actionBucketDrop())
-//
-//                .strafeToLinearHeading(new Vector2d(44, 40), Math.toRadians(-90))
-
-
-
                 .build();
-
-//        while(!isStarted()) {
-//            bot.slides.periodic();
-//        }
 
         waitForStart();
         Actions.runBlocking(

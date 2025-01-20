@@ -49,7 +49,7 @@ public class Bot  {
         this.outtakeArm = new OuttakeArm(opMode);
         this.outtakeClaw = new OuttakeClaw(opMode);
         this.slides = new Slides(opMode);
-        prepMotors();
+
 
 
     }
@@ -84,11 +84,7 @@ public class Bot  {
         br.setPower(-speeds[3]);
     }
     public void prepMotors() {
-        intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
-        slides.slideMotorR.setInverted(false);
-        slides.slideMotorL.setInverted(true);
-        outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
-        outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
+
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
         br.setDirection(DcMotorSimple.Direction.REVERSE);
         fl.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
@@ -100,6 +96,13 @@ public class Bot  {
         fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+    }
+    public void prepSubsystems(){
+        intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
+        slides.slideMotorR.setInverted(false);
+        slides.slideMotorL.setInverted(true);
+        outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
+        outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
     }
     public void resetEverything(){
         intakeArm.armToUpPos();

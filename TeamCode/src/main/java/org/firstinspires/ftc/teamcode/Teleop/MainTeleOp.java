@@ -47,6 +47,7 @@ public class MainTeleOp extends LinearOpMode {
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
         bot.prepMotors();
+        bot.prepSubsystems();
         bot.resetEverything();
         waitForStart();
         while (opModeIsActive()) {

@@ -1,9 +1,16 @@
 package org.firstinspires.ftc.teamcode.Test;
 
+import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.storage;
+import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.topBucket;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import  com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
+
 @Autonomous(name = "Bucket Auto")
 public class autoTemplate extends LinearOpMode {
 
@@ -26,6 +33,8 @@ public class autoTemplate extends LinearOpMode {
     boolean toggleTopWrist = false;
 
     boolean toggleTop = false;
+    Bot bot;
+    ElapsedTime time = new ElapsedTime();
 
     /**
      * This function is executed when this Op Mode is selected from the Driver Station.
@@ -35,51 +44,15 @@ public class autoTemplate extends LinearOpMode {
         float forwardSpeed;
         float strafeSpeed;
         float turnSpeed;
+        bot = Bot.getInstance(this);
 
-        fr = hardwareMap.get(DcMotor.class, "fr");
-        bl = hardwareMap.get(DcMotor.class, "bl");
-        fl = hardwareMap.get(DcMotor.class, "fl");
-        br = hardwareMap.get(DcMotor.class, "br");
-        claw = hardwareMap.get(Servo.class, "claw");
-        armServoR = hardwareMap.get(Servo.class, "armServoR");
-        armServoL = hardwareMap.get(Servo.class, "armServoL");
-        slideMotorR = hardwareMap.get(DcMotor.class, "slideMotorR");
-        slideMotorL = hardwareMap.get(DcMotor.class, "slideMotorL");
-        bucketServoR = hardwareMap.get(Servo.class, "bucketServoR");
-        bucketServoL = hardwareMap.get(Servo.class, "bucketServoL");
-        wristServo = hardwareMap.get(Servo.class, "wristServo");
-        topWrist = hardwareMap.get(Servo.class, "topWrist");
-        topClaw = hardwareMap.get(Servo.class, "topClaw");
-        //fr.setDirection(DcMotor.Direction.REVERSE);
-        //bl.setDirection(DcMotor.Direction.REVERSE);
-        armServoL.setDirection(Servo.Direction.REVERSE);
-        bucketServoL.setDirection(Servo.Direction.REVERSE);
-        topWrist.setDirection(Servo.Direction.REVERSE);
-        fr.setDirection(DcMotor.Direction.FORWARD);
-        br.setDirection(DcMotor.Direction.FORWARD);
-        bl.setDirection(DcMotor.Direction.REVERSE);
-        fl.setDirection(DcMotor.Direction.REVERSE);
-
-
-        fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slideMotorR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        slideMotorL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-        slideMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slideMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        slideMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        slideMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        bot.resetEncoders();
 
 
         waitForStart();
 
         if (opModeIsActive()) {
-            afterTransfer1();
+            defaultPos();
             drive(-50, -50, 0.6);
             strafe(-850, 0.6);
             sleep(600);
@@ -91,9 +64,9 @@ public class autoTemplate extends LinearOpMode {
             sleep(500);
             lowerSlides();
             sleep(500);
-            transfer2();
+            goToOuttake();
             sleep(500);
-            afterTransfer1();
+            defaultPos();
             sleep(500);
             raiseSlides();
             drive(-1000,-1000,.6);
@@ -127,63 +100,19 @@ public class autoTemplate extends LinearOpMode {
 
 
     public void raiseSlides() {
-        slideMotorL.setPower(.4);
-        slideMotorR.setPower(-.4);
-        sleep(3600);
-        slideMotorL.setPower(0);
-        slideMotorR.setPower(0);
+        bot.slides.runTo(topBucket);
     }
-    public void lowerSlides() {
-        slideMotorL.setPower(-.4);
-        slideMotorR.setPower(.4);
-        if(gamepad1.b){
-            slideMotorL.setPower(0);
-            slideMotorR.setPower(0);
-        }
-        sleep(3500);
-        slideMotorL.setPower(-.09);
-        slideMotorR.setPower(0.09);
-
-
+    public void lowerSlides(){
+        bot.slides.runTo(storage);
     }
-    public void transfer1(){
-        bucketServoL.setPosition(0.38);
-        bucketServoR.setPosition(0.38);
-        topWrist.setPosition(0.15);
-        // wrist less is more up
-
-        wristServo.setPosition(0.18);
-        sleep(1500);
-        armServoR.setPosition(0.62);
-        armServoL.setPosition(0.62);
-        sleep(500);
-        sleep(500);
-        topClaw.setPosition(0.6);
-        sleep(500);
-        claw.setPosition(0.05);
-        sleep(1000);
-        toggleTop = true;
-        toggleTopMethod();
+    public void transferToIntake(){
+        bot.goToTransferPos(time);
     }
-    public void afterTransfer1(){
-        bucketServoL.setPosition(0.58);
-        bucketServoR.setPosition(0.58);
-        armServoR.setPosition(0.43);
-        armServoL.setPosition(0.43);
-        wristServo.setPosition(0.8);
-        topWrist.setPosition(0.12);
+    public void defaultPos(){
+       bot.resetEverything();
     }
-    public void transfer2(){
-        topClaw.setPosition(0.7);
-        sleep(500);
-        topWrist.setPosition(0.53);
-        bucketServoL.setPosition(.9);
-        bucketServoR.setPosition(.9);
-        sleep(1500);
-        topClaw.setPosition(.1);
-        //toggleTop = false;
-        //toggleTopMethod();
-        sleep(1000);
+    public void goToOuttake(){
+        bot.goToOuttakePos(time);
     }
 
     /**
