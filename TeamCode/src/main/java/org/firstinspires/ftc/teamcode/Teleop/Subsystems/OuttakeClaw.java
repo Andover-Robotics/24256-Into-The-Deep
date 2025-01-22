@@ -8,8 +8,8 @@ public class OuttakeClaw {
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.6;
-    public static final double topWristUp = 0.53;
-    public static final double topWristDown = 0.15;
+    public static final double topWristUp = 0.46;
+    public static final double topWristDown = 0.1;
 
     public OuttakeClaw(OpMode opMode){
     topClaw = opMode.hardwareMap.get(Servo.class, "topClaw");

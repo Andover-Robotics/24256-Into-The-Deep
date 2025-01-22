@@ -15,7 +15,7 @@ import  com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-public class Bot  {
+public class Bot {
 
     public OpMode opMode;
     public static Bot instance;
@@ -36,20 +36,19 @@ public class Bot  {
 
         try {
             fieldCentricRunMode = false;
-        }catch (Exception e) {
-            fieldCentricRunMode=false;
+        } catch (Exception e) {
+            fieldCentricRunMode = false;
         }
-        fl = opMode.hardwareMap.get(DcMotorEx.class,"fl");
-        fr = opMode.hardwareMap.get(DcMotorEx.class,"fr");
-        bl = opMode.hardwareMap.get(DcMotorEx.class,"bl");
-        br = opMode.hardwareMap.get(DcMotorEx.class,"br");
+        fl = opMode.hardwareMap.get(DcMotorEx.class, "fl");
+        fr = opMode.hardwareMap.get(DcMotorEx.class, "fr");
+        bl = opMode.hardwareMap.get(DcMotorEx.class, "bl");
+        br = opMode.hardwareMap.get(DcMotorEx.class, "br");
 
         this.intakeArm = new IntakeArm(opMode);
         this.intakeClaw = new IntakeClaw(opMode);
         this.outtakeArm = new OuttakeArm(opMode);
         this.outtakeClaw = new OuttakeClaw(opMode);
         this.slides = new Slides(opMode);
-
 
 
     }
@@ -83,6 +82,7 @@ public class Bot  {
         bl.setPower(-speeds[2]);
         br.setPower(-speeds[3]);
     }
+
     public void prepMotors() {
 
         fr.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -97,14 +97,16 @@ public class Bot  {
         bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
     }
-    public void prepSubsystems(){
+
+    public void prepSubsystems() {
         intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
         slides.slideMotorR.setInverted(false);
         slides.slideMotorL.setInverted(true);
         outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
     }
-    public void resetEverything(){
+
+    public void resetEverything() {
         intakeArm.armToUpPos();
         outtakeArm.outtake();
         intakeClaw.openClaw();
@@ -119,84 +121,123 @@ public class Bot  {
         br.setMode(STOP_AND_RESET_ENCODER);
         bl.setMode(STOP_AND_RESET_ENCODER);
     }
-    public void resetIntake(){
+
+    public void resetIntake() {
         intakeArm.intake();
         intakeClaw.wristToIntakePos();
     }
 
     public Action actionResetIntake() {
-        return new InstantAction(()-> resetIntake());
+        return new InstantAction(() -> resetIntake());
     }
-    public void resetOuttake(){
+
+    public void resetOuttake() {
         outtakeArm.transfer();
         outtakeClaw.topWristTransferPos();
     }
 
-    public Action actionIntakePos(){
+    public Action actionIntakePos() {
         return new SequentialAction(
                 new InstantAction(() -> intakeArm.intake()),
                 new InstantAction(() -> outtakeArm.transfer()),
                 new InstantAction(() -> intakeClaw.openClaw()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(()-> intakeClaw.wristToIntakePos()),
-                new InstantAction(()-> outtakeClaw.topWristTransferPos())
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos())
         );
     }
-    public void goToTransferPos(ElapsedTime time){
+
+    public void goToTransferPos(ElapsedTime time) {
         time.reset();
         outtakeClaw.outtakeClawOpen();
         intakeArm.transfer();
-        while(time.seconds() <0.5);
+        while (time.seconds() < 0.5) ;
         intakeClaw.wristToTransferPos();
-        while(time.seconds() <1.5);
+        while (time.seconds() < 1.5) ;
         outtakeClaw.outtakeClawClose();
-        while(time.seconds() <2);
+        while (time.seconds() < 2) ;
         intakeClaw.openClaw();
-        while(time.seconds() < 2.5);
+        while (time.seconds() < 2.5) ;
     }
 
     public Action actionTransfer() {
         return new SequentialAction(
-                new InstantAction(()-> intakeClaw.closeClaw()),
+                new InstantAction(() -> intakeClaw.closeClaw()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
                 new SleepAction(0.5),
-                new InstantAction(()->intakeClaw.wristToTransferPos()),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
                 new SleepAction(1),
-                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5),
-                new InstantAction(()-> intakeClaw.openClaw())
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.wristToIntakePos())
+        );
+    }
+
+    public Action intakeAuto() {
+        return new SequentialAction(
+                new InstantAction(() -> intakeArm.intake()),
+                new InstantAction(() -> outtakeArm.transfer()),
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new SleepAction(0.9),
+                new InstantAction(() -> intakeClaw.closeClaw()),
+                new SleepAction(0.5),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(() -> intakeArm.transfer()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(1),
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.wristToIntakePos())
         );
     }
 
     public void goToOuttakePos(ElapsedTime time) {
         time.reset();
         outtakeArm.outtake();
-        while(time.seconds() <0.5);
+        while (time.seconds() < 0.5) ;
         outtakeClaw.topWristToOuttakePos();
-        while(time.seconds() <1);
+        while (time.seconds() < 1) ;
         outtakeClaw.outtakeClawOpen();
-        while(time.seconds() <2);
+        while (time.seconds() < 2) ;
     }
 
     public Action actionHighBucket() {
         return new SequentialAction(
-                //new InstantAction(()-> slides.runToTopBucket()),
+                new InstantAction(() -> slides.runToTopBucket()),
                 new SleepAction(1.3),
-                new InstantAction(()-> outtakeArm.transfer()),
-                new SleepAction(0.5),
-                new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
     }
 
     public Action actionBucketDrop() {
         return new SequentialAction(
-                new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(()-> outtakeArm.transfer()),
-                new SleepAction(0.5),
-                new InstantAction(()-> slides.runToStorage())
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new SleepAction(1.5),
+                new InstantAction(() -> slides.runToStorage())
         );
+    }
+    public Action actionRelease(){
+        return new SequentialAction(
+        new InstantAction(()-> outtakeClaw.outtakeClawOpen())
+        );
+    }
+
+    public Action actionSlidesLower() {
+        return new  SequentialAction(
+                new InstantAction(() -> slides.runToStorage()));
     }
     public Action toIntake() {
         return new SequentialAction(
@@ -210,9 +251,9 @@ public class Bot  {
            new InstantAction(()-> outtakeArm.transfer()),
            new InstantAction(()-> intakeArm.armToUpPos()),
            new InstantAction(()-> intakeClaw.wristToIntakePos()),
-           new InstantAction(()->outtakeClaw.topWristTransferPos()),
+           new InstantAction(()-> outtakeClaw.topWristTransferPos()),
            new InstantAction(()-> intakeClaw.openClaw())
-                   );
+           );
     }
 
     public class actionPeriodic implements Action {
