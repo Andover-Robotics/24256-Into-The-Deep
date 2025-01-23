@@ -213,6 +213,11 @@ public class Bot {
         outtakeClaw.outtakeClawOpen();
         while (time.seconds() < 2) ;
     }
+    public Action armFlip(){
+        return new SequentialAction(
+                new InstantAction(()->outtakeArm.transfer())
+        );
+    }
 
     public Action actionHighBucket() {
         return new SequentialAction(
@@ -249,7 +254,7 @@ public class Bot {
     public Action actionStorage(){
         return new SequentialAction(
            new InstantAction(()-> outtakeArm.transfer()),
-           new InstantAction(()-> intakeArm.armToUpPos()),
+           new InstantAction(()-> intakeArm.armToStorage()),
            new InstantAction(()-> intakeClaw.wristToIntakePos()),
            new InstantAction(()-> outtakeClaw.topWristTransferPos()),
            new InstantAction(()-> intakeClaw.openClaw())

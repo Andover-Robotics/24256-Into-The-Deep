@@ -25,6 +25,7 @@ public class BucketAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
+                .stopAndAdd(bot.armFlip())
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 //SLIDES
@@ -60,10 +61,7 @@ public class BucketAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionRelease())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
-                // Please fix heading or I will crush your skull
-                .strafeToLinearHeading(new Vector2d(52, 0), Math.toRadians(-180))
-                .strafeToLinearHeading(new Vector2d(24, 0), Math.toRadians(45))
-
+                .waitSeconds(1)
                 .build();
 
         waitForStart();
