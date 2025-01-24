@@ -82,4 +82,5 @@ public class BucketAuto extends LinearOpMode {
                         runAuto
                 ));
     }
+
 }
