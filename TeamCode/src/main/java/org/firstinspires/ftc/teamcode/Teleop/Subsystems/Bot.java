@@ -108,7 +108,6 @@ public class Bot {
 
     public void resetEverything() {
         intakeArm.armToUpPos();
-        outtakeArm.outtake();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
@@ -242,7 +241,9 @@ public class Bot {
 
     public Action actionSlidesLower() {
         return new  SequentialAction(
-                new InstantAction(() -> slides.runToStorage()));
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(()-> outtakeClaw.topWristTransferPos())
+    );
     }
     public Action toIntake() {
         return new SequentialAction(
@@ -251,15 +252,13 @@ public class Bot {
                 new InstantAction(()-> intakeClaw.openClaw())
         );
     }
-    public Action actionStorage(){
-        return new SequentialAction(
-           new InstantAction(()-> outtakeArm.transfer()),
-           new InstantAction(()-> intakeArm.armToStorage()),
-           new InstantAction(()-> intakeClaw.wristToIntakePos()),
-           new InstantAction(()-> outtakeClaw.topWristTransferPos()),
-           new InstantAction(()-> intakeClaw.openClaw())
-           );
+    public Action actionWrist(){
+        return  new SequentialAction(
+                new InstantAction(()-> outtakeClaw.topWristTransferPos())
+        );
     }
+
+
 
     public class actionPeriodic implements Action {
         @Override

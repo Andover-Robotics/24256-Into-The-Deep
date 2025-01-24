@@ -33,6 +33,7 @@ public class MainTeleOp extends LinearOpMode {
     private  boolean toggleTopClaw = false;
     private  boolean toggleBottClaw = false;
     private boolean liftArm = false;
+    private double driveSpeed = 1, driveMultiplier = 1;
 
     int slidesTarget = 0;
     ElapsedTime time = new ElapsedTime();
@@ -49,6 +50,7 @@ public class MainTeleOp extends LinearOpMode {
         bot.prepMotors();
         bot.prepSubsystems();
         bot.resetEverything();
+        bot.armFlip();
         waitForStart();
         while (opModeIsActive()) {
 
@@ -74,7 +76,7 @@ public class MainTeleOp extends LinearOpMode {
                 runningActions.add(bot.actionRelease());
             }
             if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
-                bot.actionStorage();
+                bot.actionWrist();
             }
             // remember PLEASE raise at the start
             if (gp2.wasJustPressed((GamepadKeys.Button.DPAD_UP))) {
@@ -83,10 +85,10 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
                bot.slides.runTo(storage);
             }
+            bot.slides.periodic();
+            bot.slides.runSlides(-gp2.getRightY());
 
-            if (Math.abs(gp2.getLeftY()) > 0.05){
-                bot.slides.runToManual(gp2.getLeftY());
-            }
+
 
             drive();
             telemetry.addData("slides target", bot.slides.target);
@@ -116,12 +118,14 @@ public class MainTeleOp extends LinearOpMode {
     public void drive() {
         gp1.readButtons();
         bot.prepMotors();
-        Vector2d driveVector;
-        driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY());
-        Vector2d turnVector;
-        turnVector = new Vector2d(-gp1.getRightX(), 0);
-        bot.driveRobotCentric(driveVector.getX()*0.7, driveVector.getY()*0.7, turnVector.getX()/1.7);
-
+        driveSpeed = driveMultiplier - 0.5 * gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        driveSpeed = Math.max(0, driveSpeed);
+        Vector2d driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY()),
+                turnVector = new Vector2d(gp1.getRightX(), 0);
+        bot.driveRobotCentric(driveVector.getX() * driveSpeed,
+                driveVector.getY() * driveSpeed,
+                turnVector.getX() * driveSpeed
+        );
     }
 
 

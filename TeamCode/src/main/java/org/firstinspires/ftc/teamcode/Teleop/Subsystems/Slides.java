@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.dashboard.config.Config;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 
 @Config
@@ -55,15 +56,21 @@ public class Slides {
 
         controller = new PIDFController(p, i, d, f);
         controller.setTolerance(tolerance);
+        resetProfiler();
+        profiler.init(slideMotorL.getCurrentPosition(),pos);
+        profiler_init_time = opMode.time;
 
-        if (manualPower == 0) {
+        goingDown = pos> target;
+        target = pos;
+
+        /* if (manualPower == 0) {
             resetProfiler();
             profiler.init(slideMotorL.getCurrentPosition(),pos);
             profiler_init_time = opMode.time;
 
             goingDown = pos> target;
             target = pos;
-        }
+        } */
     }
     public void runToTopBucket(){
         runTo(topBucket);
@@ -71,6 +78,11 @@ public class Slides {
     public void runToStorage() {
         runTo(storage);
     }
+    public void runSlides(double power) {
+            runToManual(power);
+            periodic();
+        }
+
     public void runToManual(double manual){
         if (manualPower > powerMin || manualPower < -powerMin) {
             manualPower = -manual;
