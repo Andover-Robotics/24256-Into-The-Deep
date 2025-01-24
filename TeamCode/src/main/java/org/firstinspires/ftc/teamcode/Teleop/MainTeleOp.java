@@ -73,7 +73,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
                 runningActions.add(bot.actionRelease());
             }
-            if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
+            if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
                 bot.actionStorage();
             }
             // remember PLEASE raise at the start
