@@ -60,7 +60,7 @@ public class BucketAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionRelease())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
-                .strafeToLinearHeading(new Vector2d(61.3, 42.5),((Math.toRadians(-63))))
+                .strafeToLinearHeading(new Vector2d(61.3, 42.5),((Math.toRadians(-65))))
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.2)
                 .afterTime(0.01, bot.actionHighBucket())
