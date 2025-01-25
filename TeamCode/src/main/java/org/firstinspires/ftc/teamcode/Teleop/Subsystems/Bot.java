@@ -100,8 +100,8 @@ public class Bot {
 
     public void prepSubsystems() {
         intakeArm.armServoL.setDirection(Servo.Direction.REVERSE);
-        slides.slideMotorR.setInverted(false);
-        slides.slideMotorL.setInverted(true);
+        slides.slideMotorR.setInverted(true);
+        slides.slideMotorL.setInverted(false);
         outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
     }
@@ -116,12 +116,11 @@ public class Bot {
         slides.resetProfiler();
             }
     public void prepAuto() {
-        intakeArm.armToStorage();
+        intakeArm.armToUpPos();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
-        outtakeArm.outtake();
     }
     public void resetEncoders() {
         fl.setMode(STOP_AND_RESET_ENCODER);

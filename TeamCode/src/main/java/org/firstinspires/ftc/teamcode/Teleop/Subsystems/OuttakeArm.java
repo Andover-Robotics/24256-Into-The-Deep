@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 public class OuttakeArm {
     public Servo bucketServoR, bucketServoL;
-    public static final double afterTransfer1Pos = .37;
+    public static final double afterTransfer1Pos = 0;
     public static final double transfer2Pos = 1;
     public OuttakeArm(OpMode opMode){
         bucketServoR = opMode.hardwareMap.get(Servo.class, "bucketServoR");

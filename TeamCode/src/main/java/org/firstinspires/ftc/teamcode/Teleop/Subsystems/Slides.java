@@ -16,11 +16,11 @@ public class Slides {
     private PIDFController controller;
     public static double p = 0.015, i = 0, d = 0, f =0, staticF = 0.25;
     //tune if you have time, supposedly it will work well enough without tuning but likely will help.
-    private final double tolerance = 10, powerUp = 0.1, powerDown = 0.05, powerMin =0.1, manualDivide = 1 ;
+    private final double tolerance = 10, powerUp = 0.1, powerDown = 0.05, powerMin =0.2, manualDivide = 1 ;
     public  double target = 0;
     private double power;
     private final OpMode opMode;
-    private double manualPower = 0;
+    public double manualPower = 0;
     public boolean goingDown = false;
 
     public static int storage = 0, topBucket = -3000, failSafe = -500;
@@ -56,21 +56,15 @@ public class Slides {
 
         controller = new PIDFController(p, i, d, f);
         controller.setTolerance(tolerance);
-        resetProfiler();
-        profiler.init(slideMotorL.getCurrentPosition(),pos);
-        profiler_init_time = opMode.time;
 
-        goingDown = pos> target;
-        target = pos;
-
-        /* if (manualPower == 0) {
+        if (manualPower == 0) {
             resetProfiler();
             profiler.init(slideMotorL.getCurrentPosition(),pos);
             profiler_init_time = opMode.time;
 
             goingDown = pos> target;
             target = pos;
-        } */
+        }
     }
     public void runToTopBucket(){
         runTo(topBucket);
@@ -96,7 +90,6 @@ public class Slides {
         controller.setPIDF(p, i, d, f);
         double dt = opMode.time - profiler_init_time;
         if (!profiler.isOver()) {
-
             controller.setSetPoint(profiler.profile_pos(dt));
             power = powerUp * controller.calculate(slideMotorL.getCurrentPosition());
             if (goingDown) {
@@ -108,9 +101,8 @@ public class Slides {
 
         } else {
             if (profiler.isDone()) {
-                profiler = new MotionProfiler(30000, 20000);
+                profiler = new MotionProfiler(20000, 30000);
             }
-
             if (manualPower != 0) {
 
                 controller.setSetPoint(slideMotorL.getCurrentPosition());
@@ -136,6 +128,7 @@ public class Slides {
     public int getPosition() {
         return slideMotorL.getCurrentPosition();
     }
+
 public void resetSlideEncoders(){
         slideMotorL.resetEncoder();
         slideMotorR.resetEncoder();

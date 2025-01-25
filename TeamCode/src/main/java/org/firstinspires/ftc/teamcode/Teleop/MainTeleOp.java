@@ -86,8 +86,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
                bot.slides.runTo(storage);
             }
-            bot.slides.periodic();
-            bot.slides.runSlides(-gp2.getRightY());
+            bot.slides.runToManual(-gp2.getRightY());
 
 
 
@@ -98,6 +97,8 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addData("slides joywtick input", gp2.getLeftY());
             telemetry.addData("left top servo pos", bot.outtakeArm.bucketServoL.getPosition());
             telemetry.addData("Right top servo pos", bot.outtakeArm.bucketServoR.getPosition());
+            telemetry.addData("gp2RightY", gp2.getRightY());
+            telemetry.addData("Manual Power", bot.slides.manualPower);
             telemetry.update();
             bot.slides.periodic();
             // update running actions

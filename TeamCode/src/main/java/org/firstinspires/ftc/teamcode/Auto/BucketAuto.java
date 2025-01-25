@@ -25,8 +25,7 @@ public class BucketAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
-                .stopAndAdd(bot.armFlip())
-                .waitSeconds(.5)
+
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
 
@@ -36,7 +35,7 @@ public class BucketAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
 
-                .strafeToLinearHeading(new Vector2d(48.5,43),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(47.5,43),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(.2)
@@ -60,7 +59,7 @@ public class BucketAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionRelease())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
-                .strafeToLinearHeading(new Vector2d(61.3, 42.5),((Math.toRadians(-65))))
+                .strafeToLinearHeading(new Vector2d(62.3, 43),((Math.toRadians(-65))))
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.2)
                 .afterTime(0.01, bot.actionHighBucket())
