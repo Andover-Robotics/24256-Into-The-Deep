@@ -112,8 +112,17 @@ public class Bot {
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
+        slides.resetSlideEncoders();
+        slides.resetProfiler();
+            }
+    public void prepAuto() {
+        intakeArm.armToStorage();
+        intakeClaw.openClaw();
+        outtakeClaw.outtakeClawClose();
+        intakeClaw.wristToIntakePos();
+        outtakeClaw.topWristTransferPos();
+        outtakeArm.outtake();
     }
-
     public void resetEncoders() {
         fl.setMode(STOP_AND_RESET_ENCODER);
         fr.setMode(STOP_AND_RESET_ENCODER);
@@ -235,7 +244,8 @@ public class Bot {
     }
     public Action actionRelease(){
         return new SequentialAction(
-        new InstantAction(()-> outtakeClaw.outtakeClawOpen())
+        new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
+        new InstantAction(()-> outtakeArm.transfer())
         );
     }
 

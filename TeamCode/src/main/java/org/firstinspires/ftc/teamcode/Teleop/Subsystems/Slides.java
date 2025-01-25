@@ -136,5 +136,10 @@ public class Slides {
     public int getPosition() {
         return slideMotorL.getCurrentPosition();
     }
+public void resetSlideEncoders(){
+        slideMotorL.resetEncoder();
+        slideMotorR.resetEncoder();
 }
+}
+
 

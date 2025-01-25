@@ -20,7 +20,7 @@ public class BucketAuto extends LinearOpMode {
         Bot.instance = null;
         bot = Bot.getInstance(this);
         bot.prepSubsystems();
-
+        bot.prepAuto();
         Pose2d initialPose = new Pose2d(38,64, Math.toRadians(-90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
