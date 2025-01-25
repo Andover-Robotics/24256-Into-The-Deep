@@ -29,7 +29,7 @@ public class BucketAuto extends LinearOpMode {
                 .waitSeconds(.5)
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                //SLIDES
+
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
                 .stopAndAdd(bot.actionRelease())
 
@@ -39,8 +39,7 @@ public class BucketAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(48.5,43),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
-
-                .waitSeconds(1)
+                .waitSeconds(.2)
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 //SLIDES
@@ -53,12 +52,11 @@ public class BucketAuto extends LinearOpMode {
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
 
-                .waitSeconds(0.5)
+                .waitSeconds(0.2)
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 //SLIDES
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
-                .waitSeconds(0.5)
                 .stopAndAdd(bot.actionRelease())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
