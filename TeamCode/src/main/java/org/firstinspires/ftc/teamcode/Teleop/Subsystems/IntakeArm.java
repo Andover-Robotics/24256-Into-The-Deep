@@ -9,7 +9,6 @@ public class IntakeArm {
     public static final double ArmUpPos = 0.48;
     public final double armStorage = 0.65;
 
-
     public IntakeArm(OpMode opMode) {
         armServoR = opMode.hardwareMap.get(Servo.class, "armServoR");
         armServoL = opMode.hardwareMap.get(Servo.class, "armServoL");
