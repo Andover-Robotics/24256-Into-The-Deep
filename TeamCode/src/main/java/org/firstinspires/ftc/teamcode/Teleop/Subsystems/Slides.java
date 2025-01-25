@@ -37,8 +37,8 @@ public class Slides {
         controller.setTolerance(tolerance);
         controller.setSetPoint(0);
 
-        slideMotorR.setInverted(false);
-        slideMotorL.setInverted(true);
+        slideMotorR.setInverted(true);
+        slideMotorL.setInverted(false);
 
         slideMotorL.setRunMode(Motor.RunMode.RawPower );
         slideMotorL.setZeroPowerBehavior(Motor.ZeroPowerBehavior.BRAKE);
@@ -57,14 +57,13 @@ public class Slides {
         controller = new PIDFController(p, i, d, f);
         controller.setTolerance(tolerance);
 
-        if (manualPower == 0) {
-            resetProfiler();
-            profiler.init(slideMotorL.getCurrentPosition(),pos);
-            profiler_init_time = opMode.time;
 
-            goingDown = pos> target;
-            target = pos;
-        }
+        resetProfiler();
+        profiler.init(slideMotorL.getCurrentPosition(),pos);
+        profiler_init_time = opMode.time;
+
+        goingDown = pos> target;
+        target = pos;
     }
     public void runToTopBucket(){
         runTo(topBucket);
@@ -78,7 +77,7 @@ public class Slides {
         }
 
     public void runToManual(double manual){
-        if (manualPower > powerMin || manualPower < -powerMin) {
+        if (manual > powerMin || manual < -powerMin) {
             manualPower = -manual;
         } else {
             manualPower = 0;

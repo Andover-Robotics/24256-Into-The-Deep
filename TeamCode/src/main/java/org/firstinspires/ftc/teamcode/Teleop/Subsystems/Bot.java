@@ -113,7 +113,7 @@ public class Bot {
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
         slides.resetSlideEncoders();
-        slides.resetProfiler();
+        // slides.resetProfiler();
             }
     public void prepAuto() {
         intakeArm.armToUpPos();
