@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 public class Slides {
     public  final MotorEx slideMotorR, slideMotorL;
-    private PIDFController controller;
+    public PIDFController controller;
     public static double p = 0.015, i = 0, d = 0, f =0, staticF = 0.25;
     //tune if you have time, supposedly it will work well enough without tuning but likely will help.
     private final double tolerance = 10, powerUp = 0.1, powerDown = 0.05, powerMin =0.2, manualDivide = 1 ;
@@ -28,7 +28,7 @@ public class Slides {
     private double profiler_init_time = 0;
 
 
-    MotionProfiler profiler = new MotionProfiler(20000,30000);
+    MotionProfiler profiler = new MotionProfiler(30000,20000);
     public Slides (OpMode opmode) {
         slideMotorL = new MotorEx(opmode.hardwareMap, "slideMotorL", Motor.GoBILDA.RPM_312);
         slideMotorR = new MotorEx(opmode.hardwareMap, "slideMotorR", Motor.GoBILDA.RPM_312);
@@ -100,7 +100,7 @@ public class Slides {
 
         } else {
             if (profiler.isDone()) {
-                profiler = new MotionProfiler(20000, 30000);
+                profiler = new MotionProfiler(30000, 20000);
             }
             if (manualPower != 0) {
 
@@ -120,13 +120,14 @@ public class Slides {
 
 
     public void resetProfiler() {
-        profiler = new MotionProfiler(20000,30000);
+        profiler = new MotionProfiler(30000,20000);
     }
 
 
     public int getPosition() {
         return slideMotorL.getCurrentPosition();
     }
+
 
 public void resetSlideEncoders(){
         slideMotorL.resetEncoder();

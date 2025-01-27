@@ -116,11 +116,12 @@ public class Bot {
         // slides.resetProfiler();
             }
     public void prepAuto() {
-        intakeArm.armToUpPos();
+        intakeArm.armToStorage();
+        outtakeArm.outtake();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
-        outtakeClaw.topWristTransferPos();
+        outtakeClaw.wristIns();
     }
     public void resetEncoders() {
         fl.setMode(STOP_AND_RESET_ENCODER);
@@ -222,7 +223,8 @@ public class Bot {
     }
     public Action armFlip(){
         return new SequentialAction(
-                new InstantAction(()->outtakeArm.transfer())
+                new InstantAction(()->outtakeArm.transfer()),
+                new InstantAction(()-> intakeArm.armToUpPos())
         );
     }
 

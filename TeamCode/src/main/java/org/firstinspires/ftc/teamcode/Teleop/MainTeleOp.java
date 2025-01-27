@@ -45,6 +45,7 @@ public class MainTeleOp extends LinearOpMode {
 
     public void runOpMode() throws InterruptedException{
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
+        Bot.instance = null;
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
@@ -99,6 +100,7 @@ public class MainTeleOp extends LinearOpMode {
             telemetry.addData("Right top servo pos", bot.outtakeArm.bucketServoR.getPosition());
             telemetry.addData("gp2RightY", gp2.getRightY());
             telemetry.addData("Manual Power", bot.slides.manualPower);
+            telemetry.addData("PIDF Controller SetPoint", bot.slides.controller.getSetPoint());
             telemetry.update();
             bot.slides.periodic();
             // update running actions

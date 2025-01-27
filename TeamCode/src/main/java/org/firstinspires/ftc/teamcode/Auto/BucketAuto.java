@@ -25,12 +25,14 @@ public class BucketAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
-
+                .stopAndAdd(bot.armFlip())
+                .waitSeconds(1.5)
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
 
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
                 .stopAndAdd(bot.actionRelease())
+                .waitSeconds(.6)
 
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
@@ -44,6 +46,8 @@ public class BucketAuto extends LinearOpMode {
                 //SLIDES
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
                 .stopAndAdd(bot.actionRelease())
+                .waitSeconds(.6)
+
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
 
@@ -57,17 +61,12 @@ public class BucketAuto extends LinearOpMode {
                 //SLIDES
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
                 .stopAndAdd(bot.actionRelease())
+                .waitSeconds(.6)
+
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
                 .stopAndAdd(bot.actionSlidesLower())
                 .strafeToLinearHeading(new Vector2d(62.3, 43),((Math.toRadians(-65))))
-                .stopAndAdd(bot.intakeAuto())
-                .waitSeconds(0.2)
-                .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                //SLIDES
-                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
-                .stopAndAdd(bot.actionRelease())
-                .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
+
                 .stopAndAdd(bot.actionSlidesLower())
                 .waitSeconds(1)
                 .build();
