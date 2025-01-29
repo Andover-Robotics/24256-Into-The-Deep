@@ -43,7 +43,11 @@ public class SpecimenAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-20, 35), Math.toRadians(-90))
                 //CLIP
                 .strafeToLinearHeading(new Vector2d(-35, 60), Math.toRadians(-90))
-                //INTAKE
+                //INTAKE FROM WALL
+                .strafeToLinearHeading(new Vector2d(-20, 35), Math.toRadians(-90))
+                //CLIP
+
+
 
 
 
