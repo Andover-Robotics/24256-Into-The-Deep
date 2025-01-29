@@ -12,7 +12,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import  com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 
 public class Bot {
@@ -233,6 +232,15 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
+        );
+    }
+    public Action autoSpecimen(){
+        return new SequentialAction(
+                new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.5)
         );
     }
 
