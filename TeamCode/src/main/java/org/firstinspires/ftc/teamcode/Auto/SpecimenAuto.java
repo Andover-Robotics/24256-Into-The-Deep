@@ -9,7 +9,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 
-@Autonomous(name = "Specimen Auto ")
+@Autonomous(name = "Specimen Auto")
 public class SpecimenAuto extends LinearOpMode {
     Bot bot;
 
@@ -30,23 +30,24 @@ public class SpecimenAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionRelease())
                 //clip preload
 
-                .strafeToConstantHeading(new Vector2d(-35, 35))
+                .strafeToConstantHeading(new Vector2d(-35, 37))
                 .strafeToConstantHeading(new Vector2d(-35, 0))
-                .strafeToConstantHeading(new Vector2d(-45, 0))
-                .strafeToConstantHeading(new Vector2d(-45, 60))
-                //push specimens into obs zone
+                .strafeToConstantHeading(new Vector2d(-40, 0))
+                .strafeToConstantHeading(new Vector2d(-40, 60))
+                //push specimen into obs zone
 
                 .afterTime(0.5,bot.autoSpecimen())
                 .strafeToConstantHeading(new Vector2d(-20,64))
                 .waitSeconds(0.5)
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(-19,35))
+                .strafeToConstantHeading(new Vector2d(-20,35))
                 .waitSeconds(1)
                 .stopAndAdd(bot.actionRelease())
                 //second specimen
 
                 .afterTime(0.5,bot.autoSpecimen())
                 .strafeToLinearHeading(new Vector2d(-35, 60), Math.toRadians(-90))
+                .waitSeconds(0.5)
                 .stopAndAdd(bot.actionHighChamber())
                 .strafeToConstantHeading(new Vector2d(-18, 35))
                 .waitSeconds(1)
