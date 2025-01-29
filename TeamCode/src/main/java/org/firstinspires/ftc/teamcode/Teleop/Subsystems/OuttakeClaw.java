@@ -11,6 +11,16 @@ public class OuttakeClaw {
     public static final double topWristUp = 0.46;
     public static final double topWristDown = 0.07;
     public static double topWristIns = 0.7;
+    public boolean open = false;
+    public void toggleClaw() {
+        if (open) {
+            outtakeClawOpen();
+            open = true;
+        } else {
+            outtakeClawClose();
+            open = false;
+        }
+    }
 
     public OuttakeClaw(OpMode opMode){
     topClaw = opMode.hardwareMap.get(Servo.class, "topClaw");

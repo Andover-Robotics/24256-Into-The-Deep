@@ -23,7 +23,7 @@ public class Slides {
     public double manualPower = 0;
     public boolean goingDown = false;
 
-    public static int storage = 0, topBucket = -3000, failSafe = -500;
+    public static int storage = 0, topBucket = -3000, topChamber = -740;
     //tune top bucket value very carefully
     private double profiler_init_time = 0;
 
@@ -70,6 +70,9 @@ public class Slides {
         }
     public void runToStorage() {
         runTo(storage);
+    }
+    public void runToHighChamber(){
+        runTo(topChamber);
     }
     public void runSlides(double power) {
             runToManual(power);

@@ -130,43 +130,6 @@ public class Bot {
         bl.setMode(STOP_AND_RESET_ENCODER);
     }
 
-    public void resetIntake() {
-        intakeArm.intake();
-        intakeClaw.wristToIntakePos();
-    }
-
-    public Action actionResetIntake() {
-        return new InstantAction(() -> resetIntake());
-    }
-
-    public void resetOuttake() {
-        outtakeArm.transfer();
-        outtakeClaw.topWristTransferPos();
-    }
-
-    public Action actionIntakePos() {
-        return new SequentialAction(
-                new InstantAction(() -> intakeArm.intake()),
-                new InstantAction(() -> outtakeArm.transfer()),
-                new InstantAction(() -> intakeClaw.openClaw()),
-                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(() -> intakeClaw.wristToIntakePos()),
-                new InstantAction(() -> outtakeClaw.topWristTransferPos())
-        );
-    }
-
-    public void goToTransferPos(ElapsedTime time) {
-        time.reset();
-        outtakeClaw.outtakeClawOpen();
-        intakeArm.transfer();
-        while (time.seconds() < 0.5) ;
-        intakeClaw.wristToTransferPos();
-        while (time.seconds() < 1.5) ;
-        outtakeClaw.outtakeClawClose();
-        while (time.seconds() < 2) ;
-        intakeClaw.openClaw();
-        while (time.seconds() < 2.5) ;
-    }
 
     public Action actionTransfer() {
         return new SequentialAction(
@@ -212,15 +175,7 @@ public class Bot {
         );
     }
 
-    public void goToOuttakePos(ElapsedTime time) {
-        time.reset();
-        outtakeArm.outtake();
-        while (time.seconds() < 0.5) ;
-        outtakeClaw.topWristToOuttakePos();
-        while (time.seconds() < 1) ;
-        outtakeClaw.outtakeClawOpen();
-        while (time.seconds() < 2) ;
-    }
+
     public Action armFlip(){
         return new SequentialAction(
                 new InstantAction(()->outtakeArm.transfer()),
@@ -232,6 +187,7 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> slides.runToTopBucket()),
                 new SleepAction(1.3),
+                new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
     }
@@ -240,9 +196,12 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new SleepAction(1.5),
+                new InstantAction(()-> outtakeArm.transfer()),
                 new InstantAction(() -> slides.runToStorage())
+
         );
     }
+
     public Action actionRelease(){
         return new SequentialAction(
         new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
@@ -263,9 +222,17 @@ public class Bot {
                 new InstantAction(()-> intakeClaw.openClaw())
         );
     }
-    public Action actionWrist(){
-        return  new SequentialAction(
-                new InstantAction(()-> outtakeClaw.topWristTransferPos())
+    public Action actionHighChamber(){
+        return new SequentialAction(
+            new InstantAction(()-> outtakeArm.transfer()),
+            new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
+            new InstantAction(()-> slides.runToHighChamber())
+        );
+    }
+    public Action actionIntakeSpecimen(){
+        return new SequentialAction(
+                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
         );
     }
 

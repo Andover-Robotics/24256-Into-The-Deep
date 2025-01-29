@@ -64,7 +64,6 @@ public class autoTemplate extends LinearOpMode {
             sleep(500);
             lowerSlides();
             sleep(500);
-            goToOuttake();
             sleep(500);
             defaultPos();
             sleep(500);
@@ -105,15 +104,11 @@ public class autoTemplate extends LinearOpMode {
     public void lowerSlides(){
         bot.slides.runTo(storage);
     }
-    public void transferToIntake(){
-        bot.goToTransferPos(time);
-    }
+
     public void defaultPos(){
        bot.resetEverything();
     }
-    public void goToOuttake(){
-        bot.goToOuttakePos(time);
-    }
+
 
     /**
      * Turns the robot right by setting opposite motor targets.
