@@ -173,7 +173,32 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.wristToIntakePos())
         );
     }
-
+    public Action autolastsample() {
+        return new SequentialAction(
+                new InstantAction(() -> intakeArm.intake()),
+                new InstantAction(() -> outtakeArm.transfer()),
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new InstantAction(() -> intakeClaw.clawSlanted()),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new SleepAction(0.8),
+                new InstantAction(() -> intakeClaw.closeClaw()),
+                new SleepAction(0.4),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(() -> intakeArm.transfer()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(1),
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.4),
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new SleepAction(0.4),
+                new InstantAction(() -> intakeClaw.wristToIntakePos())
+        );
+    }
 
     public Action armFlip(){
         return new SequentialAction(
