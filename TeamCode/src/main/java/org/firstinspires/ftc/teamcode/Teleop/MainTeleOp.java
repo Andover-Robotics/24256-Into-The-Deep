@@ -59,7 +59,9 @@ public class MainTeleOp extends LinearOpMode {
 
             // updated based on gamepads
             gp2.readButtons();
-
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
+                bot.outtakeArm.outtake();
+            }
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
             }
@@ -90,10 +92,13 @@ public class MainTeleOp extends LinearOpMode {
                 switch (bot.intakeClaw.getOrientation()){
                     case STRAIGHT:
                         bot.intakeClaw.clawStraight();
+                        break;
                     case SLANTED:
                         bot.intakeClaw.clawSlanted();
+                        break;
                     case HORIZONTAL:
                         bot.intakeClaw.clawHorizontal();
+                        break;
                 }
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
