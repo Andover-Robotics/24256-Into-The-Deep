@@ -28,40 +28,40 @@ public class UPDATEDBUCKETAUTO extends LinearOpMode {
 
                 .afterTime(0.01, bot.actionHighBucket())
                 //.strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
+                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-135))
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(47.5,43),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(47.5,41),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(.2)
 
                 .afterTime(0.01, bot.actionHighBucket())
                 //.strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
+                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-135))
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(57.5,43),Math.toRadians(-90)) // stop and add close claw and transfer etc
-                .waitSeconds(.2)
-                .stopAndAdd(bot.intakeAuto())
-                .waitSeconds(0.2)
-
-                .afterTime(0.01, bot.actionHighBucket())
-                //.strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
-                .stopAndAdd(bot.actionBucketDrop())
-                .waitSeconds(.2)
-
-                .strafeToLinearHeading(new Vector2d(62.3,43),Math.toRadians(-65)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(57.5,41),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.2)
 
                 .afterTime(0.01, bot.actionHighBucket())
                 //.strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
-                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(45))
+                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-135))
+                .stopAndAdd(bot.actionBucketDrop())
+                .waitSeconds(.2)
+
+                .strafeToLinearHeading(new Vector2d(62.3,41),Math.toRadians(-65)) // stop and add close claw and transfer etc
+                .waitSeconds(.2)
+                .stopAndAdd(bot.Autolastsample())
+                .waitSeconds(0.2)
+
+                .afterTime(0.01, bot.actionHighBucket())
+                //.strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))
+                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-135))
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 

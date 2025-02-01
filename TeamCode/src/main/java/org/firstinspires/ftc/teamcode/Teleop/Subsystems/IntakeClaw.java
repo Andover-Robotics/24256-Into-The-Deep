@@ -11,7 +11,7 @@ public class IntakeClaw {
     public static final double wristDown = 0.72;
     public static final double rotateStraight = .5;
     public static final double rotateSide = 1;
-    public static final double rotate45Deg = 0;
+    public static final double rotate45Deg = .25;
 
     public boolean open = true;
     public enum clawOrientation{
