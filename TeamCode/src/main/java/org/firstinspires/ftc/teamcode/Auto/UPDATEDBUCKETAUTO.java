@@ -54,7 +54,7 @@ public class UPDATEDBUCKETAUTO extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(62.3,41),Math.toRadians(-65)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(62,41),Math.toRadians(-65)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.Autolastsample())
                 .waitSeconds(0.2)
