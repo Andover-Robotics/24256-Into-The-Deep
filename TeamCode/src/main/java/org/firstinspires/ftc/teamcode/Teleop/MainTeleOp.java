@@ -45,7 +45,7 @@ public class MainTeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException{
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         Bot.instance = null;
-        int i = 2;
+        int c = 2;
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
@@ -61,21 +61,21 @@ public class MainTeleOp extends LinearOpMode {
             // updated based on gamepads
             gp2.readButtons();
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
-                if (i==1){
+                if (c==1){
                     bot.intakeClaw.clawStraight();
-                    i+=1;
+                    c+=1;
                 }
-                else if (i==2){
+                else if (c==2){
                     bot.intakeClaw.clawSlanted();
-                    i+=1;
+                    c+=1;
                 }
-                else if (i==3){
+                else if (c==3){
                     bot.intakeClaw.setRotate0ther45Deg();
-                    i+=1;
+                    c+=1;
                 }
-                else if (i==4) {
+                else if (c==4) {
                     bot.intakeClaw.clawHorizontal();
-                    i = 1;
+                    c = 1;
 
 
             }

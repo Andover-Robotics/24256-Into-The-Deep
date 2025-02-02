@@ -9,7 +9,7 @@ public class IntakeClaw {
     public static final double clawClose = 0.47;
     public static final double wristUp = 0.223 ;
     public static final double wristDown = 0.72;
-    public static final double rotateStraight = .52;
+    public static final double rotateStraight = .523;
     public static final double rotateSide = .85;
     public static final double rotate45Deg = .3;
     public static final double rotate0ther45Deg =.65;
