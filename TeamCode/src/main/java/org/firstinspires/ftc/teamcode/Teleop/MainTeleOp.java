@@ -65,7 +65,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X )){
+            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
                 runningActions.add(bot.toIntake());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
@@ -79,7 +79,7 @@ public class MainTeleOp extends LinearOpMode {
                 runningActions.add(bot.actionTransfer());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
-               bot.intakeClaw.clawHorizontal();
+               runningActions.add(bot.actionBucketDrop());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
                 bot.outtakeClaw.toggleClaw();
@@ -89,8 +89,6 @@ public class MainTeleOp extends LinearOpMode {
                bot.slides.runTo(storage);
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
-                bot.intakeClaw.clawStraight();
-
                 switch (bot.intakeClaw.getOrientation()){
                     case STRAIGHT:
                         bot.intakeClaw.clawStraight();
@@ -104,7 +102,7 @@ public class MainTeleOp extends LinearOpMode {
                 }
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
-                bot.intakeClaw.clawSlanted();
+                bot.intakeClaw.clawStraight();
             }
 
 

@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class OuttakeClaw {
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
-    public static final double topClawClose = 0.57;
+    public static final double topClawClose = 0.575;
     public static final double topWristUp = 0.46;
-    public static final double topWristDown = 0.07;
+    public static final double topWristDown = 0.8;
     public static double topWristIns = 0.7;
     public boolean open = false;
     public void toggleClaw() {
