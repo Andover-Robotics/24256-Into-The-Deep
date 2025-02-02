@@ -112,7 +112,7 @@ public class Bot {
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
         slides.resetSlideEncoders();
-        // slides.resetProfiler();
+        slides.resetProfiler();
         intakeClaw.clawStraight();
             }
     public void prepAuto() {
@@ -210,7 +210,7 @@ public class Bot {
 
     public Action actionHighBucket() {
         return new SequentialAction(
-                //new InstantAction(() -> slides.runToTopBucket()),
+                new InstantAction(() -> slides.runToTopBucket()),
                 new SleepAction(1.3),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())

@@ -46,13 +46,13 @@ public class MainTeleOp extends LinearOpMode {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         Bot.instance = null;
         int c = 2;
+        int b = 1;
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
         bot.prepMotors();
         bot.prepSubsystems();
         bot.resetEverything();
-        bot.armFlip();
         waitForStart();
         while (opModeIsActive()) {
 
@@ -83,14 +83,26 @@ public class MainTeleOp extends LinearOpMode {
                 bot.intakeClaw.toggleClaw();
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+
                 runningActions.add(bot.toIntake());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
                 runningActions.add(bot.actionHighChamber());
             }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.B))
-                runningActions.add(bot.actionIntakeSpecimen());
+            if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                if (b==1){
+                    bot.actionHighBucket();
+                    b+=1;
+                }
+                else if (b==2){
+                    bot.actionBucketDrop();
+                    b = 1;
+
+
+                }
+            }
+
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 runningActions.add(bot.actionTransfer());
@@ -107,9 +119,8 @@ public class MainTeleOp extends LinearOpMode {
             }
 
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
-                bot.intakeClaw.clawStraight();
-            }
+
+
 
 
 
