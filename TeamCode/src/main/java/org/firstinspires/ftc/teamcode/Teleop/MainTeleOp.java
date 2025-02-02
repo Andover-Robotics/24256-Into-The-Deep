@@ -59,21 +59,24 @@ public class MainTeleOp extends LinearOpMode {
 
             // updated based on gamepads
             gp2.readButtons();
+            if (gp2.wasJustPressed(GamepadKeys.Button.X)) {
+                runningActions.add(bot.sendHelp());
+            }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
                 bot.outtakeArm.outtake();
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+            /*if (gp2.wasJustPressed(GamepadKeys.Button.X)){
                 runningActions.add(bot.toIntake());
-            }
+            }*/
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
                 runningActions.add(bot.actionHighChamber());
             }
 
             if (gp2.wasJustPressed(GamepadKeys.Button.B)) {
-                runningActions.add(bot.actionIntakeSpecimen());
+                runningActions.add(bot.actionHighBucket());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 runningActions.add(bot.actionTransfer());
@@ -109,6 +112,8 @@ public class MainTeleOp extends LinearOpMode {
 
 
             drive();
+            telemetry.addData("Top Wrist", bot.outtakeClaw.topWrist.getPosition());
+            telemetry.addData("Top Claw", bot.outtakeClaw.topClaw.getPosition());
             telemetry.addData("slides target", bot.slides.target);
             telemetry.addData("slides target", slidesTarget);
             telemetry.addData("slides postion", bot.slides.getPosition());

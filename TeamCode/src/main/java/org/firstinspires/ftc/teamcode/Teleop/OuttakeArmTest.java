@@ -27,6 +27,7 @@ import org.firstinspires.ftc.teamcode.Test.IntakeTest;
 import java.util.ArrayList;
 import java.util.List;
 
+@TeleOp(name = "Outtake Arm Test")
 public class OuttakeArmTest extends LinearOpMode {
     private GamepadEx gp1,gp2;
     private  boolean toggleTopClaw = false;
@@ -60,8 +61,11 @@ public class OuttakeArmTest extends LinearOpMode {
             if(gp2.wasJustPressed(GamepadKeys.Button.B)){
                 bot.actionHighBucket();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+            if (gp2.wasJustPressed(GamepadKeys.Button.X)) {
                 bot.actionHighChamber();
+            }
+                if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
+                    bot.outtakeClaw.toggleClaw();
             }
         }
     }

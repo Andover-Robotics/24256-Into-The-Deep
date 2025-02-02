@@ -209,7 +209,7 @@ public class Bot {
 
     public Action actionHighBucket() {
         return new SequentialAction(
-                new InstantAction(() -> slides.runToTopBucket()),
+                //new InstantAction(() -> slides.runToTopBucket()),
                 new SleepAction(1.3),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
@@ -259,15 +259,29 @@ public class Bot {
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
         );
     }
-    public Action autoSpecimen(){
+    public Action autoSpecimen() {
         return new SequentialAction(
-                new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(()-> outtakeArm.outtake()),
-                new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
-                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeArm.outtake()),
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5)
         );
     }
+        public Action sendHelp () {
+            return new SequentialAction(
+                    new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                    new SleepAction(1),
+                    new InstantAction(() -> outtakeClaw.outtakeClawClose()),
+                    new SleepAction(1),
+            new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                    new SleepAction(1),
+            new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+            new SleepAction(1)
+
+            );
+        }
+
 
 
 
