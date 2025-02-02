@@ -9,16 +9,18 @@ public class IntakeClaw {
     public static final double clawClose = 0.47;
     public static final double wristUp = 0.223 ;
     public static final double wristDown = 0.72;
-    public static final double rotateStraight = .51;
-    public static final double rotateSide = 1;
-    public static final double rotate45Deg = .25;
+    public static final double rotateStraight = .52;
+    public static final double rotateSide = .85;
+    public static final double rotate45Deg = .3;
+    public static final double rotate0ther45Deg =.65;
 
 
     public boolean open = true;
     public enum clawOrientation{
         STRAIGHT,
         HORIZONTAL,
-        SLANTED
+        SLANTED,
+        OTHERSLANTED
     }
     clawOrientation orientation = clawOrientation.STRAIGHT;
 
@@ -63,6 +65,13 @@ public class IntakeClaw {
         rotateServo.setPosition(rotateSide);
         orientation = clawOrientation.HORIZONTAL;
     }
+
+    public void setRotate0ther45Deg(){
+        rotateServo.setPosition((rotate0ther45Deg));
+        orientation = clawOrientation.OTHERSLANTED;
+
+    }
+
     public clawOrientation getOrientation(){
         return orientation;
     }
