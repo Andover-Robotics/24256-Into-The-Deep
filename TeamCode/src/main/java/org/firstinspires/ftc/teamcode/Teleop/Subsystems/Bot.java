@@ -278,7 +278,7 @@ public class Bot {
             new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                     new SleepAction(1),
             new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
-            new SleepAction(1)
+            new SleepAction(0.99)
 
             );
         }
