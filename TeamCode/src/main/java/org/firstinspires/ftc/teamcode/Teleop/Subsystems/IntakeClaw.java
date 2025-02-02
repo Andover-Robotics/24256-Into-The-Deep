@@ -13,6 +13,7 @@ public class IntakeClaw {
     public static final double rotateSide = 1;
     public static final double rotate45Deg = .25;
 
+
     public boolean open = true;
     public enum clawOrientation{
         STRAIGHT,

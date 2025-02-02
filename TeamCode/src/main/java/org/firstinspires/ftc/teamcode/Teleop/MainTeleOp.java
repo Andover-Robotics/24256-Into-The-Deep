@@ -45,6 +45,7 @@ public class MainTeleOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException{
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         Bot.instance = null;
+        int i = 1;
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
@@ -60,7 +61,20 @@ public class MainTeleOp extends LinearOpMode {
             // updated based on gamepads
             gp2.readButtons();
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
-                bot.outtakeArm.outtake();
+                if (i==1){
+                    bot.intakeClaw.clawStraight();
+                    i+=1;
+                }
+                else if (i==2){
+                    bot.intakeClaw.clawSlanted();
+                    i+=1;
+                }
+                else if (i==3){
+                    bot.intakeClaw.clawHorizontal();
+                    i=1;
+                }
+
+
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
@@ -78,7 +92,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 runningActions.add(bot.actionTransfer());
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
                runningActions.add(bot.actionBucketDrop());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
@@ -88,19 +102,8 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
                bot.slides.runTo(storage);
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
-                switch (bot.intakeClaw.getOrientation()){
-                    case STRAIGHT:
-                        bot.intakeClaw.clawStraight();
-                        break;
-                    case SLANTED:
-                        bot.intakeClaw.clawSlanted();
-                        break;
-                    case HORIZONTAL:
-                        bot.intakeClaw.clawHorizontal();
-                        break;
-                }
-            }
+
+
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)) {
                 bot.intakeClaw.clawStraight();
             }
