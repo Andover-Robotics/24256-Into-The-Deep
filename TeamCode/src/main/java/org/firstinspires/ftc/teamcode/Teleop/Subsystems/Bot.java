@@ -113,6 +113,7 @@ public class Bot {
         outtakeClaw.topWristTransferPos();
         slides.resetSlideEncoders();
         // slides.resetProfiler();
+        intakeClaw.clawStraight();
             }
     public void prepAuto() {
         intakeArm.armToStorage();
