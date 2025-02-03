@@ -222,6 +222,7 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new SleepAction(1.5),
                 new InstantAction(()-> outtakeArm.transfer()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage())
 
         );
@@ -275,12 +276,25 @@ public class Bot {
                     new SleepAction(1),
                     new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                     new SleepAction(1),
-            new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                    new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                     new SleepAction(1),
-            new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
-            new SleepAction(0.99)
+                    new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                    new SleepAction(0.99)
 
             );
+
+            public Action actionIntakeSample(){
+                return new SequentialAction(
+                        new InstantAction(() -> intakeArm.Hover()),
+                        new InstantAction(() -> intakeClaw.openClaw()),
+                        new SleepAction(0.3),
+                        new InstantAction(() -> intakeArm.intake()),
+                        new InstantAction(() -> intakeClaw.closeClaw()),
+                        new InstantAction(() -> intakeArm.Hover())
+
+
+                );
+            }
         }
 
 

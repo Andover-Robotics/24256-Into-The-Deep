@@ -82,40 +82,44 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
-
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
                 runningActions.add(bot.toIntake());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
-                runningActions.add(bot.actionHighChamber());
+                runningActions.add(bot.actionBucketDrop());
             }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.B)){
-                if (b==1){
-                    bot.actionHighBucket();
-                    b+=1;
+            //if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                //if (b==1){
+                    //bot.actionHighBucket();
+                    //b+=1;
+                //}
+                //else if (b==2){
+                    //bot.actionBucketDrop();
+                    //b = 1;
+
+
+                //}
+            //}
+                if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+                    runningActions.add(bot.in)
                 }
-                else if (b==2){
-                    bot.actionBucketDrop();
-                    b = 1;
-
-
+                if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                    runningActions.add(bot.actionHighBucket());
                 }
-            }
-
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 runningActions.add(bot.actionTransfer());
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
-               runningActions.add(bot.actionBucketDrop());
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)){
+               runningActions.add(bot.actionIntakeSpecimen());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
                 bot.outtakeClaw.toggleClaw();
             }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)) {
-               bot.slides.runTo(storage);
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
+               runningActions.add(bot.actionHighChamber());
             }
 
 
@@ -156,7 +160,7 @@ public class MainTeleOp extends LinearOpMode {
     public void drive() {
         gp1.readButtons();
         bot.prepMotors();
-        driveSpeed = driveMultiplier - 0.5 * gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        driveSpeed = driveMultiplier - 0.3 * gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
         driveSpeed = Math.max(0, driveSpeed);
         Vector2d driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY()),
                 turnVector = new Vector2d(gp1.getRightX(), 0);

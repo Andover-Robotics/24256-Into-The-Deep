@@ -7,6 +7,7 @@ public class IntakeArm {
     public static final double transferPos = 0.41;
     public static final double intakePos = 0.23;
     public static final double ArmUpPos = 0.47;
+    public static final double ArmHoverPos = 0.3;
     public final double armStorage = 0.62;
 
     public IntakeArm(OpMode opMode) {
@@ -28,5 +29,9 @@ public class IntakeArm {
     public void armToStorage(){
         armServoL.setPosition(armStorage);
         armServoR.setPosition(armStorage);
+    }
+    public void Hover (){
+        armServoL.setPosition(ArmHoverPos);
+        armServoR.setPosition(ArmHoverPos);
     }
 }
