@@ -12,7 +12,7 @@ public class IntakeClaw {
     public static final double rotateStraight = .523;
     public static final double rotateSide = .85;
     public static final double rotate45Deg = .3;
-    public static final double rotate0ther45Deg =.65;
+    public static final double rotateOther45Deg =.65;
 
 
     public boolean open = true;
@@ -67,7 +67,7 @@ public class IntakeClaw {
     }
 
     public void setRotate0ther45Deg(){
-        rotateServo.setPosition((rotate0ther45Deg));
+        rotateServo.setPosition((rotateOther45Deg));
         orientation = clawOrientation.OTHERSLANTED;
 
     }

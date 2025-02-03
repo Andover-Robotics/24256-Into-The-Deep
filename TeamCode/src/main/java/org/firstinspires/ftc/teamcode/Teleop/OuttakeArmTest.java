@@ -1,28 +1,14 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
-import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.storage;
-import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.topBucket;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.SleepAction;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
-import com.arcrobotics.ftclib.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import  com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
-import org.firstinspires.ftc.teamcode.Teleop.Subsystems.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Teleop.Subsystems.OuttakeArm;
-import org.firstinspires.ftc.teamcode.Test.IntakeTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +51,7 @@ public class OuttakeArmTest extends LinearOpMode {
                 bot.actionHighChamber();
             }
                 if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
-                    bot.outtakeClaw.toggleClaw();
+                    bot.outtakeClaw.toggleTopClaw();
             }
         }
     }

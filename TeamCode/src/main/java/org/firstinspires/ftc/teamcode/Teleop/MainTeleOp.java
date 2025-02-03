@@ -1,28 +1,16 @@
 package org.firstinspires.ftc.teamcode.Teleop;
 
-import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.storage;
-import static org.firstinspires.ftc.teamcode.Teleop.Subsystems.Slides.topBucket;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.SleepAction;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
-import  com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
-import org.firstinspires.ftc.teamcode.Teleop.Subsystems.IntakeClaw;
-import org.firstinspires.ftc.teamcode.Teleop.Subsystems.OuttakeArm;
-import org.firstinspires.ftc.teamcode.Test.IntakeTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,53 +48,38 @@ public class MainTeleOp extends LinearOpMode {
 
             // updated based on gamepads
             gp2.readButtons();
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)){
-                if (c==1){
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
+                if (c == 1) {
                     bot.intakeClaw.clawStraight();
-                    c+=1;
-                }
-                else if (c==2){
+                    c += 1;
+                } else if (c == 2) {
                     bot.intakeClaw.clawSlanted();
-                    c+=1;
-                }
-                else if (c==3){
+                    c += 1;
+                } else if (c == 3) {
                     bot.intakeClaw.setRotate0ther45Deg();
-                    c+=1;
-                }
-                else if (c==4) {
+                    c += 1;
+                } else if (c == 4) {
                     bot.intakeClaw.clawHorizontal();
                     c = 1;
 
 
+                }
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
-                runningActions.add(bot.toIntake());
+               bot.intakeArm.Hover();
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
                 runningActions.add(bot.actionBucketDrop());
             }
-
-            //if (gp2.wasJustPressed(GamepadKeys.Button.B)){
-                //if (b==1){
-                    //bot.actionHighBucket();
-                    //b+=1;
-                //}
-                //else if (b==2){
-                    //bot.actionBucketDrop();
-                    //b = 1;
-
-
-                //}
-            //}
-                if (gp2.wasJustPressed(GamepadKeys.Button.X)){
-                    runningActions.add(bot.in)
+            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+                    runningActions.add(bot.actionIntakeSample());
                 }
-                if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+            if (gp2.wasJustPressed(GamepadKeys.Button.B)){
                     runningActions.add(bot.actionHighBucket());
-                }
+
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
                 runningActions.add(bot.actionTransfer());
@@ -115,11 +88,14 @@ public class MainTeleOp extends LinearOpMode {
                runningActions.add(bot.actionIntakeSpecimen());
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
-                bot.outtakeClaw.toggleClaw();
+                bot.outtakeClaw.toggleTopClaw();
             }
 
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
                runningActions.add(bot.actionHighChamber());
+            }
+            if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
+                bot.resetTeleop();
             }
 
 

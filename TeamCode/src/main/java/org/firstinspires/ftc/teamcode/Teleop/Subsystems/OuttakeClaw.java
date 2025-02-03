@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class OuttakeClaw {
@@ -12,13 +11,13 @@ public class OuttakeClaw {
     public static final double topWristDown = 0.8;
     public static double topWristIns = 0.7;
     public boolean open = false;
-    public void toggleClaw() {
+    public void toggleTopClaw() {
         if (open) {
-            outtakeClawOpen();
-            open = true;
-        } else {
             outtakeClawClose();
             open = false;
+        } else {
+            outtakeClawOpen();
+            open = true;
         }
     }
 

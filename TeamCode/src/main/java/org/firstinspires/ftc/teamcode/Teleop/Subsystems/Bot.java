@@ -103,18 +103,27 @@ public class Bot {
         slides.slideMotorL.setInverted(false);
         outtakeArm.bucketServoR.setDirection(Servo.Direction.REVERSE);
         outtakeClaw.topWrist.setDirection(Servo.Direction.REVERSE);
+        intakeClaw.wristServo.setDirection(Servo.Direction.REVERSE);
     }
 
     public void resetEverything() {
         intakeArm.armToUpPos();
         intakeClaw.openClaw();
-        outtakeClaw.outtakeClawClose();
+        outtakeClaw.outtakeClawOpen();
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
         slides.resetSlideEncoders();
         slides.resetProfiler();
         intakeClaw.clawStraight();
             }
+    public void resetTeleop(){
+        intakeArm.armToUpPos();
+        intakeClaw.closeClaw();
+        outtakeClaw.outtakeClawClose();
+        intakeClaw.wristToIntakePos();
+        outtakeClaw.topWristTransferPos();
+        intakeClaw.clawStraight();
+    }
     public void prepAuto() {
         intakeArm.armToStorage();
         outtakeArm.outtake();
@@ -258,7 +267,8 @@ public class Bot {
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
                 new InstantAction(()-> outtakeArm.outtake()),
-                new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
+                new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(()->outtakeClaw.outtakeClawOpen())
         );
     }
     public Action autoSpecimen() {
@@ -270,32 +280,20 @@ public class Bot {
                 new SleepAction(0.5)
         );
     }
-        public Action sendHelp () {
-            return new SequentialAction(
-                    new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                    new SleepAction(1),
-                    new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                    new SleepAction(1),
-                    new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                    new SleepAction(1),
-                    new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
-                    new SleepAction(0.99)
 
-            );
-
-            public Action actionIntakeSample(){
-                return new SequentialAction(
-                        new InstantAction(() -> intakeArm.Hover()),
-                        new InstantAction(() -> intakeClaw.openClaw()),
-                        new SleepAction(0.3),
-                        new InstantAction(() -> intakeArm.intake()),
-                        new InstantAction(() -> intakeClaw.closeClaw()),
-                        new InstantAction(() -> intakeArm.Hover())
+    public Action actionIntakeSample(){
+        return new SequentialAction(
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeArm.intake()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.closeClaw()),
+                new InstantAction(() -> intakeArm.Hover())
 
 
                 );
             }
-        }
+
 
 
 
