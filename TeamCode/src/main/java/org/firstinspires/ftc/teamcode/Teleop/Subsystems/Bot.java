@@ -219,7 +219,7 @@ public class Bot {
 
     public Action actionHighBucket() {
         return new SequentialAction(
-                new InstantAction(() -> slides.runToTopBucket()),
+                //new InstantAction(() -> slides.runToTopBucket()),
                 new SleepAction(1.3),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
@@ -231,8 +231,8 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new SleepAction(1.5),
                 new InstantAction(()-> outtakeArm.transfer()),
-                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                new InstantAction(() -> slides.runToStorage())
+                new InstantAction(() -> outtakeClaw.topWristTransferPos())
+                //new InstantAction(() -> slides.runToStorage())
 
         );
     }
@@ -260,8 +260,8 @@ public class Bot {
     public Action actionHighChamber(){
         return new SequentialAction(
             new InstantAction(()-> outtakeArm.transfer()),
-            new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
-            new InstantAction(()-> slides.runToHighChamber())
+            new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
+            //new InstantAction(()-> slides.runToHighChamber())
         );
     }
     public Action actionIntakeSpecimen(){

@@ -108,8 +108,8 @@ public class MainTeleOp extends LinearOpMode {
             drive();
             telemetry.addData("slides target", bot.slides.target);
             telemetry.addData("slides target", slidesTarget);
-            telemetry.addData("slides postion", bot.slides.getPosition());
-            telemetry.addData("slides joywtick input", gp2.getLeftY());
+            telemetry.addData("slides position", bot.slides.getPosition());
+            telemetry.addData("slides joystick input", gp2.getLeftY());
             telemetry.addData("left top servo pos", bot.outtakeArm.bucketServoL.getPosition());
             telemetry.addData("Right top servo pos", bot.outtakeArm.bucketServoR.getPosition());
             telemetry.addData("gp2RightY", gp2.getRightY());
