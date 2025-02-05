@@ -261,9 +261,15 @@ public class Bot {
     }
     public Action actionHighChamber(){
         return new SequentialAction(
-            new InstantAction(()-> outtakeArm.transfer()),
-            new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
-            //new InstantAction(()-> slides.runToHighChamber())
+            new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
+            new InstantAction(()-> outtakeArm.vertical())
+        );
+    }
+    public Action actionClip(){
+        return new SequentialAction(
+                new InstantAction(()-> slides.runToHighChamber()),
+                new SleepAction(.7),
+                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
     public Action actionIntakeSpecimen(){
