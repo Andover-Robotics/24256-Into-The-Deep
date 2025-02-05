@@ -232,7 +232,7 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new SleepAction(.5),
                 new InstantAction(()-> outtakeArm.transfer()),
-                new SleepAction(0.2),
+                new SleepAction(0.15),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage())
 
