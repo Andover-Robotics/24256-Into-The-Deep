@@ -124,6 +124,7 @@ public class Bot {
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
         intakeClaw.clawStraight();
+        slides.runToStorage();
     }
     public void prepAuto() {
         intakeArm.armToStorage();
@@ -261,20 +262,23 @@ public class Bot {
     }
     public Action actionHighChamber(){
         return new SequentialAction(
-            new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
-            new InstantAction(()-> outtakeArm.vertical())
+            new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+            new SleepAction(0.2),
+            new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
+            new InstantAction(()-> outtakeArm.vertical()),
+            new InstantAction(()->intakeArm.armToStorage())
         );
     }
     public Action actionClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(.7),
+                new SleepAction(1.4),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
-                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
                 new InstantAction(()->outtakeClaw.outtakeClawOpen())
         );
@@ -282,8 +286,9 @@ public class Bot {
     public Action autoSpecimen() {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(() -> outtakeArm.outtake()),
+                new InstantAction(() -> outtakeArm.wallIntake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                new SleepAction(1.5),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5)
         );

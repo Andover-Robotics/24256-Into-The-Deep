@@ -96,6 +96,9 @@ public class MainTeleOp extends LinearOpMode {
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
                 bot.resetTeleop();
             }
+            if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.1){
+                runningActions.add(bot.actionClip());
+            }
 
 
 

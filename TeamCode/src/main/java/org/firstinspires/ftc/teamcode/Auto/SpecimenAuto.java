@@ -17,17 +17,19 @@ public class SpecimenAuto extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Bot.instance = null;
         bot = Bot.getInstance(this);
-        //bot.prepSubsystems();
-        //bot.prepAuto();
+        bot.prepSubsystems();
+        bot.prepAuto();
 
         Pose2d initialPose = new Pose2d(0, 64, Math.toRadians(-90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(0, 64, Math.toRadians(-90)))
-                //.stopAndAdd(bot.actionHighChamber())
-                .strafeToLinearHeading(new Vector2d(0, 34), Math.toRadians(-90))
+                .stopAndAdd(bot.actionHighChamber())
+                .strafeToLinearHeading(new Vector2d(0, 33.5), Math.toRadians(-90))
+                .waitSeconds(0.5)
+                .stopAndAdd(bot.actionClip())
                 .waitSeconds(1)
-                //.stopAndAdd(bot.actionRelease())
+                .stopAndAdd(bot.actionSlidesLower())
                 //clip preload
                 .strafeToConstantHeading(new Vector2d(0, 40))
                 .strafeToConstantHeading(new Vector2d(-20, 40))
@@ -41,32 +43,28 @@ public class SpecimenAuto extends LinearOpMode {
 
                 //push specimen into obs zone
 
-                //.afterTime(0.5,bot.autoSpecimen())
+                .afterTime(0.5,bot.autoSpecimen())
                 .strafeToConstantHeading(new Vector2d(-35,62))
                 .waitSeconds(0.5)
-                //.stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(-2,34))
+                .stopAndAdd(bot.actionHighChamber())
+                .strafeToConstantHeading(new Vector2d(-2,33.5))
                 .waitSeconds(1)
-                //.stopAndAdd(bot.actionRelease())
+                .stopAndAdd(bot.actionClip())
+                .waitSeconds(1)
+                .stopAndAdd(bot.actionSlidesLower())
                 //second specimen
 
-                //.afterTime(0.5,bot.autoSpecimen())
+                .afterTime(0.5,bot.autoSpecimen())
                 .strafeToLinearHeading(new Vector2d(-35, 62), Math.toRadians(-90))
                 .waitSeconds(0.5)
-                //.stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(2,34))
+                .stopAndAdd(bot.actionHighChamber())
+                .strafeToConstantHeading(new Vector2d(2,33.5))
                 .waitSeconds(1)
-                //.stopAndAdd(bot.actionRelease())
+                .stopAndAdd(bot.actionClip())
+                .waitSeconds(1)
+                .stopAndAdd(bot.actionSlidesLower())
                 //third specimen
 
-                //.afterTime(0.5,bot.autoSpecimen())
-                //.strafeToLinearHeading(new Vector2d(-45, 62), Math.toRadians(-90))
-                //.waitSeconds(0.5)
-                //.stopAndAdd(bot.actionHighChamber())
-                //.strafeToConstantHeading(new Vector2d(4, 34))
-                //.waitSeconds(1)
-                //.stopAndAdd(bot.actionRelease())
-                //fourth specimen
 
                 .strafeToLinearHeading(new Vector2d(-35, 62), Math.toRadians(-90))
                 //park
