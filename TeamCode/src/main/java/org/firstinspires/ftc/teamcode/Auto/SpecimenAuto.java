@@ -25,10 +25,10 @@ public class SpecimenAuto extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(0, 64, Math.toRadians(-90)))
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToLinearHeading(new Vector2d(0, 33.5), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(4, 31), Math.toRadians(-90))
                 .waitSeconds(0.5)
                 .stopAndAdd(bot.actionClip())
-                .waitSeconds(1)
+                .waitSeconds(0.7)
                 .stopAndAdd(bot.actionSlidesLower())
                 //clip preload
                 .strafeToConstantHeading(new Vector2d(0, 40))
@@ -37,36 +37,37 @@ public class SpecimenAuto extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(-35, 15))
                 .strafeToConstantHeading(new Vector2d(-45, 15))
                 .strafeToConstantHeading(new Vector2d(-45, 60))
-                .strafeToConstantHeading(new Vector2d(-45, 15))
-                .strafeToConstantHeading(new Vector2d(-58, 15))
-                .strafeToConstantHeading(new Vector2d(-52, 60))
+                .strafeToConstantHeading(new Vector2d(-40, 56))
+
 
                 //push specimen into obs zone
 
                 .afterTime(0.5,bot.autoSpecimen())
-                .strafeToConstantHeading(new Vector2d(-35,62))
+                .strafeToConstantHeading(new Vector2d(-35,63.5))
                 .waitSeconds(0.5)
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(-2,33.5))
-                .waitSeconds(1)
+                .strafeToConstantHeading(new Vector2d(0,31))
+                .waitSeconds(0.5)
                 .stopAndAdd(bot.actionClip())
-                .waitSeconds(1)
+                .waitSeconds(0.7)
                 .stopAndAdd(bot.actionSlidesLower())
                 //second specimen
 
                 .afterTime(0.5,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-35, 62), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-35, 63), Math.toRadians(-90))
                 .waitSeconds(0.5)
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(2,33.5))
-                .waitSeconds(1)
+                .strafeToConstantHeading(new Vector2d(-4,40))
+                .strafeToConstantHeading(new Vector2d(-4,31))
+                .waitSeconds(0.5)
                 .stopAndAdd(bot.actionClip())
-                .waitSeconds(1)
+                .waitSeconds(0.7)
                 .stopAndAdd(bot.actionSlidesLower())
                 //third specimen
 
 
-                .strafeToLinearHeading(new Vector2d(-35, 62), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-10, 60), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-35, 60), Math.toRadians(-90))
                 //park
 
                 .build();

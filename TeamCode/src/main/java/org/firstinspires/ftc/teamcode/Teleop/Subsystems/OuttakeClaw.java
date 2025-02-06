@@ -10,7 +10,7 @@ public class OuttakeClaw {
     public static final double topWristUp = 0.46;
     public static final double topWristDown = 0.8;
     public static double topWristIns = 0.7;
-    public static double horizontalish = .2;
+    public static double horizontalish = 0;
     public boolean open = false;
     public static final double topClawVertical = .9;
     public void toggleTopClaw() {
