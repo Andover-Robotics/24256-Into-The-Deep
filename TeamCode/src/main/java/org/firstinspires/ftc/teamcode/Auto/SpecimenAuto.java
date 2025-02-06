@@ -54,7 +54,7 @@ public class SpecimenAuto extends LinearOpMode {
                 //second specimen
 
                 .afterTime(0.5,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-35, 63), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-35, 64), Math.toRadians(-90))
                 .waitSeconds(0.5)
                 .stopAndAdd(bot.actionHighChamber())
                 .strafeToConstantHeading(new Vector2d(-4,40))
@@ -66,8 +66,8 @@ public class SpecimenAuto extends LinearOpMode {
                 //third specimen
 
 
-                .strafeToLinearHeading(new Vector2d(-10, 60), Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-35, 60), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-10, 61), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-35, 61), Math.toRadians(-90))
                 //park
 
                 .build();
