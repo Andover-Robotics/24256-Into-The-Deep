@@ -47,14 +47,17 @@ public class FourSample extends LinearOpMode {
 
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))
-                .waitSeconds(1)
+                .waitSeconds(1.5)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(59.5,43),Math.toRadians(-50)) // stop and add close claw and transfer etc
-                .waitSeconds(.2)
-                .stopAndAdd(bot.autoLastSample())
-                .waitSeconds(0.2)
+                .strafeToLinearHeading(new Vector2d(60,43.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
+                .afterTime(0.2, bot.autoLastSample())
+                .waitSeconds(1.5)
+                .strafeToLinearHeading(new Vector2d(58,43.5),Math.toRadians(-50))
+                .waitSeconds(1.9)
+                // stop and add close claw and transfer etc
+
 
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))

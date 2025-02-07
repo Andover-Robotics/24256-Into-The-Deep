@@ -272,6 +272,7 @@ public class Bot {
     }
     public Action actionHighChamber(){
         return new SequentialAction(
+                new SleepAction(0.5),
             new InstantAction(()-> outtakeClaw.outtakeClawClose()),
             new SleepAction(0.4),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
@@ -282,6 +283,13 @@ public class Bot {
     public Action actionClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber())
+        );
+    }
+    public Action actionAutoClip(){
+        return new SequentialAction(
+                new InstantAction(()-> slides.runToHighChamber()),
+                new SleepAction(0.7),
+                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
     public Action actionIntakeSpecimen(){
