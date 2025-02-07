@@ -308,7 +308,7 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.openClaw()),
                 new SleepAction(0.3),
                 new InstantAction(() -> intakeArm.intake()),
-                new SleepAction(0.2),
+                new SleepAction(0.21),
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(0.5),
                 new InstantAction(() -> intakeArm.Hover()),
