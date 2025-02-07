@@ -8,7 +8,10 @@ import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
+import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import  com.qualcomm.robotcore.hardware.Servo;
@@ -27,7 +30,7 @@ public class Bot {
 
     public Slides slides;
 
-    public DcMotorEx bl, br, fl, fr;
+    public MotorEx bl, br, fl, fr;
     public boolean fieldCentricRunMode = false;
 
     public Bot(OpMode opMode) {
@@ -38,10 +41,10 @@ public class Bot {
         } catch (Exception e) {
             fieldCentricRunMode = false;
         }
-        fl = opMode.hardwareMap.get(DcMotorEx.class, "fl");
-        fr = opMode.hardwareMap.get(DcMotorEx.class, "fr");
-        bl = opMode.hardwareMap.get(DcMotorEx.class, "bl");
-        br = opMode.hardwareMap.get(DcMotorEx.class, "br");
+        fl = new MotorEx(opMode.hardwareMap, "fl", Motor.GoBILDA.RPM_312);
+        fr = new MotorEx(opMode.hardwareMap, "fr", Motor.GoBILDA.RPM_312);
+        bl = new MotorEx(opMode.hardwareMap, "bl", Motor.GoBILDA.RPM_312);
+        br = new MotorEx(opMode.hardwareMap, "br", Motor.GoBILDA.RPM_312);
 
         this.intakeArm = new IntakeArm(opMode);
         this.intakeClaw = new IntakeClaw(opMode);
@@ -76,25 +79,25 @@ public class Bot {
                 speeds[i] /= maxSpeed;
             }
         }
-        fl.setPower(speeds[0]);
-        fr.setPower(speeds[1]);
-        bl.setPower(-speeds[2]);
-        br.setPower(-speeds[3]);
+        fl.set(speeds[0]);
+        fr.set(speeds[1]);
+        bl.set(-speeds[2]);
+        br.set(-speeds[3]);
     }
 
     public void prepMotors() {
 
-        fr.setDirection(DcMotorSimple.Direction.REVERSE);
-        br.setDirection(DcMotorSimple.Direction.REVERSE);
-        fl.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        fr.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        bl.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
-        br.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);
+        fr.setInverted(true);
+        br.setInverted(true);
+        fl.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
+        fr.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
+        br.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
 
-        fl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        fr.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        bl.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        br.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        fl.setRunMode(Motor.RunMode.RawPower);
+        fr.setRunMode(Motor.RunMode.RawPower);
+        bl.setRunMode(Motor.RunMode.RawPower);
+        br.setRunMode(Motor.RunMode.RawPower);
     }
 
     public void prepSubsystems() {
@@ -125,22 +128,17 @@ public class Bot {
         outtakeClaw.topWristTransferPos();
         intakeClaw.clawStraight();
         slides.runToStorage();
+        outtakeArm.transfer();
     }
     public void prepAuto() {
         intakeArm.armToStorage();
-        outtakeArm.outtake();
+        outtakeArm.wallIntake();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
-        outtakeClaw.wristIns();
+        outtakeClaw.setTopWrist18();
+        intakeClaw.clawStraight();
     }
-    public void resetEncoders() {
-        fl.setMode(STOP_AND_RESET_ENCODER);
-        fr.setMode(STOP_AND_RESET_ENCODER);
-        br.setMode(STOP_AND_RESET_ENCODER);
-        bl.setMode(STOP_AND_RESET_ENCODER);
-    }
-
 
     public Action actionTransfer() {
         return new SequentialAction(
@@ -150,7 +148,10 @@ public class Bot {
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
                 new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.clawLoose()),
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(1),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5),
@@ -176,6 +177,10 @@ public class Bot {
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
                 new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.clawLoose()),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.closeClaw()),
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
                 new SleepAction(1),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
@@ -185,7 +190,7 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.wristToIntakePos())
         );
     }
-    public Action autolastsample() {
+    public Action autoLastSample() {
         return new SequentialAction(
                 new InstantAction(() -> intakeArm.intake()),
                 new InstantAction(() -> outtakeArm.transfer()),
@@ -197,12 +202,17 @@ public class Bot {
                 new SleepAction(0.8),
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(0.4),
+                new InstantAction(() -> intakeClaw.clawStraight()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
                 new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.clawLoose()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(1),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.4),
@@ -263,7 +273,7 @@ public class Bot {
     public Action actionHighChamber(){
         return new SequentialAction(
             new InstantAction(()-> outtakeClaw.outtakeClawClose()),
-            new SleepAction(0.2),
+            new SleepAction(0.4),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
             new InstantAction(()-> outtakeArm.vertical()),
             new InstantAction(()->intakeArm.armToStorage())
@@ -278,6 +288,7 @@ public class Bot {
     }
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
+                new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
                 new InstantAction(()->outtakeClaw.outtakeClawOpen())
@@ -299,12 +310,19 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.openClaw()),
                 new SleepAction(0.3),
                 new InstantAction(() -> intakeArm.intake()),
-                new SleepAction(0.5),
+                new SleepAction(0.2),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new InstantAction(() -> intakeArm.Hover())
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeArm.Hover()),
+                new InstantAction(() -> intakeClaw.clawStraight())
 
 
                 );
+            }
+    public Action specPush(){
+        return new SequentialAction(
+                new InstantAction(()-> slides.runToPush())
+            );
             }
 
 

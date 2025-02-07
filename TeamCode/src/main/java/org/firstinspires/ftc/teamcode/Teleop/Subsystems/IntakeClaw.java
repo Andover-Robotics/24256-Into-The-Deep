@@ -5,10 +5,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class IntakeClaw {
     public Servo  claw, wristServo, rotateServo;
 
-    public static final double clawOpen = 0.15;
+    public static final double clawOpen = 0.18;
     public static final double clawClose = 0.47;
-    public static final double wristUp = 0.08 ;
-    public static final double wristDown = 0.66;
+    public static final double clawLoose = 0.45;
+    public static final double wristUp = 0.05 ;
+    public static final double wristDown = 0.68;
     public static final double rotateStraight = .523;
     public static final double rotateSide = .85;
     public static final double rotate45Deg = .3;
@@ -51,6 +52,9 @@ public class IntakeClaw {
     }
     public void wristToIntakePos(){
         wristServo.setPosition(wristDown);
+    }
+    public void clawLoose (){
+        claw.setPosition(clawLoose);
     }
 
     public void clawStraight() {

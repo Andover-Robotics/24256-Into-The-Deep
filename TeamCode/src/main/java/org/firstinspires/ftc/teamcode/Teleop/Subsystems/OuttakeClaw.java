@@ -7,10 +7,10 @@ public class OuttakeClaw {
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.575;
-    public static final double topWristUp = 0.46;
-    public static final double topWristDown = 0.8;
+    public static final double topWristUp = 0.47;
+    public static final double topWristDown = 0.77;
+    public static final double topWrist18 = 0;
     public static double topWristIns = 0.7;
-    public static double horizontalish = 0;
     public boolean open = false;
     public static final double topClawVertical = .9;
     public void toggleTopClaw() {
@@ -45,7 +45,5 @@ public class OuttakeClaw {
     public void outtakeClawVertical(){
         topWrist.setPosition(topClawVertical);
     }
-    public void moreHorizontalish(){
-        topWrist.setPosition(horizontalish);
-    }
+    public void setTopWrist18() {topWrist.setPosition(topWrist18);}
 }
