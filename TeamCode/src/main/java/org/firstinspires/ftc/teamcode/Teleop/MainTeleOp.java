@@ -97,11 +97,14 @@ public class MainTeleOp extends LinearOpMode {
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
                 bot.resetTeleop();
             }
+            if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
+                runningActions.add(bot.specPush());
+            }
             if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.4){
                 runningActions.add(bot.actionClip());
             }
             if(gp2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.4){
-                runningActions.add(bot.specPush());
+                bot.outtakeClaw.outtakeClawOpen();
             }
 
 

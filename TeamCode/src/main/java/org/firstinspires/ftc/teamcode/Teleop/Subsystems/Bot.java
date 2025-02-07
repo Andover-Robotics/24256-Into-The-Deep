@@ -281,9 +281,7 @@ public class Bot {
     }
     public Action actionClip(){
         return new SequentialAction(
-                new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(1.2),
-                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
+                new InstantAction(()-> slides.runToHighChamber())
         );
     }
     public Action actionIntakeSpecimen(){
