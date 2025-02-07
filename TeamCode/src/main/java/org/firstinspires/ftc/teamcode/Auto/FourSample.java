@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
-@Autonomous(name = "Bucket Auto NEW")
+@Autonomous(name = "USE FourSampleAuto")
 public class FourSample extends LinearOpMode {
     Bot bot;
 
