@@ -304,7 +304,7 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeArm.wallIntake()),
-                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(() -> outtakeClaw.outtakeClawVertical()),
                 new SleepAction(3),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5)
