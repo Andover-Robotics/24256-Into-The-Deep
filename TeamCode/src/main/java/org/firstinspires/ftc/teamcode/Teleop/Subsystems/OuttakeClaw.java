@@ -7,12 +7,12 @@ public class OuttakeClaw {
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.575;
-    public static final double topWristUp = 0.47;
-    public static final double topWristDown = 0.77;
+    public static final double topWristUp = 0.44;
+    public static final double topWristDown = 0.74;
     public static final double topWrist18 = 0;
-    public static double topWristIns = 0.7;
+    public static double topWristIns = 0.67;
     public boolean open = false;
-    public static final double topClawVertical = .9;
+    public static final double topClawVertical = .85;
     public void toggleTopClaw() {
         if (open) {
             outtakeClawClose();
