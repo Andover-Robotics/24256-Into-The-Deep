@@ -65,7 +65,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(40, 20), Math.toRadians(-180))
+                .strafeToLinearHeading(new Vector2d(40, 30), Math.toRadians(-180))
                 //.stopAndAdd(bot.actionSlidesLower())
                 .waitSeconds(2)
                 .build();

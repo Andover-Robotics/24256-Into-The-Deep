@@ -57,7 +57,7 @@ public class MainTeleOp extends LinearOpMode {
                 } else if (c == 2) {
                     bot.intakeClaw.setRotate0ther45Deg();
                     c += 1;
-                } else if (c ==3) {
+                } else if (c == 3) {
                     bot.intakeClaw.clawSlanted();
                     c = 0;
 
@@ -94,18 +94,16 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
                runningActions.add(bot.actionHighChamber());
             }
+
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
                 bot.resetTeleop();
             }
-            if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
-                runningActions.add(bot.specPush());
-            }
-            if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.4){
+
+            if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.0001){
                 runningActions.add(bot.actionClip());
             }
-            if(gp2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.4){
-                bot.outtakeClaw.outtakeClawOpen();
-            }
+
+
 
 
 
@@ -145,7 +143,7 @@ public class MainTeleOp extends LinearOpMode {
     public void drive() {
         gp1.readButtons();
         bot.prepMotors();
-        driveSpeed = driveMultiplier - 0.75 * gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
+        driveSpeed = driveMultiplier - 0.7 * gp1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER);
         driveSpeed = Math.max(0, driveSpeed);
         Vector2d driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY()),
                 turnVector = new Vector2d(-gp1.getRightX(), 0);

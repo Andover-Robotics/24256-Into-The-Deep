@@ -55,6 +55,7 @@ public class SpecimenAuto extends LinearOpMode {
                 //second specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
+                .strafeToLinearHeading(new Vector2d(-1.25, 34), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(-38, 63.2), Math.toRadians(-90))
                 .waitSeconds(0.4)

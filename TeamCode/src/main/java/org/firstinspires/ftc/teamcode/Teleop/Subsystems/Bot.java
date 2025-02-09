@@ -277,7 +277,9 @@ public class Bot {
             new SleepAction(0.4),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
             new InstantAction(()-> outtakeArm.vertical()),
-            new InstantAction(()->intakeArm.armToStorage())
+            new InstantAction(()->intakeArm.armToStorage()),
+                new InstantAction(()-> slides.runToPush())
+
         );
     }
     public Action actionClip(){
@@ -294,17 +296,17 @@ public class Bot {
     }
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
-                new InstantAction(()-> slides.runToStorage()),
+                new InstantAction(()->outtakeClaw.outtakeClawOpen()),
+        new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
-                new InstantAction(()-> outtakeClaw.topWristToOuttakePos()),
-                new InstantAction(()->outtakeClaw.outtakeClawOpen())
+                new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
         );
     }
     public Action autoSpecimen() {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeArm.wallIntake()),
-                new InstantAction(() -> outtakeClaw.outtakeClawVertical()),
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
                 new SleepAction(3),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.5)
