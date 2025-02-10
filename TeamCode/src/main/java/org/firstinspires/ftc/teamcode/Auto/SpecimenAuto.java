@@ -33,6 +33,7 @@ public class SpecimenAuto extends LinearOpMode {
                 //clip preload
                 .strafeToConstantHeading(new Vector2d(0, 40))
                 .strafeToConstantHeading(new Vector2d(-20, 40))
+                .strafeToConstantHeading(new Vector2d(-20,45))
                 .splineToConstantHeading(new Vector2d(-35,15),90)
                 /*.strafeToConstantHeading(new Vector2d(-35, 33))
                 .strafeToConstantHeading(new Vector2d(-35, 15))*/
