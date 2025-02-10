@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class OuttakeClaw {
+    public boolean open = true;
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.6;
@@ -11,7 +12,6 @@ public class OuttakeClaw {
     public static final double topWristDown = 0.70;
     public static final double topWrist18 = 0;
     public static double topWristIns = 0.67;
-    public boolean open = false;
     public static final double topClawVertical = .7;
     public void toggleTopClaw() {
         if (open) {
