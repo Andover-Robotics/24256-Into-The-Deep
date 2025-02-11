@@ -110,7 +110,7 @@ public class Bot {
     }
 
     public void resetEverything() {
-        intakeArm.armToUpPos();
+        intakeArm.Hover();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawOpen();
         intakeClaw.wristToIntakePos();
@@ -121,7 +121,7 @@ public class Bot {
         intakeClaw.clawStraight();
             }
     public void resetTeleop(){
-        intakeArm.armToUpPos();
+        intakeArm.Hover();
         intakeClaw.closeClaw();
         outtakeClaw.outtakeClawClose();
         intakeClaw.wristToIntakePos();
@@ -157,7 +157,8 @@ public class Bot {
                 new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.openClaw()),
                 new SleepAction(0.5),
-                new InstantAction(() -> intakeClaw.wristToIntakePos())
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> intakeArm.Hover())
         );
     }
 
@@ -222,17 +223,11 @@ public class Bot {
         );
     }
 
-    public Action armFlip(){
-        return new SequentialAction(
-                new InstantAction(()->outtakeArm.transfer()),
-                new InstantAction(()-> intakeArm.armToUpPos())
-        );
-    }
 
     public Action actionHighBucket() {
         return new SequentialAction(
                 new InstantAction(() -> slides.runToTopBucket()),
-                new SleepAction(1.3),
+                new SleepAction(1),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
@@ -272,7 +267,6 @@ public class Bot {
     }
     public Action actionHighChamber(){
         return new SequentialAction(
-                new SleepAction(0.5),
             new InstantAction(()-> outtakeClaw.outtakeClawClose()),
             new SleepAction(0.4),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
@@ -290,7 +284,7 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.7),
+                new SleepAction(0.5),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
@@ -327,14 +321,6 @@ public class Bot {
 
                 );
             }
-    public Action specPush(){
-        return new SequentialAction(
-                new InstantAction(()-> slides.runToPush())
-            );
-            }
-
-
-
 
 
     public class actionPeriodic implements Action {

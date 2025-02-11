@@ -23,7 +23,6 @@ public class ThreeSample extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
-                .stopAndAdd(bot.armFlip())
                 .waitSeconds(0.2)
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(52, 61), Math.toRadians(45))

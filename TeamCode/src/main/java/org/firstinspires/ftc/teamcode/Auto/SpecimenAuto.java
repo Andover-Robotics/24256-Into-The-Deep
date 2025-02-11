@@ -25,7 +25,7 @@ public class SpecimenAuto extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToLinearHeading(new Vector2d(2, 30.5), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(3, 30.5), Math.toRadians(-90))
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.actionAutoClip())
                 .waitSeconds(0.5)
@@ -45,8 +45,8 @@ public class SpecimenAuto extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(-36.59,63.2))
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(-1.25,37))
-                .strafeToConstantHeading(new Vector2d(-1.25,31))
+                .strafeToConstantHeading(new Vector2d(0,37))
+                .strafeToConstantHeading(new Vector2d(0,31))
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.actionAutoClip())
                 .waitSeconds(0.5)
@@ -54,7 +54,21 @@ public class SpecimenAuto extends LinearOpMode {
                 //second specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-1.25, 34), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(0, 34), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-38, 63.2), Math.toRadians(-90))
+                .waitSeconds(0.4)
+                .stopAndAdd(bot.actionHighChamber())
+                .strafeToConstantHeading(new Vector2d(-2,40))
+                .strafeToConstantHeading(new Vector2d(-2,31))
+                .waitSeconds(0.4)
+                .stopAndAdd(bot.actionAutoClip())
+                .waitSeconds(0.6)
+                .stopAndAdd(bot.actionSlidesLower())
+                //third specimen
+
+                .afterTime(0.4,bot.autoSpecimen())
+                .strafeToLinearHeading(new Vector2d(-2, 34), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(-38, 63.2), Math.toRadians(-90))
                 .waitSeconds(0.4)
@@ -65,12 +79,10 @@ public class SpecimenAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionAutoClip())
                 .waitSeconds(0.6)
                 .stopAndAdd(bot.actionSlidesLower())
-                //third specimen
+                //fourth specimen
 
-
-                .strafeToLinearHeading(new Vector2d(-10, 61), Math.toRadians(-90))
+                .splineToConstantHeading(new Vector2d(-45, 60),90)
                 .afterTime(0.001,bot.toIntake())
-                .strafeToLinearHeading(new Vector2d(-45, 60), Math.toRadians(-90))
                 //park
 
                 .build();
