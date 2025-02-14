@@ -32,11 +32,16 @@ public class SpecimenAuto extends LinearOpMode {
                 .stopAndAdd(bot.actionSlidesLower())
                 //clip preload
                 .strafeToConstantHeading(new Vector2d(0, 40))
-                .strafeToConstantHeading(new Vector2d(-20, 40))
-                .strafeToConstantHeading(new Vector2d(-20,45))
+                .strafeToConstantHeading(new Vector2d(-20,42))
+                .strafeToConstantHeading(new Vector2d(-20, 46))
                 .splineToConstantHeading(new Vector2d(-35,15),90)
                 /*.strafeToConstantHeading(new Vector2d(-35, 33))
-                .strafeToConstantHeading(new Vector2d(-35, 15))*/
+                .strafeToConstantHeading(new Vector2d(-35, 15))
+
+                //pushes second sample to obs zone
+                .splineToConstantHeading(new Vector2d(-35,15),90)
+                .splineToConstantHeading(new Vector2d(-41,15),90)*/
+
                 .afterTime(0.00001,bot.autoSpecimen())
                 .splineToConstantHeading(new Vector2d(-45, 60),90)
                 .strafeToConstantHeading(new Vector2d(-36.5, 56))

@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 public class Slides {
     public  final MotorEx slideMotorR, slideMotorL;
     public PIDFController controller;
-    public static double p = 0.015, i = 0, d = 0, f =0, staticF = 0.25;
+    public static double p = 0.015, i = 0, d = 0.001, f =0, staticF = 0.25;
     //tune if you have time, supposedly it will work well enough without tuning but likely will help.
     private final double tolerance = 10, powerUp = 0.1, powerDown = 0.05, powerMin =0.2, manualDivide = 1 ;
     public  double target = 0;
@@ -23,15 +23,15 @@ public class Slides {
     public double manualPower = 0;
     public boolean goingDown = false;
 //-1133, -514, -174
-    public static int storage = 0, topBucket = -1000, topChamber = -514, push = -174;
+    public static int storage = 0, topBucket = -700, topChamber = -400, push = -174;
     //tune top bucket value very carefully
     private double profiler_init_time = 0;
 
 
     MotionProfiler profiler = new MotionProfiler(30000,20000);
     public Slides (OpMode opmode) {
-        slideMotorL = new MotorEx(opmode.hardwareMap, "slideMotorL", Motor.GoBILDA.RPM_312);
-        slideMotorR = new MotorEx(opmode.hardwareMap, "slideMotorR", Motor.GoBILDA.RPM_312);
+        slideMotorL = new MotorEx(opmode.hardwareMap, "slideMotorL", Motor.GoBILDA.RPM_1150);
+        slideMotorR = new MotorEx(opmode.hardwareMap, "slideMotorR", Motor.GoBILDA.RPM_1150);
 
         controller = new PIDFController(p, i, d, f);
         controller.setTolerance(tolerance);
