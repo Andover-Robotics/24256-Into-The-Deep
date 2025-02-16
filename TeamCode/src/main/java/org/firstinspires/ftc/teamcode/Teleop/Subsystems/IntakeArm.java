@@ -4,10 +4,10 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class IntakeArm {
     public Servo armServoR, armServoL;
-    public static final double transferPos = 0.39;
-    public static final double intakePos = 0.18;
+    public static final double transferPos = 0.43;
+    public static final double intakePos = 0.19;
     public static final double ArmUpPos = 0.44;
-    public static final double ArmHoverPos = 0.26;
+    public static final double ArmHoverPos = 0.3;
     public final double armStorage = 0.69;
 
     public IntakeArm(OpMode opMode) {

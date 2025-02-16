@@ -6,14 +6,14 @@ public class IntakeClaw {
     public Servo  claw, wristServo, rotateServo;
 
     public static final double clawOpen = 0.18;
-    public static final double clawClose = 0.47;
-    public static final double clawLoose = 0.45;
-    public static final double wristUp = 0.05 ;
-    public static final double wristDown = 0.68;
-    public static final double rotateStraight = .523;
-    public static final double rotateSide = .85;
-    public static final double rotate45Deg = .3;
-    public static final double rotateOther45Deg =.65;
+    public static final double clawClose = 0.51;
+    public static final double clawLoose = 0.47;
+    public static final double wristUp = 0.05;
+    public static final double wristDown = 0.71;
+    public static final double rotateStraight = .34;
+    public static final double rotateSide = .7;
+    public static final double rotate45Deg = .5;
+    public static final double rotateOther45Deg =.2;
 
 
     public boolean open = true;

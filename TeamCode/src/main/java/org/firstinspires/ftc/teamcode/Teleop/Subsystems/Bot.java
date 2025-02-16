@@ -142,20 +142,20 @@ public class Bot {
 
     public Action actionTransfer() {
         return new SequentialAction(
-                new InstantAction(() -> intakeClaw.closeClaw()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
-                new InstantAction(() -> intakeClaw.clawLoose()),
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
-                new SleepAction(0.3),
+                new SleepAction(0.5),
+                new InstantAction(() -> intakeClaw.clawLoose()),
+                new SleepAction(.85),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new SleepAction(.3),
+                new SleepAction(.15),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.5),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> intakeArm.Hover())
         );
