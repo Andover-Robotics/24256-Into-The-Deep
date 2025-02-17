@@ -55,7 +55,7 @@ public class MainTeleOp extends LinearOpMode {
                     bot.intakeClaw.clawHorizontal();
                     c += 1;
                 } else if (c == 2) {
-                    bot.intakeClaw.setRotate0ther45Deg();
+                    bot.intakeClaw.rotate0ther45Deg();
                     c += 1;
                 } else if (c == 3) {
                     bot.intakeClaw.clawSlanted();

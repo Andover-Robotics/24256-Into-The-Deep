@@ -70,7 +70,7 @@ public class IntakeClaw {
         orientation = clawOrientation.HORIZONTAL;
     }
 
-    public void setRotate0ther45Deg(){
+    public void rotate0ther45Deg(){
         rotateServo.setPosition((rotateOther45Deg));
         orientation = clawOrientation.OTHERSLANTED;
 

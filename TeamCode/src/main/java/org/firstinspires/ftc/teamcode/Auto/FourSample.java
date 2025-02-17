@@ -23,49 +23,53 @@ public class FourSample extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
+                //go to bucket
+                .strafeToLinearHeading(new Vector2d(38, 57), Math.toRadians(-90))
                 .afterTime(0.1, bot.actionHighBucket())
                 .waitSeconds(1)
-                .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))
+                //drop in bucket
+                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
                 .afterTime(0.1, bot.actionBucketDrop())
-                .waitSeconds(.2)
-
-                .strafeToLinearHeading(new Vector2d(47,44),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .afterTime(0.000000000000001, bot.toIntake())
+                .waitSeconds(.4)
+                //intake first sample
+                .strafeToLinearHeading(new Vector2d(46,45),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(.2)
-
+                //
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))
-                .waitSeconds(0.8)
+                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
+                .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
-
-                .strafeToLinearHeading(new Vector2d(57.5,44),Math.toRadians(-90)) // stop and add close claw and transfer etc
+//
+                .strafeToLinearHeading(new Vector2d(59,44),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.2)
 
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))
-                .waitSeconds(1.5)
+                .strafeToLinearHeading(new Vector2d(56, 62.5), Math.toRadians(-135))
+                .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(60,43.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
-                .afterTime(0.2, bot.autoLastSample())
-                .waitSeconds(1.5)
-                .strafeToLinearHeading(new Vector2d(58,43.5),Math.toRadians(-50))
-                .waitSeconds(1.9)
+                .strafeToLinearHeading(new Vector2d(60,41.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
+                .stopAndAdd( bot.autoLastSample())
+                .waitSeconds(0.3)
                 // stop and add close claw and transfer etc
 
 
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(53, 60), Math.toRadians(-135))
-                .waitSeconds(1)
+                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
+                .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 
-                .strafeToLinearHeading(new Vector2d(40, 30), Math.toRadians(-180))
+                .strafeToLinearHeading(new Vector2d(40, 15), Math.toRadians(-180))
+                .afterTime(0.001,bot.actionPark())
+                .strafeToLinearHeading(new Vector2d(11, 15), Math.toRadians(-180))
                 //.stopAndAdd(bot.actionSlidesLower())
                 .waitSeconds(2)
                 .build();

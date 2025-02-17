@@ -23,7 +23,7 @@ public class Slides {
     public double manualPower = 0;
     public boolean goingDown = false;
 //-1133, -514, -174
-    public static int storage = 0, topBucket = -1200, topChamber = -620, push = -250;
+    public static int storage = 25, topBucket = -1200, topChamber = -620, push = -250;
     //tune top bucket value very carefully
     private double profiler_init_time = 0;
 

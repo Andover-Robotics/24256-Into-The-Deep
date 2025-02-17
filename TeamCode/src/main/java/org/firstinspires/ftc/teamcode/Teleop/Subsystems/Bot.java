@@ -1,5 +1,4 @@
 package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
-import static com.qualcomm.robotcore.hardware.DcMotor.RunMode.STOP_AND_RESET_ENCODER;
 
 import androidx.annotation.NonNull;
 
@@ -11,9 +10,6 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import  com.qualcomm.robotcore.hardware.Servo;
 
 
@@ -177,17 +173,22 @@ public class Bot {
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
                 new SleepAction(0.5),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(() -> intakeArm.transfer()),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.clawLoose()),
-                new InstantAction(() -> intakeClaw.wristToTransferPos()),
-                new SleepAction(0.3),
+                new SleepAction(.85),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new InstantAction(() -> intakeClaw.wristToTransferPos()),
-                new SleepAction(1),
+                new SleepAction(.15),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.4),
-                new InstantAction(() -> intakeClaw.wristToIntakePos())
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> intakeArm.Hover())
         );
     }
     public Action autoLastSample() {
@@ -195,7 +196,7 @@ public class Bot {
                 new InstantAction(() -> intakeArm.intake()),
                 new InstantAction(() -> outtakeArm.transfer()),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new InstantAction(() -> intakeClaw.clawSlanted()),
+                new InstantAction(() -> intakeClaw.rotate0ther45Deg()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
@@ -207,18 +208,18 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
-                new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
-                new SleepAction(0.3),
+                new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.clawLoose()),
-                new SleepAction(0.3),
+                new SleepAction(.85),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new SleepAction(1),
+                new SleepAction(.15),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.4),
-                new InstantAction(() -> intakeClaw.wristToIntakePos())
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> intakeArm.Hover())
         );
     }
 
@@ -226,7 +227,7 @@ public class Bot {
     public Action actionHighBucket() {
         return new SequentialAction(
                 new InstantAction(() -> slides.runToTopBucket()),
-                new SleepAction(1),
+                new SleepAction(0.6),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
@@ -259,7 +260,7 @@ public class Bot {
     }
     public Action toIntake() {
         return new SequentialAction(
-                new InstantAction(() -> intakeArm.intake()),
+                new InstantAction(() -> intakeArm.Hover()),
                 new InstantAction(()-> intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> intakeClaw.openClaw())
         );
@@ -328,6 +329,12 @@ public class Bot {
             slides.periodic();
             return true;
         }
+    }
+    public Action actionPark(){
+        return new SequentialAction(
+                new InstantAction(()-> outtakeArm.vertical()),
+                new InstantAction(()-> outtakeClaw.outtakeClawClose())
+        );
     }
 
     public Action actionPeriodic() {
