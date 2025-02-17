@@ -41,10 +41,10 @@ public class Bot {
         } catch (Exception e) {
             fieldCentricRunMode = false;
         }
-        fl = new MotorEx(opMode.hardwareMap, "fl", Motor.GoBILDA.RPM_312);
-        fr = new MotorEx(opMode.hardwareMap, "fr", Motor.GoBILDA.RPM_312);
-        bl = new MotorEx(opMode.hardwareMap, "bl", Motor.GoBILDA.RPM_312);
-        br = new MotorEx(opMode.hardwareMap, "br", Motor.GoBILDA.RPM_312);
+        fl = new MotorEx(opMode.hardwareMap, "fl", Motor.GoBILDA.RPM_435);
+        fr = new MotorEx(opMode.hardwareMap, "fr", Motor.GoBILDA.RPM_435);
+        bl = new MotorEx(opMode.hardwareMap, "bl", Motor.GoBILDA.RPM_435);
+        br = new MotorEx(opMode.hardwareMap, "br", Motor.GoBILDA.RPM_435);
 
         this.intakeArm = new IntakeArm(opMode);
         this.intakeClaw = new IntakeClaw(opMode);
