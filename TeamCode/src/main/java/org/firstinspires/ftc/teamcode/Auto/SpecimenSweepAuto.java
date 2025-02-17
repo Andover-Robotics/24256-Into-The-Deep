@@ -11,8 +11,8 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 
-@Autonomous(name = "Specimen Auto")
-public class SpecimenAuto extends LinearOpMode {
+@Autonomous(name = "Specimen Sweep Auto")
+public class SpecimenSweepAuto extends LinearOpMode {
     Bot bot;
 
     @Override
@@ -45,17 +45,16 @@ public class SpecimenAuto extends LinearOpMode {
 
                 .strafeToConstantHeading(new Vector2d(-25, 42))
                 .splineToConstantHeading(new Vector2d(-42,30),90)
-                .strafeToConstantHeading(new Vector2d(-34, 14))
-                .splineToConstantHeading(new Vector2d(-48,18),90)
+                .strafeToLinearHeading(new Vector2d(-35.5, 14),Math.toRadians(-80))
+                .splineToConstantHeading(new Vector2d(-35,24), Math.toRadians(80))
 
-                .afterTime(0.00001,bot.autoSpecimen())
-                .splineToConstantHeading(new Vector2d(-47, 55),Math.toRadians(90))
-                .strafeToConstantHeading(new Vector2d(-38,20))
+                .afterTime(0.00001,bot.actionSweep())
+                .turnTo(Math.toRadians(-180))
 
 
-                .splineToConstantHeading(new Vector2d(-57,18),Math.toRadians(130))
+                /*.splineToConstantHeading(new Vector2d(-57,18),Math.toRadians(130))
                 .strafeToLinearHeading(new Vector2d(-57,62),Math.toRadians(-80), drive.defaultVelConstraint, new ProfileAccelConstraint(-20,60))
-                .strafeToLinearHeading(new Vector2d(-45,67),Math.toRadians(-95))
+                .strafeToLinearHeading(new Vector2d(-45,67),Math.toRadians(-95))*/
                 //push specimen into obs zone
 
                 .stopAndAdd(bot.autoIntakeSpecimen())

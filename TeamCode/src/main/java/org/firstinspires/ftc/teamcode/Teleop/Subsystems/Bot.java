@@ -284,13 +284,14 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.5),
+                new SleepAction(0.9),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
                 new InstantAction(()->outtakeClaw.outtakeClawOpen()),
+        new SleepAction(0.1),
         new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
@@ -300,10 +301,14 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeArm.wallIntake()),
-                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
-                new SleepAction(3),
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
+        );
+    }
+
+        public Action autoIntakeSpecimen() {
+            return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.5)
+                new SleepAction(0.3)
         );
     }
 
@@ -321,6 +326,14 @@ public class Bot {
 
                 );
             }
+    public Action actionSweep(){
+        return new SequentialAction(
+                new InstantAction(()-> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.5),
+                new InstantAction(()->intakeArm.armSweep())
+
+        );
+    }
 
 
     public class actionPeriodic implements Action {

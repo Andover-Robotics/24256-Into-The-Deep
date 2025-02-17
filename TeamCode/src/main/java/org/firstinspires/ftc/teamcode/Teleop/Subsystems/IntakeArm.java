@@ -9,6 +9,7 @@ public class IntakeArm {
     public static final double ArmUpPos = 0.44;
     public static final double ArmHoverPos = 0.28;
     public final double armStorage = 0.69;
+    public final double sweep = 0.1;
 
     public IntakeArm(OpMode opMode) {
         armServoR = opMode.hardwareMap.get(Servo.class, "armServoR");
@@ -33,5 +34,9 @@ public class IntakeArm {
     public void Hover (){
         armServoL.setPosition(ArmHoverPos);
         armServoR.setPosition(ArmHoverPos);
+    }
+    public void armSweep(){
+        armServoL.setPosition(sweep);
+        armServoR.setPosition(sweep);
     }
 }
