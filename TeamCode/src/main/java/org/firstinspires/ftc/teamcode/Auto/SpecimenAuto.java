@@ -57,7 +57,7 @@ public class SpecimenAuto extends LinearOpMode {
                 .splineToConstantHeading(new Vector2d(-57,18),Math.toRadians(130))
                 .strafeToLinearHeading(new Vector2d(-57,62),Math.toRadians(-80), drive.defaultVelConstraint, new ProfileAccelConstraint(-20,60))
                 .strafeToLinearHeading(new Vector2d(-45,67),Math.toRadians(-95))
-                //push specimen into obs zone
+                //pushAuto specimen into obs zone
 
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamber())

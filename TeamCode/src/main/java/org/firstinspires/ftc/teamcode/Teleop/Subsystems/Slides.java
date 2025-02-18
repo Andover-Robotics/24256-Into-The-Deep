@@ -3,10 +3,7 @@ import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.acmerobotics.dashboard.config.Config;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
 
 @Config
@@ -23,7 +20,7 @@ public class Slides {
     public double manualPower = 0;
     public boolean goingDown = false;
 //-1133, -514, -174
-    public static int storage = 25, topBucket = -1200, topChamber = -680, push = -200; //was -665 and -235, changed to increase momentum
+    public static int storage = 25, topBucket = -1220, topChamber = -695, pushAuto = -200, push = -225; //was -665 and -235, changed to increase momentum
     //tune top bucket value very carefully
     private double profiler_init_time = 0;
 
@@ -73,6 +70,9 @@ public class Slides {
     }
     public void runToHighChamber(){
         runTo(topChamber);
+    }
+    public void runToPushAuto(){
+        runTo(pushAuto);
     }
     public void runToPush(){
         runTo(push);

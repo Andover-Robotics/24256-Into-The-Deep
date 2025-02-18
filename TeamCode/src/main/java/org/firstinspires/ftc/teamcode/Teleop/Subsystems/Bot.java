@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
-
 import androidx.annotation.NonNull;
-
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.InstantAction;
@@ -139,6 +137,7 @@ public class Bot {
     public Action actionTransfer() {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(()-> outtakeArm.transfer()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new InstantAction(() -> intakeArm.transfer()),
@@ -269,10 +268,22 @@ public class Bot {
         return new SequentialAction(
             new InstantAction(()->intakeClaw.wristToIntakePos()),
             new InstantAction(()-> outtakeClaw.outtakeClawClose()),
-            new SleepAction(0.4),
+            new SleepAction(0.15),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
             new InstantAction(()-> outtakeArm.vertical()),
             new InstantAction(()->intakeArm.armToStorage()),
+                new InstantAction(()-> slides.runToPushAuto())
+
+        );
+    }
+    public Action actionHighChamberTele(){
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.15),
+                new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new InstantAction(()->intakeArm.armToStorage()),
                 new InstantAction(()-> slides.runToPush())
 
         );
@@ -308,8 +319,7 @@ public class Bot {
 
         public Action autoIntakeSpecimen() {
             return new SequentialAction(
-                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.3)
+                new InstantAction(() -> outtakeClaw.outtakeClawClose())
         );
     }
 
@@ -340,7 +350,6 @@ public class Bot {
            new InstantAction(()->intakeArm.Hover())
         );
     }
-
 
     public class actionPeriodic implements Action {
         @Override

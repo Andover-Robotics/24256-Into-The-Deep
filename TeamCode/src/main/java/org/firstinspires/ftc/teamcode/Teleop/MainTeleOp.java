@@ -4,12 +4,17 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.teamcode.Auto.ActionHelper;
+import org.firstinspires.ftc.teamcode.Auto.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
 import java.util.ArrayList;
@@ -42,6 +47,7 @@ public class MainTeleOp extends LinearOpMode {
         bot.resetEverything();
         waitForStart();
         while (opModeIsActive()) {
+
 
             TelemetryPacket packet = new TelemetryPacket();
 
@@ -92,7 +98,7 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
-               runningActions.add(bot.actionHighChamber());
+               runningActions.add(bot.actionHighChamberTele());
             }
 
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
@@ -112,7 +118,10 @@ public class MainTeleOp extends LinearOpMode {
 
 
 
-            drive();
+
+
+
+                drive();
             telemetry.addData("slides target", bot.slides.target);
             telemetry.addData("slides target", slidesTarget);
             telemetry.addData("slides position", bot.slides.getPosition());

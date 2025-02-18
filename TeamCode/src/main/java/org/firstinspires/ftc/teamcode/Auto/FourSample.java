@@ -24,14 +24,13 @@ public class FourSample extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
                 //go to bucket
-                .strafeToLinearHeading(new Vector2d(38, 57), Math.toRadians(-90))
-                .afterTime(0.1, bot.actionHighBucket())
-                .waitSeconds(1)
+                .afterTime(0.001, bot.actionHighBucket())
+                .strafeToLinearHeading(new Vector2d(45, 59), Math.toRadians(-90))
                 //drop in bucket
-                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
-                .afterTime(0.1, bot.actionBucketDrop())
+                .splineToLinearHeading(new Pose2d(57,60.75,Math.toRadians(-135)),Math.toRadians(135))
+                .afterTime(0.5, bot.actionBucketDrop())
                 .afterTime(0.000000000000001, bot.toIntake())
-                .waitSeconds(.4)
+                .waitSeconds(.6)
                 //intake first sample
                 .strafeToLinearHeading(new Vector2d(46,45),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
@@ -50,7 +49,7 @@ public class FourSample extends LinearOpMode {
                 .waitSeconds(0.2)
 
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(56, 62.5), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(54.5, 63.5), Math.toRadians(-145))
                 .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
