@@ -26,6 +26,7 @@ public class SpecimenAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
+                //clip preloaded
                 .stopAndAdd(bot.actionHighChamber())
                 .strafeToLinearHeading(new Vector2d(4, 30.5), Math.toRadians(-90))
                 .stopAndAdd(bot.actionAutoClip())

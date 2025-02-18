@@ -267,6 +267,7 @@ public class Bot {
     }
     public Action actionHighChamber(){
         return new SequentialAction(
+            new InstantAction(()->intakeClaw.wristToIntakePos()),
             new InstantAction(()-> outtakeClaw.outtakeClawClose()),
             new SleepAction(0.4),
             new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
@@ -332,6 +333,11 @@ public class Bot {
                 new SleepAction(0.5),
                 new InstantAction(()->intakeArm.armSweep())
 
+        );
+    }
+    public Action armUp(){
+        return new SequentialAction(
+           new InstantAction(()->intakeArm.Hover())
         );
     }
 
