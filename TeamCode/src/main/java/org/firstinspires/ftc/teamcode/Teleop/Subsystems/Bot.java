@@ -306,14 +306,14 @@ public class Bot {
         new SleepAction(0.1),
         new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
-                new InstantAction(()-> outtakeClaw.topWristToOuttakePos())
+                new InstantAction(()-> outtakeClaw.wristToWall())
         );
     }
     public Action autoSpecimen() {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> outtakeArm.wallIntake()),
-                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
+                new InstantAction(() -> outtakeClaw.wristToWall())
         );
     }
 

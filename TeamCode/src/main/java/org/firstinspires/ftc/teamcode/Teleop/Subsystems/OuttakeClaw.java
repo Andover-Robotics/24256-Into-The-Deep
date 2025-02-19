@@ -8,11 +8,12 @@ public class OuttakeClaw {
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.6;
-    public static final double topWristUp = 0.55;
-    public static final double topWristDown = 0.76;
+    public static final double outtake = 0.45;
+    public static final double transfer = 0.74;
     public static final double topWrist18 = 0;
     public static double topWristIns = 0.67;
-    public static final double topClawVertical = .78;
+    public static final double topClawVertical = .83;
+    public static final double wristWall = 0.5;
     public void toggleTopClaw() {
         if (open) {
             outtakeClawClose();
@@ -34,10 +35,10 @@ public class OuttakeClaw {
         topClaw.setPosition(topClawOpen);
     }
     public void topWristTransferPos(){
-        topWrist.setPosition(topWristDown);
+        topWrist.setPosition(transfer);
     }
     public void topWristToOuttakePos(){
-        topWrist.setPosition(topWristUp);
+        topWrist.setPosition(outtake);
     }
     public void wristIns(){
         topWrist.setPosition(topWristIns);
@@ -46,4 +47,7 @@ public class OuttakeClaw {
         topWrist.setPosition(topClawVertical);
     }
     public void setTopWrist18() {topWrist.setPosition(topWrist18);}
+    public void wristToWall(){
+        topWrist.setPosition(wristWall);
+    }
 }

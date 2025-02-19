@@ -43,7 +43,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
 //
-                .strafeToLinearHeading(new Vector2d(59,44),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(60,44),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.2)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.2)

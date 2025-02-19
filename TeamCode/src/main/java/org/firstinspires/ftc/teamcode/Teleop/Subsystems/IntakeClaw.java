@@ -6,7 +6,7 @@ public class IntakeClaw {
     public Servo  claw, wristServo, rotateServo;
 
     public static final double clawOpen = 0.18;
-    public static final double clawClose = 0.51;
+    public static final double clawClose = 0.52;
     public static final double clawLoose = 0.47;
     public static final double wristUp = 0.05;
     public static final double wristDown = 0.71;
@@ -56,6 +56,7 @@ public class IntakeClaw {
     public void clawLoose (){
         claw.setPosition(clawLoose);
     }
+
 
     public void clawStraight() {
         rotateServo.setPosition(rotateStraight);
