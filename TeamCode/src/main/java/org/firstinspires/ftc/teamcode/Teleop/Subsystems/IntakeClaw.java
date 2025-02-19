@@ -8,8 +8,8 @@ public class IntakeClaw {
     public static final double clawOpen = 0.18;
     public static final double clawClose = 0.52;
     public static final double clawLoose = 0.47;
-    public static final double wristUp = 0.05;
-    public static final double wristDown = 0.71;
+    public static final double transfer = 0;
+    public static final double intake = 0.71;
     public static final double rotateStraight = .34;
     public static final double rotateSide = .7;
     public static final double rotate45Deg = .5;
@@ -48,10 +48,10 @@ public class IntakeClaw {
         claw.setPosition(clawClose);
     }
     public void wristToTransferPos(){
-        wristServo.setPosition(wristUp);
+        wristServo.setPosition(transfer);
     }
     public void wristToIntakePos(){
-        wristServo.setPosition(wristDown);
+        wristServo.setPosition(intake);
     }
     public void clawLoose (){
         claw.setPosition(clawLoose);
