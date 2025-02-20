@@ -12,7 +12,7 @@ public class IntakeClaw {
     public static final double intake = 0.71;
     public static final double rotateStraight = .34;
     public static final double rotateSide = .7;
-    public static final double rotate45Deg = .5;
+    public static final double rotate45Deg = .535;
     public static final double rotateOther45Deg =.2;
 
 

@@ -4,12 +4,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class IntakeArm {
     public Servo armServoR, armServoL;
-    public static final double transferPos = 0.4;
-    public static final double intakePos = 0.14;
-    public static final double ArmUpPos = 0.35;
-    public static final double ArmHoverPos = 0.235;
-    public final double armStorage = 0.68;
-    public final double sweep = 0.065;
+    public static final double transferPos = 0.45;
+    public static final double intakePos = 0.16;
+    public static final double ArmHoverPos = 0.27;
+    public final double armStorage = 0.67;
+    public final double sweep = 0.085;
 
     public IntakeArm(OpMode opMode) {
         armServoR = opMode.hardwareMap.get(Servo.class, "armServoR");
@@ -23,10 +22,7 @@ public class IntakeArm {
         armServoL.setPosition(intakePos);
         armServoR.setPosition(intakePos);
     }
-    public void armToUpPos(){
-        armServoL.setPosition(ArmUpPos);
-        armServoR.setPosition(ArmUpPos);
-    }
+
     public void armToStorage(){
         armServoL.setPosition(armStorage);
         armServoR.setPosition(armStorage);

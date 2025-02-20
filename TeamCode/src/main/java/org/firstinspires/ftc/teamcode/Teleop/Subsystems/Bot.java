@@ -236,10 +236,12 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new SleepAction(.5),
-                new InstantAction(()-> outtakeArm.transfer()),
+                new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.15),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                new InstantAction(() -> slides.runToStorage())
+                new InstantAction(() -> slides.runToStorage()),
+                new SleepAction(0.7),
+                new InstantAction(()-> outtakeArm.transfer())
 
         );
     }
