@@ -6,7 +6,7 @@ public class IntakeClaw {
     public Servo  claw, wristServo, rotateServo;
 
     public static final double clawOpen = 0.18;
-    public static final double clawClose = 0.52;
+    public static final double clawClose = 0.528;
     public static final double clawLoose = 0.47;
     public static final double transfer = 0;
     public static final double intake = 0.71;

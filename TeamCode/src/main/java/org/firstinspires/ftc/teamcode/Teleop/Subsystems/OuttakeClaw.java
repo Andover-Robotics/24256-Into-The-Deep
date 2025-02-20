@@ -9,11 +9,11 @@ public class OuttakeClaw {
     public static final double topClawOpen = 0.1;
     public static final double topClawClose = 0.6;
     public static final double outtake = 0.45;
-    public static final double transfer = 0.74;
+    public static final double transfer = 0.7;
     public static final double topWrist18 = 0;
     public static double topWristIns = 0.67;
-    public static final double topClawVertical = .83;
-    public static final double wristWall = 0.58;
+    public static final double topClawVertical = .815;
+    public static final double wristWall = 0.60;
     public void toggleTopClaw() {
         if (open) {
             outtakeClawClose();
