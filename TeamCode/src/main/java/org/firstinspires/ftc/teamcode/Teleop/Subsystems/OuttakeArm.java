@@ -6,8 +6,8 @@ public class OuttakeArm {
     public Servo bucketServoR, bucketServoL;
     public static final double transfer = .205;
     public static final double outtake = .71;
-    public static final double vertical = .485;
-    public static final double wallIntake = .9750;
+    public static final double vertical = .495;
+    public static final double wallIntake = .995;
     public OuttakeArm(OpMode opMode){
         bucketServoR = opMode.hardwareMap.get(Servo.class, "bucketServoR");
         bucketServoL = opMode.hardwareMap.get(Servo.class, "bucketServoL");

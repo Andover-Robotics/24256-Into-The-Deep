@@ -38,7 +38,7 @@ public class FourSample extends LinearOpMode {
                 .waitSeconds(.2)
                 //
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(58, 61.75), Math.toRadians(-135))
                 .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
@@ -49,7 +49,7 @@ public class FourSample extends LinearOpMode {
                 .waitSeconds(0.2)
 
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(55, 64), Math.toRadians(-145))
+                .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-145))
                 .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)
@@ -61,7 +61,7 @@ public class FourSample extends LinearOpMode {
 
 
                 .afterTime(0.01, bot.actionHighBucket())
-                .strafeToLinearHeading(new Vector2d(57, 60.75), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(58, 61.75), Math.toRadians(-135))
                 .waitSeconds(0.4)
                 .stopAndAdd(bot.actionBucketDrop())
                 .waitSeconds(.2)

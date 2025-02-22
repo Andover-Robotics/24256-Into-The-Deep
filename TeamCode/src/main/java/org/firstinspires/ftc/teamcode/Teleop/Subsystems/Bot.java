@@ -227,7 +227,7 @@ public class Bot {
     public Action actionHighBucket() {
         return new SequentialAction(
                 new InstantAction(() -> slides.runToTopBucket()),
-                new SleepAction(0.8),
+                new SleepAction(0.9),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
@@ -312,7 +312,7 @@ public class Bot {
                 new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.wristToWall()),
-                new SleepAction(0.5),
+                new SleepAction(0.65),
                 new InstantAction(()-> slides.resetSlideEncoders())
         );
     }
