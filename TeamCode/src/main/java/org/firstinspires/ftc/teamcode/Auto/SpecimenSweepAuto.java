@@ -27,7 +27,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToLinearHeading(new Vector2d(5.5, 30.5), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(5.5, 30), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,75))
                 .stopAndAdd(bot.actionAutoClip())
 
                 .afterTime(0.01,bot.actionSlidesLower())

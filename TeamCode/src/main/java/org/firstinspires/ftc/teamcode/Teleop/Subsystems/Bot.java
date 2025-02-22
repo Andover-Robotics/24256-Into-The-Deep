@@ -301,17 +301,19 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.9),
+                new SleepAction(1),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
                 new InstantAction(()->outtakeClaw.outtakeClawOpen()),
-        new SleepAction(0.1),
-        new InstantAction(()-> slides.runToStorage()),
+                new SleepAction(0.1),
+                new InstantAction(()-> slides.runToStorage()),
                 new InstantAction(()-> outtakeArm.wallIntake()),
-                new InstantAction(()-> outtakeClaw.wristToWall())
+                new InstantAction(()-> outtakeClaw.wristToWall()),
+                new SleepAction(0.5),
+                new InstantAction(()-> slides.resetSlideEncoders())
         );
     }
     public Action autoSpecimen() {
