@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class IntakeArm {
     public Servo armServoR, armServoL;
-    public static final double transferPos = 0.475;
+    public static final double transferPos = 0.4750;
     public static final double intakePos = 0.245;
     public static final double ArmHoverPos = 0.325;
     public final double armStorage = 0.765;

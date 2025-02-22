@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class IntakeClaw {
     public Servo  claw, wristServo, rotateServo;
 
-    public static final double clawOpen = 0.18;
+    public static final double clawOpen = 0.180;
     public static final double clawClose = 0.528;
     public static final double clawLoose = 0.47;
     public static final double transfer = 0;
