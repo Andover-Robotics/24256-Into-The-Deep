@@ -24,7 +24,8 @@ public class FourSample extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
                 //go to bucket
-                .afterTime(0.001, bot.actionHighBucket())
+                .afterTime(0.001, bot.savingBottomwrist())
+                .afterTime(0.4, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(45, 59), Math.toRadians(-90))
                 //drop in bucket
                 .splineToLinearHeading(new Pose2d(57.5,61,Math.toRadians(-135)),Math.toRadians(135))

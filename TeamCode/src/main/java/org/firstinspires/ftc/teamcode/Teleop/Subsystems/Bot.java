@@ -127,9 +127,9 @@ public class Bot {
     public void prepAuto() {
         intakeArm.armToStorage();
         outtakeArm.wallIntake();
-        intakeClaw.openClaw();
+        intakeClaw.closeClaw();
         outtakeClaw.outtakeClawClose();
-        intakeClaw.wristToIntakePos();
+        intakeClaw.wristToTransferPos();
         outtakeClaw.setTopWrist18();
         intakeClaw.clawStraight();
     }
@@ -375,6 +375,11 @@ public class Bot {
                 new InstantAction(()-> intakeArm.Hover()),
                 new InstantAction(()-> intakeClaw.openClaw())
         );
+    }
+    public Action savingBottomwrist() {
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.wristToIntakePos())
+                );
     }
 
     public Action actionPeriodic() {
