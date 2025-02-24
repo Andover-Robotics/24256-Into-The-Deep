@@ -129,7 +129,7 @@ public class Bot {
         outtakeArm.wallIntake();
         intakeClaw.closeClaw();
         outtakeClaw.outtakeClawClose();
-        intakeClaw.wristToTransferPos();
+        intakeClaw.setWristLegal();
         outtakeClaw.setTopWrist18();
         intakeClaw.clawStraight();
     }
@@ -301,7 +301,7 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(1),
+                new SleepAction(0.7),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }

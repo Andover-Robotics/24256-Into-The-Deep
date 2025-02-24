@@ -14,6 +14,7 @@ public class IntakeClaw {
     public static final double rotateSide = .7;
     public static final double rotate45Deg = .535;
     public static final double rotateOther45Deg =.2;
+    public static final double wristLegal = 0.1;
 
 
     public boolean open = true;
@@ -52,6 +53,9 @@ public class IntakeClaw {
     }
     public void wristToIntakePos(){
         wristServo.setPosition(intake);
+    }
+    public void setWristLegal(){
+        wristServo.setPosition(wristLegal);
     }
     public void clawLoose (){
         claw.setPosition(clawLoose);
