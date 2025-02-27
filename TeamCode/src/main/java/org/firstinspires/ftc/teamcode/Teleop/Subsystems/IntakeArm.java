@@ -7,7 +7,7 @@ public class IntakeArm {
     public static final double transferPos = 0.4750;
     public static final double intakePos = 0.24;
     public static final double ArmHoverPos = 0.325;
-    public final double armStorage = 0.765;
+    public final double armStorage = 0.75;
     public final double sweep = 0.15;
 
     public IntakeArm(OpMode opMode) {

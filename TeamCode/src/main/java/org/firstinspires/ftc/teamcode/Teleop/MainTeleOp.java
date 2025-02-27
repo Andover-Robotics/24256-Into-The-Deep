@@ -83,6 +83,7 @@ public class MainTeleOp extends LinearOpMode {
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.X)){
                     runningActions.add(bot.actionIntakeSample());
+                    bot.intakeClaw.open = false;
 
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.B)){
