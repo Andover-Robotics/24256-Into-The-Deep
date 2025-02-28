@@ -165,9 +165,9 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                new SleepAction(0.8),
+                new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(()-> outtakeArm.transfer()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
@@ -175,31 +175,30 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
                 new SleepAction(0.75),
                 new InstantAction(() -> intakeArm.transfer()),
-                new SleepAction(0.4),
                 new InstantAction(() -> intakeClaw.clawLoose()),
-                new SleepAction(.4),
+                new SleepAction(.3),
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(.2),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> intakeArm.Hover())
         );
     }
     public Action autoLastSample() {
         return new SequentialAction(
+                new InstantAction(() -> intakeClaw.rotate0ther45Deg()),
                 new InstantAction(() -> intakeArm.intake()),
                 new InstantAction(() -> outtakeArm.transfer()),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new InstantAction(() -> intakeClaw.rotate0ther45Deg()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                new SleepAction(0.8),
+                new SleepAction(0.5),
                 new InstantAction(() -> intakeClaw.closeClaw()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.clawStraight()),
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(()-> outtakeArm.transfer()),
@@ -208,15 +207,14 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.wristToTransferPos()),
                 new SleepAction(0.75),
                 new InstantAction(() -> intakeArm.transfer()),
-                new SleepAction(0.4),
                 new InstantAction(() -> intakeClaw.clawLoose()),
-                new SleepAction(.4),
+                new SleepAction(.3),
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(.2),
                 new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.4),
+                new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> intakeArm.Hover())
         );
@@ -366,7 +364,7 @@ public class Bot {
     }
     public Action actionPark(){
         return new SequentialAction(
-                new InstantAction(()-> outtakeArm.vertical()),
+                new InstantAction(()-> outtakeArm.park()),
                 new InstantAction(()-> outtakeClaw.outtakeClawClose())
         );
     }

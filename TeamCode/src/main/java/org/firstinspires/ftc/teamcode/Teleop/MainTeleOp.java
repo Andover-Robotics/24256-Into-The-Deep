@@ -23,9 +23,6 @@ import java.util.List;
 @TeleOp(name = "Main Teleop")
 public class MainTeleOp extends LinearOpMode {
     private GamepadEx gp1,gp2;
-    private  boolean toggleTopClaw = false;
-    private  boolean toggleBottClaw = false;
-    private boolean liftArm = false;
     private double driveSpeed = 1, driveMultiplier = 1;
 
     int slidesTarget = 0;
