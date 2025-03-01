@@ -399,7 +399,7 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(() -> slides.runToLowBucket()),
                 new InstantAction(()-> outtakeArm.vertical()),
-                new SleepAction(0.5),
+                new SleepAction(0.6),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
         );
