@@ -70,7 +70,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
                 bot.intakeClaw.clawStraight();
-                c = 0;
+                c = 1;
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
                bot.intakeArm.intake();
@@ -110,11 +110,11 @@ public class MainTeleOp extends LinearOpMode {
                 runningActions.add(bot.actionClip());
             }
             if( gp2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.4){
-                bot.slides.runToHigher();
+                runningActions.add(bot.actionLowBucket());
 
             }
             if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
-                bot.actionResetintake();
+                runningActions.add(bot.actionResetintake());
             }
 
 

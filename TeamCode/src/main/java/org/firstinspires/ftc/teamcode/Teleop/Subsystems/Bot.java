@@ -104,12 +104,12 @@ public class Bot {
     }
 
     public void resetEverything() {
+        outtakeArm.transfer();
         intakeArm.Hover();
         intakeClaw.openClaw();
         outtakeClaw.outtakeClawOpen();
         intakeClaw.wristToIntakePos();
         outtakeClaw.topWristTransferPos();
-        outtakeArm.transfer();
         slides.resetSlideEncoders();
         slides.resetProfiler();
         intakeClaw.clawStraight();
@@ -246,6 +246,21 @@ public class Bot {
 
         );
     }
+    public Action actionBucketDropAuto() {
+        return new SequentialAction(
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new SleepAction(.4),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new SleepAction(0.15),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new SleepAction(0.8),
+                new InstantAction(()-> outtakeArm.transfer()),
+                new SleepAction(0.1),
+                new InstantAction(()-> slides.resetSlideEncoders())
+
+        );
+    }
 
     public Action actionRelease(){
         return new SequentialAction(
@@ -299,7 +314,7 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.7),
+                new SleepAction(0.5),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
@@ -365,7 +380,8 @@ public class Bot {
     public Action actionPark(){
         return new SequentialAction(
                 new InstantAction(()-> outtakeArm.park()),
-                new InstantAction(()-> outtakeClaw.outtakeClawClose())
+                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new InstantAction(()-> outtakeClaw.setTopWrist18())
         );
     }
     public Action actionResetintake(){
@@ -379,6 +395,16 @@ public class Bot {
                 new InstantAction(()->intakeClaw.wristToIntakePos())
                 );
     }
+    public Action actionLowBucket() {
+        return new SequentialAction(
+                new InstantAction(() -> slides.runToLowBucket()),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new SleepAction(0.5),
+                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
+        );
+    }
+
 
     public Action actionPeriodic() {
         return new actionPeriodic();

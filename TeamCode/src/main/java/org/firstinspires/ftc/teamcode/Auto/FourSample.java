@@ -30,7 +30,7 @@ public class FourSample extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(45, 61), Math.toRadians(-90))
                 //drop in bucket
                 .splineToLinearHeading(new Pose2d(57.5,61,Math.toRadians(-135)),Math.toRadians(135))
-                .afterTime(0.3, bot.actionBucketDrop())
+                .afterTime(0.01, bot.actionBucketDropAuto())
                 .afterTime(0.000000000000001, bot.toIntake())
                 .waitSeconds(.4)
                 //intake first sample
@@ -41,19 +41,17 @@ public class FourSample extends LinearOpMode {
                 //
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(58, 61.75), Math.toRadians(-135))
-                .waitSeconds(0.3)
-                .stopAndAdd(bot.actionBucketDrop())
+                .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(.1)
 //
-                .strafeToLinearHeading(new Vector2d(60,45.5),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(60,44.5),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.1)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.1)
 
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(56, 65), Math.toRadians(-145))
-                .waitSeconds(0.3)
-                .stopAndAdd(bot.actionBucketDrop())
+                .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(.1)
 
                 .strafeToLinearHeading(new Vector2d(59,41.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
@@ -64,13 +62,13 @@ public class FourSample extends LinearOpMode {
 
                 .afterTime(0.01, bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(58, 61.75), Math.toRadians(-135))
-                .waitSeconds(0.2)
-                .stopAndAdd(bot.actionBucketDrop())
+                .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(.1)
 
-                .strafeToLinearHeading(new Vector2d(45, 17), Math.toRadians(-180))
-                .afterTime(6,bot.actionPark())
-                .splineToLinearHeading(new Pose2d(11,15,Math.toRadians(180)),Math.toRadians(-180))
+                .splineToLinearHeading(new Pose2d(45,17,Math.toRadians(180)),Math.toRadians(-180))
+                .splineToLinearHeading(new Pose2d(11,17,Math.toRadians(180)),Math.toRadians(-180))
+                .stopAndAdd(bot.actionPark())
+                .waitSeconds(4)
                 .build();
 
         waitForStart();

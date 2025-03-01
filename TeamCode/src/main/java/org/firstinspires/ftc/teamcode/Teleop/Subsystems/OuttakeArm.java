@@ -4,11 +4,11 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 public class OuttakeArm {
     public Servo bucketServoR, bucketServoL;
-    public static final double transfer = .23;
-    public static final double outtake = .725;
-    public static final double vertical = .49;
-    public static final double wallIntake = .99;
-    public static final double park = .26;
+    public static final double transfer = .239;
+    public static final double outtake = .735;
+    public static final double verticalish = .495;
+    public static final double wallIntake = 1;
+    public static final double park = .265;
 
     public OuttakeArm(OpMode opMode){
         bucketServoR = opMode.hardwareMap.get(Servo.class, "bucketServoR");
@@ -23,8 +23,8 @@ public class OuttakeArm {
         bucketServoL.setPosition(outtake);
     }
     public void vertical(){
-        bucketServoR.setPosition(vertical);
-        bucketServoL.setPosition(vertical);
+        bucketServoR.setPosition(verticalish);
+        bucketServoL.setPosition(verticalish);
     }
     public void wallIntake(){
         bucketServoR.setPosition(wallIntake);
