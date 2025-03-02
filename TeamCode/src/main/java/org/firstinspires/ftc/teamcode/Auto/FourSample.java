@@ -68,7 +68,7 @@ public class FourSample extends LinearOpMode {
                 .splineToLinearHeading(new Pose2d(45,17,Math.toRadians(180)),Math.toRadians(-180))
                 .splineToLinearHeading(new Pose2d(11,17,Math.toRadians(180)),Math.toRadians(-180))
                 .stopAndAdd(bot.actionPark())
-                .waitSeconds(4)
+                .waitSeconds(0.3)
                 .build();
 
         waitForStart();

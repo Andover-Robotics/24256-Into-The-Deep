@@ -379,13 +379,13 @@ public class Bot {
     }
     public Action actionPark(){
         return new SequentialAction(
-                new InstantAction(()-> outtakeArm.park()),
                 new InstantAction(()-> outtakeClaw.outtakeClawClose()),
-                new InstantAction(()-> outtakeClaw.setTopWrist18())
+                new InstantAction(()-> outtakeClaw.outtakeClawVertical())
         );
     }
     public Action actionResetintake(){
         return new SequentialAction(
+                new InstantAction(()-> outtakeArm.park()),
                 new InstantAction(()-> intakeArm.Hover()),
                 new InstantAction(()-> intakeClaw.openClaw())
         );

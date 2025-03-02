@@ -81,8 +81,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
 
                 .strafeToConstantHeading(new Vector2d(-15, 50))
                 .afterTime(0.001,bot.toIntake())
-                .splineToConstantHeading(new Vector2d(-59,64),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
-                //park
+                .splineToLinearHeading(new Pose2d(-52, 64,Math.toRadians(140)),Math.toRadians(80),drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
 
                 .build();
         waitForStart();
