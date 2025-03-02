@@ -34,7 +34,7 @@ public class FourSample extends LinearOpMode {
                 .afterTime(0.000000000000001, bot.toIntake())
                 .waitSeconds(.4)
                 //intake first sample
-                .strafeToLinearHeading(new Vector2d(46,46),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(44.5,46),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.1)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(.1)
@@ -44,7 +44,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(.1)
 //
-                .strafeToLinearHeading(new Vector2d(60,44.5),Math.toRadians(-90)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(58,44.5),Math.toRadians(-90)) // stop and add close claw and transfer etc
                 .waitSeconds(.1)
                 .stopAndAdd(bot.intakeAuto())
                 .waitSeconds(0.1)
@@ -54,7 +54,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(.1)
 
-                .strafeToLinearHeading(new Vector2d(59,41.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(58,42),Math.toRadians(-50)) // stop and add close claw and transfer etc
                 .stopAndAdd( bot.autoLastSample())
                 .waitSeconds(0.2)
                 // stop and add close claw and transfer etc
