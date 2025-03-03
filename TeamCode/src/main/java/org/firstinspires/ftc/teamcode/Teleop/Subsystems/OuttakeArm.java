@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 public class OuttakeArm {
     public Servo bucketServoR, bucketServoL;
-    public static final double transfer = .227;
+    public static final double transfer = .233;
     public static final double outtake = .735;
     public static final double verticalish = .495;
     public static final double wallIntake = 1;

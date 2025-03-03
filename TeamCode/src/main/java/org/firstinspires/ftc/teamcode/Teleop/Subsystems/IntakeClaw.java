@@ -7,7 +7,7 @@ public class IntakeClaw {
 
     public static final double clawOpen = 0.180;
     public static final double clawClose = 0.528;
-    public static final double clawLoose = 0.47;
+    public static final double clawLoose = 0.46;
     public static final double transfer = 0;
     public static final double intake = 0.71;
     public static final double rotateStraight = .34;
