@@ -385,7 +385,6 @@ public class Bot {
     }
     public Action actionResetintake(){
         return new SequentialAction(
-                new InstantAction(()-> outtakeArm.park()),
                 new InstantAction(()-> intakeArm.Hover()),
                 new InstantAction(()-> intakeClaw.openClaw())
         );

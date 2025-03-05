@@ -11,7 +11,7 @@ import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 
-@Autonomous(name = "Specimen Sweep Auto")
+@Autonomous(name = "Specimen Sweep Auto", group = "Auto")
 public class SpecimenSweepAuto extends LinearOpMode {
     Bot bot;
 

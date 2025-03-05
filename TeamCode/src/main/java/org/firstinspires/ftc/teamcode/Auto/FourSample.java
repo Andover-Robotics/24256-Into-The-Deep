@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
-@Autonomous(name = "USE FourSampleAuto")
+@Autonomous(name = "USE FourSampleAuto", group = "Auto")
 public class FourSample extends LinearOpMode {
     Bot bot;
 
