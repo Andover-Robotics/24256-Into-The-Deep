@@ -13,7 +13,9 @@ public class OuttakeClaw {
     public static final double topWrist18 = 0.30;
     public static double topWristIns = 0.67;
     public static final double topClawVertical = .735;
-    public static final double wristWall = 0.64;
+    public static final double wristWall = 0.615;
+    public static final double wristPark = 0.2;
+
     public void toggleTopClaw() {
         if (open) {
             outtakeClawClose();
@@ -37,6 +39,10 @@ public class OuttakeClaw {
     public void topWristTransferPos(){
         topWrist.setPosition(transfer);
     }
+    public void topWristPark(){
+        topWrist.setPosition(wristPark);
+    }
+
     public void topWristToOuttakePos(){
         topWrist.setPosition(outtake);
     }
