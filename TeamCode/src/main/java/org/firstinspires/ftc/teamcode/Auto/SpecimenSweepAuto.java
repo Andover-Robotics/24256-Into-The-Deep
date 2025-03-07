@@ -41,8 +41,10 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-51,34),Math.toRadians(-120))
                 .afterTime(0.1, bot.autoSpecimen())
                 .strafeToLinearHeading(new Vector2d(-53,62),Math.toRadians(120), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,75))
-                .strafeToLinearHeading(new Vector2d(-38,57),Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-38,54.5),Math.toRadians(-90))
                 .strafeToLinearHeading(new Vector2d(-38,67.5),Math.toRadians(-90))
+                .stopAndAdd(bot.armUp())
+
 
 
 
@@ -69,11 +71,11 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 //third specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-32, 56), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
+                .strafeToLinearHeading(new Vector2d(-38, 56), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamber())
-                .strafeToConstantHeading(new Vector2d(-4,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
+                .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
                 .stopAndAdd(bot.actionSlidesLower())
@@ -81,7 +83,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
 
                 .strafeToConstantHeading(new Vector2d(-15, 50))
                 .afterTime(0.001,bot.toIntake())
-                .splineToLinearHeading(new Pose2d(-52, 64,Math.toRadians(140)),Math.toRadians(70),drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
+                .splineToLinearHeading(new Pose2d(-52, 64,Math.toRadians(180)),Math.toRadians(70),drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
 
                 .build();
         waitForStart();

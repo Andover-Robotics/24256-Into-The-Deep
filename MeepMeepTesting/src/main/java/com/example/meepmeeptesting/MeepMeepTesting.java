@@ -21,9 +21,10 @@ import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
                     .turn(Math.toRadians(90))
                     .lineToY(0)
                     .turn(Math.toRadians(90))
+                    .splineToLinearHeading(new Pose2d(50,10,Math.toRadians(-30)),Math.toRadians(90))
                     .build());
 
-            meepMeep.setBackground(MeepMeep.Background.FIELD_POWERPLAY_OFFICIAL)
+            meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_OFFICIAL)
                     .setDarkMode(true)
                     .setBackgroundAlpha(0.95f)
                     .addEntity(myBot)
