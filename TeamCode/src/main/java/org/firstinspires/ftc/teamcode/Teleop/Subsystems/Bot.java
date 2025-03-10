@@ -133,27 +133,19 @@ public class Bot {
         outtakeClaw.setTopWrist18();
         intakeClaw.clawStraight();
     }
-
-    public Action actionTransfer() {
-        return new SequentialAction(
-                new InstantAction(() -> intakeClaw.clawStraight()),
-                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(()-> outtakeArm.transfer()),
-                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+    //prep methods
+    public Action actionSlidesLower() {
+        return new  SequentialAction(
                 new InstantAction(() -> slides.runToStorage()),
-                new InstantAction(() -> intakeClaw.wristToTransferPos()),
-                new SleepAction(0.7),
-                new InstantAction(() -> intakeArm.transfer()),
-                new InstantAction(() -> intakeClaw.clawLoose()),
-                new SleepAction(.3),
-                new InstantAction(() -> intakeClaw.closeClaw()),
-                new SleepAction(.2),
-                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
-                new SleepAction(0.3),
-                new InstantAction(() -> intakeClaw.openClaw()),
-                new SleepAction(0.3),
-                new InstantAction(() -> intakeClaw.wristToIntakePos()),
-                new InstantAction(()-> intakeArm.Hover())
+                new InstantAction(()-> outtakeClaw.topWristTransferPos())
+        );
+    }
+
+    public Action toIntake() {
+        return new SequentialAction(
+                new InstantAction(() -> intakeArm.Hover()),
+                new InstantAction(()-> intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> intakeClaw.openClaw())
         );
     }
 
@@ -187,6 +179,69 @@ public class Bot {
                 new InstantAction(()-> intakeArm.Hover())
         );
     }
+    public Action actionBucketDropAuto() {
+        return new SequentialAction(
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new SleepAction(.4),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new SleepAction(0.15),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new SleepAction(0.8),
+                new InstantAction(()-> outtakeArm.transfer()),
+                new SleepAction(0.1),
+                new InstantAction(()-> slides.resetSlideEncoders())
+
+        );
+    }
+    public Action actionHighChamberAuto(){
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.15),
+                new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new InstantAction(()->intakeArm.armToStorage()),
+                new InstantAction(()-> slides.runToPushAuto())
+
+        );
+    }
+
+    public Action actionAutoClip(){
+        return new SequentialAction(
+                new InstantAction(()-> slides.runToHighChamber()),
+                new SleepAction(0.5),
+                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
+        );
+    }
+
+    public Action autoSpecimen() {
+        return new SequentialAction(
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> outtakeArm.wallIntake()),
+                new InstantAction(() -> outtakeClaw.wristToWall())
+        );
+    }
+    public Action autoIntakeSpecimen() {
+        return new SequentialAction(
+                new InstantAction(() -> outtakeClaw.outtakeClawClose())
+        );
+    }
+    public Action actionSweep(){
+        return new SequentialAction(
+                new InstantAction(()-> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.5),
+                new InstantAction(()->intakeArm.armSweep())
+
+        );
+    }
+    public Action armUp(){
+        return new SequentialAction(
+                new InstantAction(()->intakeArm.Hover())
+        );
+    }
+
+
     public Action autoLastSample() {
         return new SequentialAction(
                 new InstantAction(() -> intakeClaw.rotate0ther45Deg()),
@@ -219,7 +274,30 @@ public class Bot {
                 new InstantAction(()-> intakeArm.Hover())
         );
     }
+    //auto methods primarily
 
+    public Action actionTransfer() {
+        return new SequentialAction(
+                new InstantAction(() -> intakeClaw.clawStraight()),
+                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(()-> outtakeArm.transfer()),
+                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(() -> intakeClaw.wristToTransferPos()),
+                new SleepAction(0.7),
+                new InstantAction(() -> intakeArm.transfer()),
+                new InstantAction(() -> intakeClaw.clawLoose()),
+                new SleepAction(.3),
+                new InstantAction(() -> intakeClaw.closeClaw()),
+                new SleepAction(.2),
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.openClaw()),
+                new SleepAction(0.3),
+                new InstantAction(() -> intakeClaw.wristToIntakePos()),
+                new InstantAction(()-> intakeArm.Hover())
+        );
+    }
 
     public Action actionHighBucket() {
         return new SequentialAction(
@@ -246,55 +324,10 @@ public class Bot {
 
         );
     }
-    public Action actionBucketDropAuto() {
-        return new SequentialAction(
-                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new SleepAction(.4),
-                new InstantAction(()-> outtakeArm.vertical()),
-                new SleepAction(0.15),
-                new InstantAction(() -> outtakeClaw.topWristTransferPos()),
-                new InstantAction(() -> slides.runToStorage()),
-                new SleepAction(0.8),
-                new InstantAction(()-> outtakeArm.transfer()),
-                new SleepAction(0.1),
-                new InstantAction(()-> slides.resetSlideEncoders())
 
-        );
-    }
 
-    public Action actionRelease(){
-        return new SequentialAction(
-        new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
-        new InstantAction(()-> outtakeArm.transfer())
-        );
-    }
 
-    public Action actionSlidesLower() {
-        return new  SequentialAction(
-                new InstantAction(() -> slides.runToStorage()),
-                new InstantAction(()-> outtakeClaw.topWristTransferPos())
-    );
-    }
-    public Action toIntake() {
-        return new SequentialAction(
-                new InstantAction(() -> intakeArm.Hover()),
-                new InstantAction(()-> intakeClaw.wristToIntakePos()),
-                new InstantAction(()-> intakeClaw.openClaw())
-        );
-    }
     public Action actionHighChamber(){
-        return new SequentialAction(
-            new InstantAction(()->intakeClaw.wristToIntakePos()),
-            new InstantAction(()-> outtakeClaw.outtakeClawClose()),
-            new SleepAction(0.15),
-            new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
-            new InstantAction(()-> outtakeArm.vertical()),
-            new InstantAction(()->intakeArm.armToStorage()),
-                new InstantAction(()-> slides.runToPushAuto())
-
-        );
-    }
-    public Action actionHighChamberTele(){
         return new SequentialAction(
                 new InstantAction(()->intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> outtakeClaw.outtakeClawClose()),
@@ -311,13 +344,7 @@ public class Bot {
                 new InstantAction(()-> slides.runToHighChamber())
         );
     }
-    public Action actionAutoClip(){
-        return new SequentialAction(
-                new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.5),
-                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
-        );
-    }
+
     public Action actionIntakeSpecimen(){
         return new SequentialAction(
                 new InstantAction(()->outtakeClaw.outtakeClawOpen()),
@@ -329,19 +356,9 @@ public class Bot {
                 new InstantAction(()-> slides.resetSlideEncoders())
         );
     }
-    public Action autoSpecimen() {
-        return new SequentialAction(
-                new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new InstantAction(() -> outtakeArm.wallIntake()),
-                new InstantAction(() -> outtakeClaw.wristToWall())
-        );
-    }
 
-        public Action autoIntakeSpecimen() {
-            return new SequentialAction(
-                new InstantAction(() -> outtakeClaw.outtakeClawClose())
-        );
-    }
+
+
 
     public Action actionIntakeSample(){
         return new SequentialAction(
@@ -352,23 +369,19 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(0.5),
                 new InstantAction(() -> intakeArm.Hover())
-
-
                 );
             }
-    public Action actionSweep(){
-        return new SequentialAction(
-                new InstantAction(()-> intakeClaw.wristToTransferPos()),
-                new SleepAction(0.5),
-                new InstantAction(()->intakeArm.armSweep())
+            //teleop methods primarily
 
-        );
-    }
-    public Action armUp(){
+            //archaic
+    public Action actionRelease(){
         return new SequentialAction(
-           new InstantAction(()->intakeArm.Hover())
+                new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(()-> outtakeArm.transfer())
         );
     }
+
+
 
     public class actionPeriodic implements Action {
         @Override

@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
 import com.acmerobotics.roadrunner.ProfileAccelConstraint;
-import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -26,7 +25,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToLinearHeading(new Vector2d(6, 29), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-27,57))
                 .stopAndAdd(bot.actionAutoClip())
 
@@ -52,7 +51,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 //pushAuto specimen into obs zone
 
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(1,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(1,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -65,7 +64,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-38, 57), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-1.5,45),drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-1.5,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -78,7 +77,7 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())

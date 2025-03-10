@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
 import com.acmerobotics.roadrunner.ProfileAccelConstraint;
-import com.acmerobotics.roadrunner.VelConstraint;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -27,7 +26,7 @@ public class SpecimenAuto extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
                 //clip preloaded
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToLinearHeading(new Vector2d(4, 30.5), Math.toRadians(-90))
                 .stopAndAdd(bot.actionAutoClip())
 
@@ -60,7 +59,7 @@ public class SpecimenAuto extends LinearOpMode {
                 //pushAuto specimen into obs zone
 
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45))
                 .splineToConstantHeading(new Vector2d(-2,30.5),Math.toRadians(90))
                 .stopAndAdd(bot.actionAutoClip())
@@ -71,7 +70,7 @@ public class SpecimenAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-32, 50), Math.toRadians(-90))
                 .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-1,45))
                 .splineToConstantHeading(new Vector2d(-1,30.5),Math.toRadians(90))
                 .stopAndAdd(bot.actionAutoClip())
@@ -82,7 +81,7 @@ public class SpecimenAuto extends LinearOpMode {
                 .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90))
                 .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-3,45))
                 .splineToConstantHeading(new Vector2d(-3,30.5),Math.toRadians(90))
                 .stopAndAdd(bot.actionAutoClip())

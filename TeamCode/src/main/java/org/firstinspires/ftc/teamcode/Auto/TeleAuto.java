@@ -31,7 +31,7 @@ public class TeleAuto extends LinearOpMode {
                 .strafeToConstantHeading(new Vector2d(-40,67.5))
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(1,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(1,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -46,7 +46,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-1.5,45),drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-1.5,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -61,7 +61,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -76,7 +76,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -91,7 +91,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -106,7 +106,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -121,7 +121,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
@@ -136,7 +136,7 @@ public class TeleAuto extends LinearOpMode {
                 .waitSeconds(0.3)
                 .stopAndAdd(bot.autoIntakeSpecimen())
 
-                .stopAndAdd(bot.actionHighChamber())
+                .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .splineToConstantHeading(new Vector2d(-4,30.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.actionAutoClip())
