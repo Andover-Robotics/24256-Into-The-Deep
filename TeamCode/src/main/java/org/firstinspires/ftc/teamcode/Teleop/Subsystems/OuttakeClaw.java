@@ -7,14 +7,14 @@ public class OuttakeClaw {
     public boolean open = true;
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.10;
-    public static final double topClawClose = 0.6;
-    public static final double outtake = 0.45;
-    public static final double transfer = 0.745;
-    public static final double topWrist18 = 0.30;
-    public static double topWristIns = 0.67;
-    public static final double topClawVertical = .75;
-    public static final double wristWall = 0.615;
-    public static final double wristPark = 0.2;
+    public static final double topClawClose = 0.61;
+    public static final double outtake = 0.47;
+    public static final double transfer = 0.8;
+    public static final double topWrist18 = 0.32;
+    public static double topWristIns = 0.69;
+    public static final double topClawVertical = .77;
+    public static final double wristWall = 0.63;
+    public static final double wristPark = 0.22;
 
     public void toggleTopClaw() {
         if (open) {
