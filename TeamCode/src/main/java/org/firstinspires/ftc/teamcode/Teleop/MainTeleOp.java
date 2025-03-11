@@ -42,36 +42,63 @@ public class MainTeleOp extends LinearOpMode {
         bot.state = Bot.BotStates.STORAGE;
         waitForStart();
         while (opModeIsActive()) {
+            /*
+            driver 2 controls:
+            Universal
+                right bumper: opens top claw
+                left bumper: opens bottom claw
+                dpad up: rotates claw
+                left stick: resets teleop
+            Storage:
+                X: intake sample
+                A: transfer
+                B: Intake Spec
+            Transfer:
+                A: outtake low bucket
+                B: outtake high bucket
+            Bucket:
+                Y: outtake sample
+            Intake Spec:
+                Y: go to high chamber pos
+            Clip
+                Y: clip on bar
+                Need to reset teleop to clip again for now
+             */
 
 
             TelemetryPacket packet = new TelemetryPacket();
 
             // updated based on gamepads
             gp2.readButtons();
+
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
+                // open bottom claw
                 bot.intakeClaw.toggleClaw();
                 bot.intakeClaw.clawStraight();
                 c = 1;
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
+                //open top claw
                 bot.outtakeClaw.toggleTopClaw();
+
             }
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
+                if (c == 0) {
+                    bot.intakeClaw.clawStraight();
+                    c += 1;
+                } else if (c == 1) {
+                    bot.intakeClaw.clawHorizontal();
+                    c += 1;
+                } else if (c == 2) {
+                    bot.intakeClaw.rotate0ther45Deg();
+                    c += 1;
+                } else if (c == 3) {
+                    bot.intakeClaw.clawSlanted();
+                    c = 0;
+                }
             if (bot.state == Bot.BotStates.STORAGE) {
-                // in storage: rotating claw, intake sample, drag pos
-                if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
-                    if (c == 0) {
-                        bot.intakeClaw.clawStraight();
-                        c += 1;
-                    } else if (c == 1) {
-                        bot.intakeClaw.clawHorizontal();
-                        c += 1;
-                    } else if (c == 2) {
-                        bot.intakeClaw.rotate0ther45Deg();
-                        c += 1;
-                    } else if (c == 3) {
-                        bot.intakeClaw.clawSlanted();
-                        c = 0;
-                    }
+                // in storage: intake sample, drag pos, transfer, intake spec,
+
                     if (gp2.wasJustPressed(GamepadKeys.Button.X)){
                         runningActions.add(bot.actionIntakeSample());
                         bot.intakeClaw.open = false;
@@ -80,59 +107,70 @@ public class MainTeleOp extends LinearOpMode {
                     if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
                         bot.intakeArm.intake();
                 }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
+                        runningActions.add(bot.actionTransfer());
+                        c=1;
+                    }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                        runningActions.add(bot.actionIntakeSpecimen());
+                    }
+
             }
+
+                if (bot.state == Bot.BotStates.TRANSFER){
+                    //high bucket pos: B
+                    //low bucket pos: A
+                    if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                        runningActions.add(bot.actionHighBucket());
+
+                    }
+                    if(gp2.wasJustPressed(GamepadKeys.Button.A)){
+                        runningActions.add(bot.actionLowBucket());
+                    }
+
+                }
+                if (bot.state == Bot.BotStates.BUCKET){
+                    //drop in bucket: Y
+                    if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
+                        runningActions.add(bot.actionBucketDrop());
+                    }
+                }
+                if (bot.state == Bot.BotStates.INTAKE_SPEC){
+                    // goes to clip pos: A
+                    if (gp2.wasJustPressed(GamepadKeys.Button.Y)) {
+                        runningActions.add(bot.actionHighChamber());
+                    }
+                }
+                if (bot.state == Bot.BotStates.CLIP_POS){
+                    // clips: A
+                    if(gp2.wasJustPressed(GamepadKeys.Button.Y)){
+                        runningActions.add(bot.actionClip());
+                    }
+                }
 
 
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
-                runningActions.add(bot.actionBucketDrop());
-            }
-
-            if (gp2.wasJustPressed(GamepadKeys.Button.B)){
-                    runningActions.add(bot.actionHighBucket());
-
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
-                runningActions.add(bot.actionTransfer());
-                c=1;
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)){
-               runningActions.add(bot.actionIntakeSpecimen());
-            }
 
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
-               runningActions.add(bot.actionHighChamber());
-            }
+
+
+
+
+
+
 
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
                 bot.resetTeleop();
             }
-
-            if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.4){
-                runningActions.add(bot.actionClip());
-            }
-            if( gp2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.4){
-                runningActions.add(bot.actionLowBucket());
-
-            }
             if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
-                runningActions.add(bot.actionResetintake());
+                runningActions.add(bot.actionResetIntake());
             }
 
+            drive();
 
 
 
 
-
-
-
-
-
-
-
-
-                drive();
             telemetry.addData("slides target", bot.slides.target);
             telemetry.addData("slides target", slidesTarget);
             telemetry.addData("slides position", bot.slides.getPosition());

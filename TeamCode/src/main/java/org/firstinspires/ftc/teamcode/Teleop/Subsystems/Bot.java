@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.Actions;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
@@ -134,6 +133,7 @@ public class Bot {
         intakeClaw.clawStraight();
         slides.runToStorage();
         outtakeArm.transfer();
+        state = BotStates.STORAGE;
     }
     public void prepAuto() {
         intakeArm.armToStorage();
@@ -285,6 +285,17 @@ public class Bot {
                 new InstantAction(()-> intakeArm.Hover())
         );
     }
+    public Action actionPark(){
+        return new SequentialAction(
+                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
+                new InstantAction(()-> outtakeClaw.topWristPark())
+        );
+    }
+    public Action savingBottomWrist() {
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.wristToIntakePos())
+        );
+    }
     //auto methods primarily
 
     public Action actionTransfer() {
@@ -316,6 +327,16 @@ public class Bot {
                 new InstantAction(() -> slides.runToTopBucket()),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.9),
+                new InstantAction(()-> outtakeArm.outtake()),
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(()-> state = BotStates.BUCKET)
+        );
+    }
+    public Action actionLowBucket() {
+        return new SequentialAction(
+                new InstantAction(() -> slides.runToLowBucket()),
+                new InstantAction(()-> outtakeArm.vertical()),
+                new SleepAction(0.6),
                 new InstantAction(()-> outtakeArm.outtake()),
                 new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
                 new InstantAction(()-> state = BotStates.BUCKET)
@@ -369,8 +390,7 @@ public class Bot {
                 new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.wristToWall()),
                 new SleepAction(0.65),
-                new InstantAction(()-> slides.resetSlideEncoders()),
-                new InstantAction(()-> state = BotStates.INTAKE_SPEC)
+                new InstantAction(()-> slides.resetSlideEncoders())
         );
     }
 
@@ -389,10 +409,17 @@ public class Bot {
                 new InstantAction(()-> state = BotStates.INTAKE_SAM)
                 );
             }
+    public Action actionResetIntake(){
+        return new SequentialAction(
+                new InstantAction(()-> intakeArm.Hover()),
+                new InstantAction(()-> intakeClaw.openClaw()),
+                new InstantAction(()-> state = BotStates.STORAGE)
+        );
+    }
             //teleop methods primarily
 
 
-            //archaic
+    //archaic
     public Action actionRelease(){
         return new SequentialAction(
                 new InstantAction(()-> outtakeClaw.outtakeClawOpen()),
@@ -409,32 +436,10 @@ public class Bot {
             return true;
         }
     }
-    public Action actionPark(){
-        return new SequentialAction(
-                new InstantAction(()-> outtakeClaw.outtakeClawClose()),
-                new InstantAction(()-> outtakeClaw.topWristPark())
-        );
-    }
-    public Action actionResetintake(){
-        return new SequentialAction(
-                new InstantAction(()-> intakeArm.Hover()),
-                new InstantAction(()-> intakeClaw.openClaw())
-        );
-    }
-    public Action savingBottomwrist() {
-        return new SequentialAction(
-                new InstantAction(()->intakeClaw.wristToIntakePos())
-                );
-    }
-    public Action actionLowBucket() {
-        return new SequentialAction(
-                new InstantAction(() -> slides.runToLowBucket()),
-                new InstantAction(()-> outtakeArm.vertical()),
-                new SleepAction(0.6),
-                new InstantAction(()-> outtakeArm.outtake()),
-                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
-        );
-    }
+
+
+
+
 
 
     public Action actionPeriodic() {
