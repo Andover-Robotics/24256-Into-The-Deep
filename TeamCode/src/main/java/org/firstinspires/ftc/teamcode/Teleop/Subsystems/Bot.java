@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Teleop.Subsystems;
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
+import com.acmerobotics.roadrunner.Actions;
 import com.acmerobotics.roadrunner.InstantAction;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
@@ -78,6 +79,16 @@ public class Bot {
         bl.set(-speeds[2]);
         br.set(-speeds[3]);
     }
+    public enum BotStates{
+        STORAGE,
+        INTAKE_SPEC,
+        INTAKE_SAM,
+        CLIP,
+        CLIP_POS,
+        BUCKET,
+        TRANSFER,
+    }
+    public BotStates state = BotStates.STORAGE; //bot state at init
 
     public void prepMotors() {
 
@@ -295,7 +306,8 @@ public class Bot {
                 new InstantAction(() -> intakeClaw.openClaw()),
                 new SleepAction(0.3),
                 new InstantAction(() -> intakeClaw.wristToIntakePos()),
-                new InstantAction(()-> intakeArm.Hover())
+                new InstantAction(()-> intakeArm.Hover()),
+                new InstantAction(()-> state = BotStates.TRANSFER)
         );
     }
 
@@ -305,7 +317,8 @@ public class Bot {
                 new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.9),
                 new InstantAction(()-> outtakeArm.outtake()),
-                new InstantAction(() -> outtakeClaw.topWristToOuttakePos())
+                new InstantAction(() -> outtakeClaw.topWristToOuttakePos()),
+                new InstantAction(()-> state = BotStates.BUCKET)
         );
     }
 
@@ -320,7 +333,8 @@ public class Bot {
                 new SleepAction(0.9),
                 new InstantAction(()-> outtakeArm.transfer()),
                 new SleepAction(0.3),
-                new InstantAction(()-> slides.resetSlideEncoders())
+                new InstantAction(()-> slides.resetSlideEncoders()),
+                new InstantAction(()-> state = BotStates.STORAGE)
 
         );
     }
@@ -335,13 +349,15 @@ public class Bot {
                 new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new InstantAction(()->intakeArm.armToStorage()),
-                new InstantAction(()-> slides.runToPush())
+                new InstantAction(()-> slides.runToPush()),
+                new InstantAction(()-> state = BotStates.CLIP_POS)
 
         );
     }
     public Action actionClip(){
         return new SequentialAction(
-                new InstantAction(()-> slides.runToHighChamber())
+                new InstantAction(()-> slides.runToHighChamber()),
+                new InstantAction(()-> state = BotStates.CLIP)
         );
     }
 
@@ -353,7 +369,8 @@ public class Bot {
                 new InstantAction(()-> outtakeArm.wallIntake()),
                 new InstantAction(()-> outtakeClaw.wristToWall()),
                 new SleepAction(0.65),
-                new InstantAction(()-> slides.resetSlideEncoders())
+                new InstantAction(()-> slides.resetSlideEncoders()),
+                new InstantAction(()-> state = BotStates.INTAKE_SPEC)
         );
     }
 
@@ -368,10 +385,12 @@ public class Bot {
                 new SleepAction(0.21),
                 new InstantAction(() -> intakeClaw.closeClaw()),
                 new SleepAction(0.5),
-                new InstantAction(() -> intakeArm.Hover())
+                new InstantAction(() -> intakeArm.Hover()),
+                new InstantAction(()-> state = BotStates.INTAKE_SAM)
                 );
             }
             //teleop methods primarily
+
 
             //archaic
     public Action actionRelease(){

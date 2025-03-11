@@ -35,9 +35,11 @@ public class MainTeleOp extends LinearOpMode {
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
+        //bot init
         bot.prepMotors();
         bot.prepSubsystems();
         bot.resetEverything();
+        bot.state = Bot.BotStates.STORAGE;
         waitForStart();
         while (opModeIsActive()) {
 
@@ -46,39 +48,46 @@ public class MainTeleOp extends LinearOpMode {
 
             // updated based on gamepads
             gp2.readButtons();
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
-                if (c == 0) {
-                    bot.intakeClaw.clawStraight();
-                    c += 1;
-                } else if (c == 1) {
-                    bot.intakeClaw.clawHorizontal();
-                    c += 1;
-                } else if (c == 2) {
-                    bot.intakeClaw.rotate0ther45Deg();
-                    c += 1;
-                } else if (c == 3) {
-                    bot.intakeClaw.clawSlanted();
-                    c = 0;
-
-
-                }
-            }
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
                 bot.intakeClaw.clawStraight();
                 c = 1;
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
-               bot.intakeArm.intake();
+            if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
+                bot.outtakeClaw.toggleTopClaw();
+            }
+            if (bot.state == Bot.BotStates.STORAGE) {
+                // in storage: rotating claw, intake sample, drag pos
+                if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
+                    if (c == 0) {
+                        bot.intakeClaw.clawStraight();
+                        c += 1;
+                    } else if (c == 1) {
+                        bot.intakeClaw.clawHorizontal();
+                        c += 1;
+                    } else if (c == 2) {
+                        bot.intakeClaw.rotate0ther45Deg();
+                        c += 1;
+                    } else if (c == 3) {
+                        bot.intakeClaw.clawSlanted();
+                        c = 0;
+                    }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+                        runningActions.add(bot.actionIntakeSample());
+                        bot.intakeClaw.open = false;
+
+                    }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
+                        bot.intakeArm.intake();
+                }
+            }
+
+
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
                 runningActions.add(bot.actionBucketDrop());
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
-                    runningActions.add(bot.actionIntakeSample());
-                    bot.intakeClaw.open = false;
 
-            }
             if (gp2.wasJustPressed(GamepadKeys.Button.B)){
                     runningActions.add(bot.actionHighBucket());
 
@@ -90,9 +99,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)){
                runningActions.add(bot.actionIntakeSpecimen());
             }
-            if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
-                bot.outtakeClaw.toggleTopClaw();
-            }
+
 
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
                runningActions.add(bot.actionHighChamber());
