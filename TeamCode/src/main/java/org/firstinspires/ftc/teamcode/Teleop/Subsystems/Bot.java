@@ -378,7 +378,7 @@ public class Bot {
     public Action actionClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new InstantAction(()-> state = BotStates.CLIP)
+                new InstantAction(()-> state = BotStates.STORAGE)
         );
     }
 
