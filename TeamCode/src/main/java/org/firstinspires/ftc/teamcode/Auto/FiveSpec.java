@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
 
-@Autonomous(name = "Specimen Sweep Auto", group = "Auto")
+@Autonomous(name = "fivespec", group = "Auto")
 public class FiveSpec extends LinearOpMode {
     Bot bot;
 
@@ -27,28 +27,32 @@ public class FiveSpec extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
                 .stopAndAdd(bot.actionHighChamberAuto())
-                .strafeToLinearHeading(new Vector2d(6, 29), Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(6.5, 29), Math.toRadians(-90))
                 .stopAndAdd(bot.actionAutoClip())
                 .afterTime(0.01,bot.actionSlidesLower())
 
                 //first specimen
 
-                .afterTime(1.4,bot.actionSweep())
+                .afterTime(1.2,bot.actionSweep())
                 .strafeToConstantHeading(new Vector2d(-20,43))
-                .splineToLinearHeading(new Pose2d(-42, 39,Math.toRadians(-120)),Math.toRadians(55))
-                .strafeToConstantHeading(new Vector2d(-43,63))
-                .afterTime(0.01, bot.armUp())
-                .splineToLinearHeading(new Pose2d(-44,64,Math.toRadians(140)),Math.toRadians(75), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,80))
-                .afterTime(0.9,bot.actionSweep())
-                .strafeToLinearHeading(new Vector2d(-51,34),Math.toRadians(-120))
-                .splineToLinearHeading(new Pose2d(-53, 62,Math.toRadians(120)), Math.toRadians(55), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,80))
-                .stopAndAdd(bot.armUp())
-                .afterTime(0.9,bot.actionSweep())
-                .strafeToLinearHeading(new Vector2d(-58,34),Math.toRadians(-120))
+                .splineToLinearHeading(new Pose2d(-42, 39,Math.toRadians(-150)),Math.toRadians(75))
+                .afterTime(3, bot.actionSweep())
+                .strafeToLinearHeading(new Vector2d(-43,67.5), Math.toRadians(-180))
+                .waitSeconds(0.00001)
+                .afterTime(0.0000001, bot.armUp())
+                .splineToLinearHeading(new Pose2d(-45,32,Math.toRadians(-150)),Math.toRadians(75))
+                .afterTime(2,bot.armUp())
+                .afterTime(2.9, bot.actionSweep())
+                .splineToLinearHeading(new Pose2d(-46, 67.5,Math.toRadians(-180)), Math.toRadians(75))
+                .strafeToLinearHeading(new Vector2d(-53,27),Math.toRadians(-160))
+                .waitSeconds(0.00001)
                 .afterTime(0.01, bot.autoSpecimen())
-                .afterTime(0.2, bot.armUp())
-                .splineToLinearHeading(new Pose2d(-58,60,Math.toRadians(-90)), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(-45,68),Math.toRadians(-90))
+                .afterTime(2, bot.armUp())
+                .splineToLinearHeading(new Pose2d(-53,65,Math.toRadians(-180)), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(-43,60),Math.toRadians(-90))
+                .splineToLinearHeading(new Pose2d(-43,68,Math.toRadians(-90)), Math.toRadians(90))
+
+
 
                 //push specimen into observation zone
 
@@ -62,8 +66,8 @@ public class FiveSpec extends LinearOpMode {
                 //second specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-45, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
-                .splineToConstantHeading(new Vector2d(-45,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,85))
+                .strafeToLinearHeading(new Vector2d(-47, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
+                .splineToConstantHeading(new Vector2d(-47,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,85))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-1.5,45),drive.defaultVelConstraint, new ProfileAccelConstraint(-40,100))
@@ -74,8 +78,8 @@ public class FiveSpec extends LinearOpMode {
                 //third specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-45, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
-                .splineToConstantHeading(new Vector2d(-45,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-40,80))
+                .strafeToLinearHeading(new Vector2d(-47, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
+                .splineToConstantHeading(new Vector2d(-47,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-40,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
@@ -86,8 +90,8 @@ public class FiveSpec extends LinearOpMode {
                 //fourth specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-45, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
-                .splineToConstantHeading(new Vector2d(-45,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
+                .strafeToLinearHeading(new Vector2d(-47, 60), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
+                .splineToConstantHeading(new Vector2d(-47,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,100))
