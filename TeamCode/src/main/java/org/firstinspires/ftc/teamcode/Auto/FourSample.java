@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode.Auto;
 
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -25,7 +24,7 @@ public class FourSample extends LinearOpMode {
 
         Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
                 //go to bucket
-                .afterTime(0.001, bot.savingBottomwrist())
+                .afterTime(0.001, bot.savingBottomWrist())
                 .afterTime(0.4,   bot.actionHighBucket())
                 .strafeToLinearHeading(new Vector2d(45, 61), Math.toRadians(-90))
                 //drop in bucket
