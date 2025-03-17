@@ -34,21 +34,21 @@ public class FiveSpec extends LinearOpMode {
                 //first specimen
 
                 .afterTime(1.2,bot.actionSweep())
-                .strafeToConstantHeading(new Vector2d(-20,43))
-                .splineToLinearHeading(new Pose2d(-42, 39,Math.toRadians(-150)),Math.toRadians(75))
+                .splineToConstantHeading(new Vector2d(-20,43),Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-42, 32),Math.toRadians(-160))
                 .afterTime(3, bot.actionSweep())
-                .strafeToLinearHeading(new Vector2d(-43,64), Math.toRadians(-180))
+                .splineToLinearHeading(new Pose2d(-42,64, Math.toRadians(-180)),Math.toRadians(-180))
                 .afterTime(0.5, bot.armUp())
-                .splineToLinearHeading(new Pose2d(-45,32,Math.toRadians(-150)),Math.toRadians(75))
+                .strafeToLinearHeading(new Vector2d(-48,32),Math.toRadians(-160))
                 .afterTime(2,bot.armUp())
                 .afterTime(2.9, bot.actionSweep())
-                .splineToLinearHeading(new Pose2d(-46, 67.5,Math.toRadians(-180)), Math.toRadians(75))
-                .strafeToLinearHeading(new Vector2d(-48,27),Math.toRadians(-160))
+                .splineToLinearHeading(new Pose2d(-46, 67.5,Math.toRadians(-180)), Math.toRadians(-180))
+                .strafeToLinearHeading(new Vector2d(-50,27),Math.toRadians(-160))
                 .afterTime(0.01, bot.autoSpecimen())
                 .afterTime(2.5, bot.armUp())
                 .splineToLinearHeading(new Pose2d(-53,65,Math.toRadians(-180)), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(-43,60),Math.toRadians(-90))
-                .splineToLinearHeading(new Pose2d(-43,68,Math.toRadians(-90)), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(-50,60),Math.toRadians(-90))
+                .splineToLinearHeading(new Pose2d(-50,68,Math.toRadians(-90)), Math.toRadians(90))
 
 
 

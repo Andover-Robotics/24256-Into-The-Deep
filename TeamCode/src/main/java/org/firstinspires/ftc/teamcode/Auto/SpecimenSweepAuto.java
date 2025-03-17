@@ -37,11 +37,11 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 .splineToLinearHeading(new Pose2d(-44,64,Math.toRadians(140)),Math.toRadians(75), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,75))
                 .stopAndAdd(bot.armUp())
                 .afterTime(0.9,bot.actionSweep())
-                .strafeToLinearHeading(new Vector2d(-51,34),Math.toRadians(-120))
+                .strafeToLinearHeading(new Vector2d(-53.5,32),Math.toRadians(-120))
                 .afterTime(0.1, bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-53,62),Math.toRadians(120), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,75))
-                .strafeToLinearHeading(new Vector2d(-38,54.5),Math.toRadians(-90))
-                .strafeToLinearHeading(new Vector2d(-38,68),Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-51.5,62),Math.toRadians(120), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,75))
+                .strafeToLinearHeading(new Vector2d(-48.5,55.5),Math.toRadians(-90))
+                .strafeToLinearHeading(new Vector2d(-48.5,68),Math.toRadians(-90))
                 .stopAndAdd(bot.armUp())
 
 
@@ -61,8 +61,8 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 //second specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-38, 57), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
-                .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
+                .strafeToLinearHeading(new Vector2d(-47, 59), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-25,80))
+                .splineToConstantHeading(new Vector2d(-47,67),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-25,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-1.5,45),drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
@@ -74,8 +74,8 @@ public class SpecimenSweepAuto extends LinearOpMode {
                 //third specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
-                .strafeToLinearHeading(new Vector2d(-38, 58), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
-                .splineToConstantHeading(new Vector2d(-38,67.5),Math.toRadians(90), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))
+                .strafeToLinearHeading(new Vector2d(-40, 50), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-25,80))
+                .splineToLinearHeading(new Pose2d(-49, 67, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-25,80))
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToConstantHeading(new Vector2d(-2,45), drive.defaultVelConstraint, new ProfileAccelConstraint(-35,80))

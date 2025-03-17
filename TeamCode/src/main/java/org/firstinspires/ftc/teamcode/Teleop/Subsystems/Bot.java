@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import  com.qualcomm.robotcore.hardware.Servo;
 
 
@@ -91,8 +92,8 @@ public class Bot {
 
     public void prepMotors() {
 
-        fr.setInverted(true);
-        br.setInverted(true);
+        fl.setInverted(true);
+        bl.setInverted(true);
         fl.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
         bl.setZeroPowerBehavior(MotorEx.ZeroPowerBehavior.BRAKE);
@@ -102,6 +103,7 @@ public class Bot {
         fr.setRunMode(Motor.RunMode.RawPower);
         bl.setRunMode(Motor.RunMode.RawPower);
         br.setRunMode(Motor.RunMode.RawPower);
+
     }
 
     public void prepSubsystems() {
