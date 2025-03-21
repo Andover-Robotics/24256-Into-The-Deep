@@ -98,8 +98,11 @@ public class OldMainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
                 bot.outtakeClaw.toggleTopClaw();
             }
+            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
+                runningActions.add(bot.actionHighChamber());
+            }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)) {
+            if (gp1.wasJustPressed(GamepadKeys.Button.A)) {
                 Bot.instance = null;
                 Pose2d initialPose = new Pose2d(-60, 64, Math.toRadians(-90));
                 MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
@@ -291,8 +294,8 @@ public class OldMainTeleOp extends LinearOpMode {
         bot.prepMotors();
         driveSpeed = driveMultiplier - 0.7 * gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
         driveSpeed = Math.max(0, driveSpeed);
-        Vector2d driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY()),
-                turnVector = new Vector2d(-gp1
+        Vector2d driveVector = new Vector2d(-gp1.getLeftX(), gp1.getLeftY()),
+                turnVector = new Vector2d(gp1
                         .getRightX(), 0);
         bot.driveRobotCentric(driveVector.getX() * driveSpeed,
                 driveVector.getY() * driveSpeed,
