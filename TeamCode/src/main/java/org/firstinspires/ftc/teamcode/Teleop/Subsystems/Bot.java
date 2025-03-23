@@ -223,7 +223,7 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.5),
+                new SleepAction(0.65),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
@@ -296,6 +296,16 @@ public class Bot {
     public Action savingBottomWrist() {
         return new SequentialAction(
                 new InstantAction(()->intakeClaw.wristToIntakePos())
+        );
+    }
+    public Action iDontLikeThis() {
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.clawHorizontal())
+        );
+    }
+    public Action iDontLikeThisPart2() {
+        return new SequentialAction(
+                new InstantAction(()->intakeClaw.clawHorizontalBruh())
         );
     }
     //auto methods primarily

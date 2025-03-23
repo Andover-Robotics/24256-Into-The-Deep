@@ -8,13 +8,14 @@ public class IntakeClaw {
     public static final double clawOpen = 0.180;
     public static final double clawClose = 0.528;
     public static final double clawLoose = 0.46;
-    public static final double transfer = 0;
-    public static final double intake = 0.71;
+    public static final double transfer = 0.05;
+    public static final double intake = 0.76;
     public static final double rotateStraight = .34;
-    public static final double rotateSide = .7;
+    public static final double rotateSide = .7;//L
+    public static final double rotateSideOther = .7;//R
     public static final double rotate45Deg = .535;
     public static final double rotateOther45Deg =.2;
-    public static final double wristLegal = 0.1;
+    public static final double wristLegal = 0.15;
 
 
     public boolean open = true;
@@ -72,6 +73,10 @@ public class IntakeClaw {
     }
     public void clawHorizontal(){
         rotateServo.setPosition(rotateSide);
+        orientation = clawOrientation.HORIZONTAL;
+    }
+    public void clawHorizontalBruh(){
+        rotateServo.setPosition(rotateSideOther);
         orientation = clawOrientation.HORIZONTAL;
     }
 
