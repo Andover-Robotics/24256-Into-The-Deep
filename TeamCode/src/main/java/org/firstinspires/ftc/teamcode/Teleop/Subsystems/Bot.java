@@ -223,7 +223,7 @@ public class Bot {
     public Action actionAutoClip(){
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
-                new SleepAction(0.65),
+                new SleepAction(0.6),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen())
         );
     }
