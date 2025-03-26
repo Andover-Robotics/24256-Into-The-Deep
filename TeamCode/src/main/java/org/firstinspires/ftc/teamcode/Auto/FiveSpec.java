@@ -27,9 +27,9 @@ public class FiveSpec extends LinearOpMode {
 //heading, tangent
         Action runAuto = drive.actionBuilder(new Pose2d(-24, 64, Math.toRadians(-90)))
                 .stopAndAdd(bot.actionHighChamberAuto())
+                .afterTime(1.5, bot.actionAutoClip())
                 .strafeToLinearHeading(new Vector2d(6.6, 29), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,90))
-                .stopAndAdd(bot.actionAutoClip())
-                .afterTime(0.01,bot.actionSlidesLower())
+                .waitSeconds(3.5)
                 //clip preload
                 .afterTime(0.55,bot.actionSweep())
                 .setReversed(true)
@@ -57,8 +57,6 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(false)
                 .splineToConstantHeading(new Vector2d(1,30.5),Math.toRadians(140), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,90))
                 .stopAndAdd(bot.actionAutoClip())
-                .stopAndAdd(bot.actionSlidesLower())
-                .waitSeconds(0.2)
 
                 //second specimen
 
@@ -73,8 +71,6 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(false)
                 .splineToConstantHeading(new Vector2d(-1,30.5),Math.toRadians(140), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
                 .stopAndAdd(bot.actionAutoClip())
-                .stopAndAdd(bot.actionSlidesLower())
-                .waitSeconds(0.25)
 
                 //third specimen
 
@@ -89,7 +85,6 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(false)
                 .splineToConstantHeading(new Vector2d(-24,30.5),Math.toRadians(150), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .stopAndAdd(bot.actionAutoClip())
-                .stopAndAdd(bot.actionSlidesLower())
                 //fourth specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
@@ -103,7 +98,6 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(false)
                 .splineToConstantHeading(new Vector2d(-6,30.5),Math.toRadians(160), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .stopAndAdd(bot.actionAutoClip())
-                .stopAndAdd(bot.actionSlidesLower())
                 .strafeToConstantHeading(new Vector2d(-15, 50), drive.defaultVelConstraint, new ProfileAccelConstraint(-90,200))
                 .afterTime(0.001,bot.toIntake())
                 .strafeToLinearHeading(new Vector2d(-50, 64), Math.toRadians(180), drive.defaultVelConstraint, new ProfileAccelConstraint(-90,200))

@@ -224,7 +224,9 @@ public class Bot {
         return new SequentialAction(
                 new InstantAction(()-> slides.runToHighChamber()),
                 new SleepAction(0.6),
-                new InstantAction (()-> outtakeClaw.outtakeClawOpen())
+                new InstantAction (()-> outtakeClaw.outtakeClawOpen()),
+                new InstantAction(() -> slides.runToStorage()),
+                new InstantAction(()-> outtakeClaw.topWristTransferPos())
         );
     }
 
