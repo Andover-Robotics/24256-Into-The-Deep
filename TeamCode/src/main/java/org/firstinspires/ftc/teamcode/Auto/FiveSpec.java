@@ -29,7 +29,7 @@ public class FiveSpec extends LinearOpMode {
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .afterTime(1.5, bot.actionAutoClip())
                 .strafeToLinearHeading(new Vector2d(6.6, 29), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,90))
-                .waitSeconds(.3)
+                .waitSeconds(.5)
                 //clip preload
                 .afterTime(0.55,bot.actionSweep())
                 .setReversed(true)
@@ -53,7 +53,7 @@ public class FiveSpec extends LinearOpMode {
                 //pushAuto specimen into obs zone
 
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .afterTime(1.5, bot.actionAutoClip())
+                .afterTime(1.6, bot.actionAutoClip())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .setReversed(false)
                 .splineToLinearHeading(new Pose2d(-2,30.5, Math.toRadians(-90)), Math.toRadians(140), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,90))
@@ -69,7 +69,7 @@ public class FiveSpec extends LinearOpMode {
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .setReversed(false)
-                .splineToConstantHeading(new Vector2d(-5, 30.5),Math.toRadians(140), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
+                .splineToConstantHeading(new Vector2d(-5, 30.5),Math.toRadians(130), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
                 .stopAndAdd(bot.actionAutoClip())
 
                 //third specimen
