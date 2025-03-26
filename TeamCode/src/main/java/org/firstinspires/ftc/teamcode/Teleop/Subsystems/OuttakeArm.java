@@ -6,7 +6,7 @@ public class OuttakeArm {
     public Servo bucketServoR, bucketServoL;
     public static final double transfer = .222;
     public static final double outtake = .735;
-    public static final double verticalish = .467;
+    public static final double verticalish = .474;
     public static final double wallIntake = .975;
     public static final double park = .285;
 
