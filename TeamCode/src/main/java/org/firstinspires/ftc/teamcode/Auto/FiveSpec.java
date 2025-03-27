@@ -76,7 +76,7 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(true)
                 .splineToConstantHeading(new Vector2d(-38, 67), Math.toRadians(80), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .afterTime(1.7, bot.actionAutoClip())
+                .afterTime(1.75, bot.actionAutoClip())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToLinearHeading(new Vector2d(-3, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .splineToLinearHeading(new Pose2d(-4.5, 30.5, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
@@ -90,9 +90,10 @@ public class FiveSpec extends LinearOpMode {
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToLinearHeading(new Vector2d(-6, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .splineToLinearHeading(new Pose2d(-7, 30.5, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
-                .afterTime(0.01,bot.toIntake())
+                .afterTime(1,bot.toIntake())
                 .waitSeconds(0.4)
-                .splineTo(new Vector2d(-60, 60), Math.toRadians(-30), drive.defaultVelConstraint, new ProfileAccelConstraint(-300,800))
+                .setReversed(true)
+                .splineTo(new Vector2d(-60, 60), Math.toRadians(-15), drive.defaultVelConstraint, new ProfileAccelConstraint(-300,800))
                 //fifth
 
                         .build();
