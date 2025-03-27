@@ -57,18 +57,18 @@ public class FiveSpec extends LinearOpMode {
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .setReversed(false)
                 .splineToLinearHeading(new Pose2d(-2,30.5, Math.toRadians(-90)), Math.toRadians(140), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,90))
-                .waitSeconds(0.4)
+                .waitSeconds(0.3)
                 //second specimen
 
                 .afterTime(0.4,bot.autoSpecimen())
                 .setReversed(true)
                 .splineToConstantHeading(new Vector2d(-38, 67), Math.toRadians(80), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .afterTime(1.6, bot.actionAutoClip())
+                .afterTime(1.65, bot.actionAutoClip())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .setReversed(false)
-                .strafeToLinearHeading(new Vector2d(-4, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
-                .splineToConstantHeading(new Vector2d(-5, 30.5),Math.toRadians(130), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
+                .strafeToLinearHeading(new Vector2d(-2, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
+                .splineToConstantHeading(new Vector2d(-3, 30.5),Math.toRadians(130), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
                 .waitSeconds(0.4)
                 //third specimen
 
@@ -76,24 +76,23 @@ public class FiveSpec extends LinearOpMode {
                 .setReversed(true)
                 .splineToConstantHeading(new Vector2d(-38, 67), Math.toRadians(80), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .afterTime(1.6, bot.actionAutoClip())
+                .afterTime(1.7, bot.actionAutoClip())
                 .stopAndAdd(bot.actionHighChamberAuto())
-                .strafeToLinearHeading(new Vector2d(-6, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
-                .splineToLinearHeading(new Pose2d(-5, 30.5, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
+                .strafeToLinearHeading(new Vector2d(-3, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
+                .splineToLinearHeading(new Pose2d(-4.5, 30.5, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .waitSeconds(0.4)
 
                 .afterTime(0.4,bot.autoSpecimen())
                 .setReversed(true)
                 .splineToConstantHeading(new Vector2d(-38, 67), Math.toRadians(80), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .stopAndAdd(bot.autoIntakeSpecimen())
-                .afterTime(1.6, bot.actionAutoClip())
+                .afterTime(1.7, bot.actionAutoClip())
                 .stopAndAdd(bot.actionHighChamberAuto())
                 .strafeToLinearHeading(new Vector2d(-6, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
                 .splineToLinearHeading(new Pose2d(-7, 30.5, Math.toRadians(-90)), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
+                .afterTime(0.01,bot.toIntake())
                 .waitSeconds(0.4)
-                .strafeToConstantHeading(new Vector2d(-15, 50), drive.defaultVelConstraint, new ProfileAccelConstraint(-90,200))
-                .afterTime(0.001,bot.toIntake())
-                .strafeToLinearHeading(new Vector2d(-50, 64), Math.toRadians(180), drive.defaultVelConstraint, new ProfileAccelConstraint(-90,200))
+                .splineTo(new Vector2d(-60, 60), Math.toRadians(-30), drive.defaultVelConstraint, new ProfileAccelConstraint(-300,800))
                 //fifth
 
                         .build();
