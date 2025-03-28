@@ -1,15 +1,9 @@
-
 package org.firstinspires.ftc.teamcode.Teleop;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.ProfileAccelConstraint;
-import com.acmerobotics.roadrunner.SequentialAction;
-import com.acmerobotics.roadrunner.ftc.Actions;
-import com.arcrobotics.ftclib.command.button.GamepadButton;
 import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.arcrobotics.ftclib.geometry.Vector2d;
@@ -17,15 +11,13 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Auto.ActionHelper;
-import org.firstinspires.ftc.teamcode.Auto.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@TeleOp(name = "Main Teleop OLD", group = "Teleop")
-public class MainTeleOp extends LinearOpMode {
+@TeleOp(name = "DOESNT WORK")
+public class StatesMainTeleOp extends LinearOpMode {
     private GamepadEx gp1,gp2;
     private double driveSpeed = 1, driveMultiplier = 1;
 
@@ -43,17 +35,53 @@ public class MainTeleOp extends LinearOpMode {
         bot = Bot.getInstance(this);
         gp1 = new GamepadEx(gamepad1);
         gp2 = new GamepadEx(gamepad2);
+        //bot init
         bot.prepMotors();
         bot.prepSubsystems();
         bot.resetEverything();
+        bot.state = Bot.BotStates.STORAGE;
         waitForStart();
         while (opModeIsActive()) {
+            /*
+            driver 2 controls:
+            Universal
+                right bumper: opens top claw
+                left bumper: opens bottom claw
+                dpad up: rotates claw
+                left stick: resets teleop
+            Storage:
+                X: intake sample
+                A: transfer
+                B: Intake Spec
+            Transfer:
+                A: outtake low bucket
+                B: outtake high bucket
+            Bucket:
+                Y: outtake sample
+            Intake Spec:
+                Y: go to high chamber pos
+            Clip
+                Y: clip on bar
+                Need to reset teleop to clip again for now
+             */
 
 
             TelemetryPacket packet = new TelemetryPacket();
 
             // updated based on gamepads
             gp2.readButtons();
+
+            if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
+                // open bottom claw
+                bot.intakeClaw.toggleClaw();
+                bot.intakeClaw.clawStraight();
+                c = 1;
+            }
+            if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
+                //open top claw
+                bot.outtakeClaw.toggleTopClaw();
+
+            }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_UP)) {
                 if (c == 0) {
                     bot.intakeClaw.clawStraight();
@@ -67,73 +95,82 @@ public class MainTeleOp extends LinearOpMode {
                 } else if (c == 3) {
                     bot.intakeClaw.clawSlanted();
                     c = 0;
+                }
+            if (bot.state == Bot.BotStates.STORAGE) {
+                // in storage: intake sample, drag pos, transfer, intake spec,
 
+                    if (gp2.wasJustPressed(GamepadKeys.Button.X)){
+                        runningActions.add(bot.actionIntakeSample());
+                        bot.intakeClaw.open = false;
+
+                    }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
+                        bot.intakeArm.intake();
+                }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
+                        runningActions.add(bot.actionTransfer());
+                        c=1;
+                    }
+                    if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                        runningActions.add(bot.actionIntakeSpecimen());
+                    }
+
+            }
+
+                if (bot.state == Bot.BotStates.TRANSFER){
+                    //high bucket pos: B
+                    //low bucket pos: A
+                    if (gp2.wasJustPressed(GamepadKeys.Button.B)){
+                        runningActions.add(bot.actionHighBucket());
+
+                    }
+                    if(gp2.wasJustPressed(GamepadKeys.Button.A)){
+                        runningActions.add(bot.actionLowBucket());
+                    }
 
                 }
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
-                bot.intakeClaw.toggleClaw();
-                bot.intakeClaw.clawStraight();
-                c = 1;
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){
-                bot.intakeArm.intake();
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
-                runningActions.add(bot.actionBucketDrop());
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.X)){
-                runningActions.add(bot.actionIntakeSample());
-                bot.intakeClaw.open = false;
+                if (bot.state == Bot.BotStates.BUCKET){
+                    //drop in bucket: Y
+                    if (gp2.wasJustPressed(GamepadKeys.Button.Y)){
+                        runningActions.add(bot.actionBucketDrop());
+                    }
+                }
+                if (bot.state == Bot.BotStates.INTAKE_SPEC){
+                    // goes to clip pos: A
+                    if (gp2.wasJustPressed(GamepadKeys.Button.Y)) {
+                        runningActions.add(bot.actionHighChamber());
+                    }
+                }
+                if (bot.state == Bot.BotStates.CLIP_POS){
+                    // clips: A
+                    if(gp2.wasJustPressed(GamepadKeys.Button.Y)){
+                        runningActions.add(bot.actionClip());
+                    }
+                }
+
 
             }
 
-            if (gp2.wasJustPressed(GamepadKeys.Button.B)){
-                runningActions.add(bot.actionHighBucket());
 
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.A)) {
-                runningActions.add(bot.actionTransfer());
-                c=1;
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_LEFT)){
-                runningActions.add(bot.actionIntakeSpecimen());
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.RIGHT_BUMPER)){
-                bot.outtakeClaw.toggleTopClaw();
-            }
-            if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_RIGHT)){
-                runningActions.add(bot.actionHighChamber());
-            }
+
+
+
+
+
+
 
             if(gp2.wasJustPressed(GamepadKeys.Button.LEFT_STICK_BUTTON)){
                 bot.resetTeleop();
-            }
-
-            if(gp2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)>0.4){
-                runningActions.add(bot.actionClip());
-            }
-            if( gp2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)>0.4){
-                runningActions.add(bot.actionLowBucket());
-
             }
             if(gp2.wasJustPressed(GamepadKeys.Button.RIGHT_STICK_BUTTON)){
                 runningActions.add(bot.actionResetIntake());
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
             drive();
+
+
+
+
             telemetry.addData("slides target", bot.slides.target);
             telemetry.addData("slides target", slidesTarget);
             telemetry.addData("slides position", bot.slides.getPosition());
@@ -168,8 +205,8 @@ public class MainTeleOp extends LinearOpMode {
         bot.prepMotors();
         driveSpeed = driveMultiplier - 0.7 * gp1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER);
         driveSpeed = Math.max(0, driveSpeed);
-        Vector2d driveVector = new Vector2d(-gp1.getLeftX(), gp1.getLeftY()),
-                turnVector = new Vector2d(gp1
+        Vector2d driveVector = new Vector2d(gp1.getLeftX(), -gp1.getLeftY()),
+                turnVector = new Vector2d(-gp1
                         .getRightX(), 0);
         bot.driveRobotCentric(driveVector.getX() * driveSpeed,
                 driveVector.getY() * driveSpeed,
