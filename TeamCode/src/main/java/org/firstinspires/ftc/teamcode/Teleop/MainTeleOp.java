@@ -24,7 +24,7 @@ import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 import java.util.ArrayList;
 import java.util.List;
 
-@TeleOp(name = "Main Teleop OLD", group = "Teleop")
+@TeleOp(name = "Main Teleop ", group = "Teleop")
 public class MainTeleOp extends LinearOpMode {
     private GamepadEx gp1,gp2;
     private double driveSpeed = 1, driveMultiplier = 1;

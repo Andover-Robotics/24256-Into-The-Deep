@@ -6,7 +6,7 @@ public class IntakeArm {
     public Servo armServoR, armServoL;
     public static final double transferPos = 0.47;
     public static final double intakePos = 0.24;
-    public static final double ArmHoverPos = 0.325;
+    public static final double ArmHoverPos = 0.335;
     public final double armStorage = 0.75;
     public final double sweep = 0.15;
 

@@ -338,6 +338,7 @@ public class Bot {
 
     public Action actionHighBucket() {
         return new SequentialAction(
+                new InstantAction(()-> intakeArm.Hover()),
                 new InstantAction(() -> slides.runToTopBucket()),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.9),
@@ -348,6 +349,7 @@ public class Bot {
     }
     public Action actionLowBucket() {
         return new SequentialAction(
+                new InstantAction(()-> intakeArm.Hover()),
                 new InstantAction(() -> slides.runToLowBucket()),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.6),
