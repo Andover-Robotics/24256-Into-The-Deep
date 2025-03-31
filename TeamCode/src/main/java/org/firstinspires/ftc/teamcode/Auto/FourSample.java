@@ -31,12 +31,12 @@ public class FourSample extends LinearOpMode {
                 //Outtake preload
                 .afterTime(0.000000000000001, bot.toIntake())
                 .waitSeconds(.2)
-                .strafeToLinearHeading(new Vector2d(43.5,46),Math.toRadians(-80)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(43,46),Math.toRadians(-80)) // stop and add close claw and transfer etc
                 .waitSeconds(.1)
                 .stopAndAdd(bot.intakeAuto())
                 //intake second sample
                 .afterTime(0.01, bot.actionHighBucketAuto())
-                .strafeToLinearHeading(new Vector2d(59, 62.75), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(57.75, 62.75), Math.toRadians(-135))
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(0.2)
                 //outtake second sample
@@ -52,7 +52,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd( bot.autoLastSample())
                 //intake fourth sample
                 .afterTime(0.01, bot.actionHighBucketAuto())
-                .strafeToLinearHeading(new Vector2d(58, 61.75), Math.toRadians(-135))
+                .strafeToLinearHeading(new Vector2d(57, 62.25), Math.toRadians(-143))
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(0.15)
                 //outtake fourth sample

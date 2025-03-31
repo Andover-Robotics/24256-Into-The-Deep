@@ -195,7 +195,7 @@ public class Bot {
     public Action actionBucketDropAuto() {
         return new SequentialAction(
                 new InstantAction(() -> outtakeClaw.outtakeClawOpen()),
-                new SleepAction(.4),
+                new SleepAction(0.8),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new SleepAction(0.15),
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
@@ -212,14 +212,17 @@ public class Bot {
                 new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
                 new InstantAction(()-> outtakeArm.vertical()),
                 new InstantAction(()->intakeArm.armToStorage()),
-                new InstantAction(()-> slides.runToPushAuto())
+                new InstantAction(()-> slides.runToPushAuto()),
+                new InstantAction(()-> intakeClaw.wristToIntakePos())
+
+
 
         );
     }
 
     public Action actionAutoClip(){
         return new SequentialAction(
-                new InstantAction(()-> slides.runToHighChamber()),
+                new InstantAction(()-> slides.runToClipAuto()),
                 new SleepAction(0.6),
                 new InstantAction (()-> outtakeClaw.outtakeClawOpen()),
                 new InstantAction(() -> slides.runToStorage()),
@@ -236,7 +239,8 @@ public class Bot {
     }
     public Action autoIntakeSpecimen() {
         return new SequentialAction(
-                new InstantAction(() -> outtakeClaw.outtakeClawClose())
+                new InstantAction(() -> outtakeClaw.outtakeClawClose()),
+                new SleepAction(0.2)
         );
     }
     public Action actionSweep(){
@@ -376,7 +380,7 @@ public class Bot {
                 new InstantAction(() -> outtakeClaw.topWristTransferPos()),
                 new InstantAction(() -> slides.runToStorage()),
                 new SleepAction(0.9),
-                new InstantAction(()-> outtakeArm.transfer()),
+                new InstantAction(()-> outtakeArm.tall()),
                 new SleepAction(0.3),
                 new InstantAction(()-> slides.resetSlideEncoders()),
                 new InstantAction(()-> state = BotStates.STORAGE)
@@ -391,11 +395,11 @@ public class Bot {
                 new InstantAction(()->intakeClaw.wristToIntakePos()),
                 new InstantAction(()-> outtakeClaw.outtakeClawClose()),
                 new SleepAction(0.15),
+                new InstantAction(()-> slides.runToPush()),
+                new SleepAction(0.3),
                 new InstantAction(()-> outtakeClaw.outtakeClawVertical()),
                 new InstantAction(()-> outtakeArm.vertical()),
-                new InstantAction(()->intakeArm.armToStorage()),
-                new InstantAction(()-> slides.runToPush()),
-                new InstantAction(()-> state = BotStates.CLIP_POS)
+                new InstantAction(()->intakeArm.armToStorage())
 
         );
     }

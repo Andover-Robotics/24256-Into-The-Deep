@@ -7,7 +7,7 @@ public class OuttakeClaw {
     public boolean open = true;
     public Servo topClaw, topWrist;
     public static final double topClawOpen = 0.10;
-    public static final double topClawClose = 0.61;
+    public static final double topClawClose = 0.618;
     public static final double outtake = 0.47;
     public static final double transfer = 0.8;
     public static final double topWrist18 = 0.32;

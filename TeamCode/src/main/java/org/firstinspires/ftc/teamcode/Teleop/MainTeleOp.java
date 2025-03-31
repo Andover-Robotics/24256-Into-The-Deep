@@ -74,6 +74,7 @@ public class MainTeleOp extends LinearOpMode {
             if (gp2.wasJustPressed(GamepadKeys.Button.LEFT_BUMPER)) {
                 bot.intakeClaw.toggleClaw();
                 bot.intakeClaw.clawStraight();
+                bot.outtakeArm.tall();
                 c = 1;
             }
             if (gp2.wasJustPressed(GamepadKeys.Button.DPAD_DOWN)){

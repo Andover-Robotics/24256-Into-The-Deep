@@ -23,6 +23,7 @@ public class IntakeArm {
         armServoR.setPosition(intakePos);
     }
 
+
     public void armToStorage(){
         armServoL.setPosition(armStorage);
         armServoR.setPosition(armStorage);
