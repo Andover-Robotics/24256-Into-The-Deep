@@ -44,7 +44,7 @@ public class FiveSpec extends LinearOpMode {
                 .splineToLinearHeading(new Pose2d(-57,62,Math.toRadians(120)), Math.toRadians(75), drive.defaultVelConstraint, new ProfileAccelConstraint(-52,92))
                 .afterTime(0.1, bot.armUp())
                 .setReversed(true)
-                .afterTime(0.4,bot.actionSweep())
+                .afterTime(0.6,bot.actionSweep())
                 .splineToLinearHeading(new Pose2d(-56.5,30,Math.toRadians(-160)), Math.toRadians(75), drive.defaultVelConstraint, new ProfileAccelConstraint(-52,92))
                 .splineToLinearHeading(new Pose2d(-56.5,64,Math.toRadians(160)), Math.toRadians(75), drive.defaultVelConstraint, new ProfileAccelConstraint(-52,92))
                 .setReversed(false)
