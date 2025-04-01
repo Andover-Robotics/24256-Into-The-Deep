@@ -31,7 +31,7 @@ public class FourSample extends LinearOpMode {
                 //Outtake preload
                 .afterTime(0.000000000000001, bot.toIntake())
                 .waitSeconds(.2)
-                .strafeToLinearHeading(new Vector2d(43,46),Math.toRadians(-80)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(43.4,44),Math.toRadians(-80)) // stop and add close claw and transfer etc
                 .waitSeconds(.1)
                 .stopAndAdd(bot.intakeAuto())
                 //intake second sample
@@ -40,7 +40,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(0.2)
                 //outtake second sample
-                .strafeToLinearHeading(new Vector2d(57,45),Math.toRadians(-80)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(57,43.5),Math.toRadians(-80)) // stop and add close claw and transfer etc
                 .stopAndAdd(bot.intakeAuto())
                 //intake third sample
                 .afterTime(0.01, bot.actionHighBucketAuto())
@@ -48,11 +48,11 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(0.2)
                 //outtake third sample
-                .strafeToLinearHeading(new Vector2d(58.5,42),Math.toRadians(-50)) // stop and add close claw and transfer etc
+                .strafeToLinearHeading(new Vector2d(58.5,41.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
                 .stopAndAdd( bot.autoLastSample())
                 //intake fourth sample
                 .afterTime(0.01, bot.actionHighBucketAuto())
-                .strafeToLinearHeading(new Vector2d(57, 62.25), Math.toRadians(-143))
+                .strafeToLinearHeading(new Vector2d(56.5, 62.25), Math.toRadians(-148))
                 .stopAndAdd(bot.actionBucketDropAuto())
                 .waitSeconds(0.15)
                 //outtake fourth sample
