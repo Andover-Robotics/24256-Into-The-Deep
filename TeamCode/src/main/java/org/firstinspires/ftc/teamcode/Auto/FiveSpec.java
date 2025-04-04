@@ -55,7 +55,7 @@ public class FiveSpec extends LinearOpMode {
                 .stopAndAdd(bot.autoIntakeSpecimen())
                 .afterTime(1.8, bot.actionAutoClip())
                 .setReversed(false)
-                .splineToLinearHeading(new Pose2d(-2,30.5, Math.toRadians(-90)), Math.toRadians(180), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,90))
+                .splineToLinearHeading(new Pose2d(-1,30.5, Math.toRadians(-90)), Math.toRadians(180), drive.defaultVelConstraint, new ProfileAccelConstraint(-50,90))
                 .waitSeconds(0.3)
                 //second specimen
 
@@ -67,7 +67,7 @@ public class FiveSpec extends LinearOpMode {
                 .afterTime(1.65, bot.actionAutoClip())
                 .setReversed(false)
                 .strafeToLinearHeading(new Vector2d(-2, 45), Math.toRadians(-90), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,92))
-                .splineToConstantHeading(new Vector2d(-3, 30.5),Math.toRadians(130), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
+                .splineToConstantHeading(new Vector2d(-2, 30.5),Math.toRadians(130), drive.defaultVelConstraint, new ProfileAccelConstraint(-55,95))
                 .waitSeconds(0.4)
                 //third specimen
 
