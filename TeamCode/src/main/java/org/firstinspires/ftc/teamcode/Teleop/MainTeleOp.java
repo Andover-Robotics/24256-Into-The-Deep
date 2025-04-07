@@ -167,8 +167,8 @@ public class MainTeleOp extends LinearOpMode {
     public void drive() {
         gp1.readButtons();
         bot.prepMotors();
-        double x = Math.max(Math.abs(gp1.getLeftX()), Math.abs(gp1.getLeftY()));
-        driveSpeed = 0.37947*x + 0.62972*x*x*x;
+        double x = Math.max(Math.max(Math.abs(gp1.getLeftX()), Math.abs(gp1.getLeftY())), Math.abs(gp1.getRightX()));
+        driveSpeed = 0.0121*Math.pow(2.718281828,4.48*x)-0.0121;
         driveSpeed = Math.max(0, driveSpeed);
         Vector2d driveVector = new Vector2d(-gp1.getLeftX(), gp1.getLeftY()),
                 turnVector = new Vector2d(gp1
