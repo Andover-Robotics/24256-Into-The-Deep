@@ -49,7 +49,7 @@ public class FourSample extends LinearOpMode {
                 .stopAndAdd(bot.actionBucketDropAuto())
                 //outtake third sample
                 .strafeToLinearHeading(new Vector2d(58.5,41.5),Math.toRadians(-50)) // stop and add close claw and transfer etc
-                .stopAndAdd( bot.autoLastSample())
+                .stopAndAdd( bot.autoSpecialSample())
                 //intake fourth sample
                 .afterTime(0.01, bot.actionHighBucketAuto())
                 .strafeToLinearHeading(new Vector2d(55.5, 63), Math.toRadians(-148))

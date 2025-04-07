@@ -22,40 +22,41 @@ public class SixSample extends LinearOpMode {
         Pose2d initialPose = new Pose2d(38,64, Math.toRadians(-90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, initialPose);
 
-        Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-150)))
+        Action runAuto = drive.actionBuilder(new Pose2d(38,63, Math.toRadians(-90)))
                 .afterTime(0.001, bot.savingBottomWrist())
                 .afterTime(0.2,   bot.actionHighBucketAuto())
                 .setReversed(true)
                 .afterTime(1.5, bot.actionBucketDropAuto())
-                .splineToLinearHeading(new Pose2d(58.5,62,Math.toRadians(-135)),Math.toRadians(90))
-                .waitSeconds(1.2)
+                .setReversed(true)
+                .splineToLinearHeading(new Pose2d(58.5,62,Math.toRadians(-135)),Math.toRadians(60))
+                .waitSeconds(0.8)
                 //Outtake preload
                 .afterTime(0.000000000000001, bot.toIntake())
                 .afterTime(1.5, bot.intakeAuto())
                 .afterTime(3.8, bot.actionHighBucketAuto())
-                .strafeToLinearHeading(new Vector2d(43.4,44),Math.toRadians(-80))
-                .waitSeconds(1)
+                .afterTime(5, bot.actionBucketDropAuto())
+                .strafeToLinearHeading(new Vector2d(43.4,46),Math.toRadians(-80))
                 //intake second sample
-                .afterTime(0.4, bot.actionBucketDropAuto())
+                .waitSeconds(1)
                 .strafeToLinearHeading(new Vector2d(57.75, 62.75), Math.toRadians(-135))
-                .waitSeconds(0.3)
+                .waitSeconds(3)
 
-                //outtake second sample
+                 //outtake second sample
                 .afterTime(0.8, bot.intakeAuto())
                 .afterTime(3.4, bot.actionHighBucketAuto())
+                .afterTime(5, bot.actionBucketDropAuto())
                 .strafeToLinearHeading(new Vector2d(57,43.5),Math.toRadians(-80))
-                .waitSeconds(2.3)
+                .waitSeconds(0.5)
                 //intake third sample
-                .afterTime(0.3, bot.actionBucketDropAuto())
                 .strafeToLinearHeading(new Vector2d(57, 66), Math.toRadians(-145))
                 .waitSeconds(0.5)
                 //outtake third sample
                 .afterTime(0.8, bot.autoSpecialSample())
                 .afterTime(3.5, bot.actionHighBucketAuto())
+                .afterTime(5, bot.actionBucketDropAuto())
                 .strafeToLinearHeading(new Vector2d(58.5,41.5),Math.toRadians(-50))
-                .waitSeconds(3.4)
+                .waitSeconds(0.8)
                 //intake fourth sample
-                .afterTime(0.3, bot.actionBucketDropAuto())
                 .strafeToLinearHeading(new Vector2d(56.5, 62.25), Math.toRadians(-148))
                 .waitSeconds(0.3)
                 //outtake fourth sample
