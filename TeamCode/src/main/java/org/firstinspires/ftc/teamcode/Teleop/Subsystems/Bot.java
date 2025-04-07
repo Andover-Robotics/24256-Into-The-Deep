@@ -258,7 +258,7 @@ public class Bot {
     }
 
 
-    public Action autoLastSample() {
+    public Action autoSpecialSample() {
         return new SequentialAction(
                 new InstantAction(() -> intakeClaw.rotate0ther45Deg()),
                 new InstantAction(() -> intakeArm.intake()),
