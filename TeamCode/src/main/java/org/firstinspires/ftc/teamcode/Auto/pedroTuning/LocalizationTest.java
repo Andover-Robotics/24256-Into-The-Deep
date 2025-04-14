@@ -1,4 +1,5 @@
-package pedroPathing.tuners_tests.localization;
+package org.firstinspires.ftc.teamcode.Auto.pedroTuning;
+
 
 import static com.pedropathing.follower.FollowerConstants.leftFrontMotorName;
 import static com.pedropathing.follower.FollowerConstants.leftRearMotorName;
@@ -27,7 +28,6 @@ import com.pedropathing.util.Drawing;
 import java.util.Arrays;
 import java.util.List;
 
-import pedroPathing.constants.*;
 
 /**
  * This is the LocalizationTest OpMode. This is basically just a simple mecanum drive attached to a
