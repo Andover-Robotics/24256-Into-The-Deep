@@ -7,6 +7,8 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Auto.tuning.ActionHelper;
+import org.firstinspires.ftc.teamcode.Auto.tuning.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
 @Autonomous(name = "DON'T USE Three Sample Auto ")

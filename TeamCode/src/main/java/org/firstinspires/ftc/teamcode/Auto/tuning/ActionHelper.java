@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Auto;
+package org.firstinspires.ftc.teamcode.Auto.tuning;
 
 import androidx.annotation.NonNull;
 import com.acmerobotics.dashboard.canvas.Canvas;

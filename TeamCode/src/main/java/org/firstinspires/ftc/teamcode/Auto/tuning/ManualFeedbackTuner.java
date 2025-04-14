@@ -4,11 +4,6 @@ import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Auto.MecanumDrive;
-import org.firstinspires.ftc.teamcode.Auto.TankDrive;
-import org.firstinspires.ftc.teamcode.Auto.ThreeDeadWheelLocalizer;
-import org.firstinspires.ftc.teamcode.Auto.TwoDeadWheelLocalizer;
-
 public final class ManualFeedbackTuner extends LinearOpMode {
     public static double DISTANCE = 64;
 
