@@ -15,8 +15,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.Auto.ActionHelper;
-import org.firstinspires.ftc.teamcode.Auto.MecanumDrive;
+import org.firstinspires.ftc.teamcode.Auto.tuning.ActionHelper;
+import org.firstinspires.ftc.teamcode.Auto.tuning.MecanumDrive;
 import org.firstinspires.ftc.teamcode.Teleop.Subsystems.Bot;
 
 import java.util.ArrayList;

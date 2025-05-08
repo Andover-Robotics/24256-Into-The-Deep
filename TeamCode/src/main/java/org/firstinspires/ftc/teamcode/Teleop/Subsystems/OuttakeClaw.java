@@ -9,7 +9,7 @@ public class OuttakeClaw {
     public static final double topClawOpen = 0.10;
     public static final double topClawClose = 0.618;
     public static final double outtake = 0.47;
-    public static final double transfer = 0.82;
+    public static final double transfer = 0.85;
     public static final double topWrist18 = 0.34;
     public static double topWristIns = 0.71;
     public static final double topClawVertical = .805;
